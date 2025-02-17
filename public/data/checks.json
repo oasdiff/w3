@@ -1,0 +1,2186 @@
+[
+  {
+    "id": "api-deprecated-sunset-missing",
+    "level": "error",
+    "description": "api-deprecated-sunset-missing-description",
+    "direction": "none",
+    "location": "none",
+    "action": "change"
+  },
+  {
+    "id": "api-deprecated-sunset-parse",
+    "level": "error",
+    "description": "api-deprecated-sunset-parse-description",
+    "direction": "none",
+    "location": "none",
+    "action": "change"
+  },
+  {
+    "id": "api-global-security-added",
+    "level": "info",
+    "description": "api-global-security-added-description",
+    "direction": "none",
+    "location": "security",
+    "action": "add"
+  },
+  {
+    "id": "api-global-security-removed",
+    "level": "info",
+    "description": "api-global-security-removed-description",
+    "direction": "none",
+    "location": "security",
+    "action": "remove"
+  },
+  {
+    "id": "api-global-security-scope-added",
+    "level": "info",
+    "description": "api-global-security-scope-added-description",
+    "direction": "none",
+    "location": "security",
+    "action": "add"
+  },
+  {
+    "id": "api-global-security-scope-removed",
+    "level": "info",
+    "description": "api-global-security-scope-removed-description",
+    "direction": "none",
+    "location": "security",
+    "action": "remove"
+  },
+  {
+    "id": "api-invalid-stability-level",
+    "level": "error",
+    "description": "api-invalid-stability-level-description",
+    "direction": "none",
+    "location": "none",
+    "action": "change"
+  },
+  {
+    "id": "api-operation-id-added",
+    "level": "info",
+    "description": "api-operation-id-added-description",
+    "direction": "none",
+    "location": "none",
+    "action": "add"
+  },
+  {
+    "id": "api-operation-id-removed",
+    "level": "info",
+    "description": "api-operation-id-removed-description",
+    "direction": "none",
+    "location": "none",
+    "action": "remove"
+  },
+  {
+    "id": "api-path-removed-before-sunset",
+    "level": "error",
+    "description": "api-path-removed-before-sunset-description",
+    "direction": "none",
+    "location": "none",
+    "action": "remove"
+  },
+  {
+    "id": "api-path-removed-with-deprecation",
+    "level": "info",
+    "description": "api-path-removed-with-deprecation-description",
+    "direction": "none",
+    "location": "none",
+    "action": "remove"
+  },
+  {
+    "id": "api-path-removed-without-deprecation",
+    "level": "error",
+    "description": "api-path-removed-without-deprecation-description",
+    "direction": "none",
+    "location": "none",
+    "action": "remove"
+  },
+  {
+    "id": "api-path-sunset-parse",
+    "level": "error",
+    "description": "api-path-sunset-parse-description",
+    "direction": "none",
+    "location": "none",
+    "action": "change"
+  },
+  {
+    "id": "api-removed-before-sunset",
+    "level": "error",
+    "description": "api-removed-before-sunset-description",
+    "direction": "none",
+    "location": "none",
+    "action": "remove"
+  },
+  {
+    "id": "api-removed-with-deprecation",
+    "level": "info",
+    "description": "api-removed-with-deprecation-description",
+    "direction": "none",
+    "location": "none",
+    "action": "remove"
+  },
+  {
+    "id": "api-removed-without-deprecation",
+    "level": "error",
+    "description": "api-removed-without-deprecation-description",
+    "direction": "none",
+    "location": "none",
+    "action": "remove"
+  },
+  {
+    "id": "api-schema-removed",
+    "level": "info",
+    "description": "api-schema-removed-description",
+    "direction": "none",
+    "location": "components",
+    "action": "remove"
+  },
+  {
+    "id": "api-security-added",
+    "level": "info",
+    "description": "api-security-added-description",
+    "direction": "none",
+    "location": "security",
+    "action": "add"
+  },
+  {
+    "id": "api-security-component-added",
+    "level": "info",
+    "description": "api-security-component-added-description",
+    "direction": "none",
+    "location": "components",
+    "action": "add"
+  },
+  {
+    "id": "api-security-component-oauth-scope-added",
+    "level": "info",
+    "description": "api-security-component-oauth-scope-added-description",
+    "direction": "none",
+    "location": "components",
+    "action": "add"
+  },
+  {
+    "id": "api-security-component-oauth-scope-changed",
+    "level": "info",
+    "description": "api-security-component-oauth-scope-changed-description",
+    "direction": "none",
+    "location": "components",
+    "action": "change"
+  },
+  {
+    "id": "api-security-component-oauth-scope-removed",
+    "level": "info",
+    "description": "api-security-component-oauth-scope-removed-description",
+    "direction": "none",
+    "location": "components",
+    "action": "remove"
+  },
+  {
+    "id": "api-security-component-oauth-token-url-changed",
+    "level": "info",
+    "description": "api-security-component-oauth-token-url-changed-description",
+    "direction": "none",
+    "location": "components",
+    "action": "change"
+  },
+  {
+    "id": "api-security-component-oauth-url-changed",
+    "level": "info",
+    "description": "api-security-component-oauth-url-changed-description",
+    "direction": "none",
+    "location": "components",
+    "action": "change"
+  },
+  {
+    "id": "api-security-component-removed",
+    "level": "info",
+    "description": "api-security-component-removed-description",
+    "direction": "none",
+    "location": "components",
+    "action": "remove"
+  },
+  {
+    "id": "api-security-component-type-changed",
+    "level": "info",
+    "description": "api-security-component-type-changed-description",
+    "direction": "none",
+    "location": "components",
+    "action": "change"
+  },
+  {
+    "id": "api-security-removed",
+    "level": "info",
+    "description": "api-security-removed-description",
+    "direction": "none",
+    "location": "security",
+    "action": "remove"
+  },
+  {
+    "id": "api-security-scope-added",
+    "level": "info",
+    "description": "api-security-scope-added-description",
+    "direction": "none",
+    "location": "security",
+    "action": "add"
+  },
+  {
+    "id": "api-security-scope-removed",
+    "level": "info",
+    "description": "api-security-scope-removed-description",
+    "direction": "none",
+    "location": "security",
+    "action": "remove"
+  },
+  {
+    "id": "api-stability-decreased",
+    "level": "error",
+    "description": "api-stability-decreased-description",
+    "direction": "none",
+    "location": "none",
+    "action": "decrease"
+  },
+  {
+    "id": "api-sunset-date-changed-too-small",
+    "level": "error",
+    "description": "api-sunset-date-changed-too-small-description",
+    "direction": "none",
+    "location": "none",
+    "action": "change"
+  },
+  {
+    "id": "api-sunset-date-too-small",
+    "level": "error",
+    "description": "api-sunset-date-too-small-description",
+    "direction": "none",
+    "location": "none",
+    "action": "change"
+  },
+  {
+    "id": "api-tag-added",
+    "level": "info",
+    "description": "api-tag-added-description",
+    "direction": "none",
+    "location": "none",
+    "action": "add"
+  },
+  {
+    "id": "api-tag-removed",
+    "level": "info",
+    "description": "api-tag-removed-description",
+    "direction": "none",
+    "location": "none",
+    "action": "remove"
+  },
+  {
+    "id": "endpoint-added",
+    "level": "info",
+    "description": "endpoint-added-description",
+    "direction": "none",
+    "location": "none",
+    "action": "add"
+  },
+  {
+    "id": "endpoint-deprecated",
+    "level": "info",
+    "description": "endpoint-deprecated-description",
+    "direction": "none",
+    "location": "none",
+    "action": "change"
+  },
+  {
+    "id": "endpoint-reactivated",
+    "level": "info",
+    "description": "endpoint-reactivated-description",
+    "direction": "none",
+    "location": "none",
+    "action": "change"
+  },
+  {
+    "id": "new-optional-request-default-parameter-to-existing-path",
+    "level": "info",
+    "description": "new-optional-request-default-parameter-to-existing-path-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "add"
+  },
+  {
+    "id": "new-optional-request-parameter",
+    "level": "info",
+    "description": "new-optional-request-parameter-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "add"
+  },
+  {
+    "id": "new-optional-request-property",
+    "level": "info",
+    "description": "new-optional-request-property-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "new-request-path-parameter",
+    "level": "error",
+    "description": "new-request-path-parameter-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "add"
+  },
+  {
+    "id": "new-required-request-default-parameter-to-existing-path",
+    "level": "error",
+    "description": "new-required-request-default-parameter-to-existing-path-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "add"
+  },
+  {
+    "id": "new-required-request-header-property",
+    "level": "error",
+    "description": "new-required-request-header-property-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "new-required-request-parameter",
+    "level": "error",
+    "description": "new-required-request-parameter-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "add"
+  },
+  {
+    "id": "new-required-request-property",
+    "level": "error",
+    "description": "new-required-request-property-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "new-required-request-property-with-default",
+    "level": "info",
+    "description": "new-required-request-property-with-default-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "optional-response-header-removed",
+    "level": "warning",
+    "description": "optional-response-header-removed-description",
+    "direction": "response",
+    "location": "headers",
+    "action": "remove"
+  },
+  {
+    "id": "request-body-added-optional",
+    "level": "info",
+    "description": "request-body-added-optional-description",
+    "direction": "request",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "request-body-added-required",
+    "level": "error",
+    "description": "request-body-added-required-description",
+    "direction": "request",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "request-body-all-of-added",
+    "level": "error",
+    "description": "request-body-all-of-added-description",
+    "direction": "request",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "request-body-all-of-removed",
+    "level": "warning",
+    "description": "request-body-all-of-removed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "request-body-any-of-added",
+    "level": "info",
+    "description": "request-body-any-of-added-description",
+    "direction": "request",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "request-body-any-of-removed",
+    "level": "error",
+    "description": "request-body-any-of-removed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "request-body-became-enum",
+    "level": "error",
+    "description": "request-body-became-enum-description",
+    "direction": "request",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "request-body-became-not-nullable",
+    "level": "error",
+    "description": "request-body-became-not-nullable-description",
+    "direction": "request",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "request-body-became-nullable",
+    "level": "info",
+    "description": "request-body-became-nullable-description",
+    "direction": "request",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "request-body-became-optional",
+    "level": "info",
+    "description": "request-body-became-optional-description",
+    "direction": "request",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "request-body-became-required",
+    "level": "error",
+    "description": "request-body-became-required-description",
+    "direction": "request",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "request-body-default-value-added",
+    "level": "info",
+    "description": "request-body-default-value-added-description",
+    "direction": "request",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "request-body-default-value-changed",
+    "level": "info",
+    "description": "request-body-default-value-changed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "request-body-default-value-removed",
+    "level": "info",
+    "description": "request-body-default-value-removed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "request-body-discriminator-added",
+    "level": "info",
+    "description": "request-body-discriminator-added-description",
+    "direction": "request",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "request-body-discriminator-mapping-added",
+    "level": "info",
+    "description": "request-body-discriminator-mapping-added-description",
+    "direction": "request",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "request-body-discriminator-mapping-changed",
+    "level": "info",
+    "description": "request-body-discriminator-mapping-changed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "request-body-discriminator-mapping-deleted",
+    "level": "info",
+    "description": "request-body-discriminator-mapping-deleted-description",
+    "direction": "request",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "request-body-discriminator-property-name-changed",
+    "level": "info",
+    "description": "request-body-discriminator-property-name-changed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "request-body-discriminator-removed",
+    "level": "info",
+    "description": "request-body-discriminator-removed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "request-body-enum-value-removed",
+    "level": "info",
+    "description": "request-body-enum-value-removed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "request-body-max-decreased",
+    "level": "error",
+    "description": "request-body-max-decreased-description",
+    "direction": "request",
+    "location": "body",
+    "action": "decrease"
+  },
+  {
+    "id": "request-body-max-increased",
+    "level": "info",
+    "description": "request-body-max-increased-description",
+    "direction": "request",
+    "location": "body",
+    "action": "increase"
+  },
+  {
+    "id": "request-body-max-length-decreased",
+    "level": "error",
+    "description": "request-body-max-length-decreased-description",
+    "direction": "request",
+    "location": "body",
+    "action": "decrease"
+  },
+  {
+    "id": "request-body-max-length-increased",
+    "level": "info",
+    "description": "request-body-max-length-increased-description",
+    "direction": "request",
+    "location": "body",
+    "action": "increase"
+  },
+  {
+    "id": "request-body-max-length-set",
+    "level": "warning",
+    "description": "request-body-max-length-set-description",
+    "direction": "request",
+    "location": "body",
+    "action": "set"
+  },
+  {
+    "id": "request-body-max-set",
+    "level": "warning",
+    "description": "request-body-max-set-description",
+    "direction": "request",
+    "location": "body",
+    "action": "set"
+  },
+  {
+    "id": "request-body-media-type-added",
+    "level": "info",
+    "description": "request-body-media-type-added-description",
+    "direction": "request",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "request-body-media-type-removed",
+    "level": "error",
+    "description": "request-body-media-type-removed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "request-body-min-decreased",
+    "level": "info",
+    "description": "request-body-min-decreased-description",
+    "direction": "request",
+    "location": "body",
+    "action": "decrease"
+  },
+  {
+    "id": "request-body-min-increased",
+    "level": "error",
+    "description": "request-body-min-increased-description",
+    "direction": "request",
+    "location": "body",
+    "action": "increase"
+  },
+  {
+    "id": "request-body-min-items-increased",
+    "level": "error",
+    "description": "request-body-min-items-increased-description",
+    "direction": "request",
+    "location": "body",
+    "action": "increase"
+  },
+  {
+    "id": "request-body-min-items-set",
+    "level": "warning",
+    "description": "request-body-min-items-set-description",
+    "direction": "request",
+    "location": "body",
+    "action": "set"
+  },
+  {
+    "id": "request-body-min-length-decreased",
+    "level": "info",
+    "description": "request-body-min-length-decreased-description",
+    "direction": "request",
+    "location": "body",
+    "action": "decrease"
+  },
+  {
+    "id": "request-body-min-length-increased",
+    "level": "error",
+    "description": "request-body-min-length-increased-description",
+    "direction": "request",
+    "location": "body",
+    "action": "increase"
+  },
+  {
+    "id": "request-body-min-set",
+    "level": "warning",
+    "description": "request-body-min-set-description",
+    "direction": "request",
+    "location": "body",
+    "action": "set"
+  },
+  {
+    "id": "request-body-one-of-added",
+    "level": "info",
+    "description": "request-body-one-of-added-description",
+    "direction": "request",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "request-body-one-of-removed",
+    "level": "error",
+    "description": "request-body-one-of-removed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "request-body-type-changed",
+    "level": "error",
+    "description": "request-body-type-changed-description",
+    "direction": "request",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "request-body-type-generalized",
+    "level": "info",
+    "description": "request-body-type-generalized-description",
+    "direction": "request",
+    "location": "body",
+    "action": "generalize"
+  },
+  {
+    "id": "request-header-property-became-enum",
+    "level": "error",
+    "description": "request-header-property-became-enum-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-header-property-became-required",
+    "level": "error",
+    "description": "request-header-property-became-required-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-optional-property-became-not-read-only",
+    "level": "info",
+    "description": "request-optional-property-became-not-read-only-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-optional-property-became-not-write-only",
+    "level": "info",
+    "description": "request-optional-property-became-not-write-only-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-optional-property-became-read-only",
+    "level": "info",
+    "description": "request-optional-property-became-read-only-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-optional-property-became-write-only",
+    "level": "info",
+    "description": "request-optional-property-became-write-only-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-became-enum",
+    "level": "error",
+    "description": "request-parameter-became-enum-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-became-optional",
+    "level": "info",
+    "description": "request-parameter-became-optional-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-became-required",
+    "level": "error",
+    "description": "request-parameter-became-required-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-default-value-added",
+    "level": "error",
+    "description": "request-parameter-default-value-added-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "add"
+  },
+  {
+    "id": "request-parameter-default-value-changed",
+    "level": "error",
+    "description": "request-parameter-default-value-changed-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-default-value-removed",
+    "level": "error",
+    "description": "request-parameter-default-value-removed-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "remove"
+  },
+  {
+    "id": "request-parameter-deprecated",
+    "level": "info",
+    "description": "request-parameter-deprecated-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-deprecated-sunset-missing",
+    "level": "error",
+    "description": "request-parameter-deprecated-sunset-missing-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-enum-value-added",
+    "level": "info",
+    "description": "request-parameter-enum-value-added-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "add"
+  },
+  {
+    "id": "request-parameter-enum-value-removed",
+    "level": "error",
+    "description": "request-parameter-enum-value-removed-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "remove"
+  },
+  {
+    "id": "request-parameter-max-decreased",
+    "level": "error",
+    "description": "request-parameter-max-decreased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "decrease"
+  },
+  {
+    "id": "request-parameter-max-increased",
+    "level": "info",
+    "description": "request-parameter-max-increased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "increase"
+  },
+  {
+    "id": "request-parameter-max-items-decreased",
+    "level": "error",
+    "description": "request-parameter-max-items-decreased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "decrease"
+  },
+  {
+    "id": "request-parameter-max-items-increased",
+    "level": "info",
+    "description": "request-parameter-max-items-increased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "increase"
+  },
+  {
+    "id": "request-parameter-max-length-decreased",
+    "level": "error",
+    "description": "request-parameter-max-length-decreased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "decrease"
+  },
+  {
+    "id": "request-parameter-max-length-increased",
+    "level": "info",
+    "description": "request-parameter-max-length-increased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "increase"
+  },
+  {
+    "id": "request-parameter-max-length-set",
+    "level": "warning",
+    "description": "request-parameter-max-length-set-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "set"
+  },
+  {
+    "id": "request-parameter-max-set",
+    "level": "warning",
+    "description": "request-parameter-max-set-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "set"
+  },
+  {
+    "id": "request-parameter-min-decreased",
+    "level": "info",
+    "description": "request-parameter-min-decreased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "decrease"
+  },
+  {
+    "id": "request-parameter-min-increased",
+    "level": "error",
+    "description": "request-parameter-min-increased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "increase"
+  },
+  {
+    "id": "request-parameter-min-items-decreased",
+    "level": "info",
+    "description": "request-parameter-min-items-decreased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "decrease"
+  },
+  {
+    "id": "request-parameter-min-items-increased",
+    "level": "error",
+    "description": "request-parameter-min-items-increased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "increase"
+  },
+  {
+    "id": "request-parameter-min-items-set",
+    "level": "warning",
+    "description": "request-parameter-min-items-set-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "set"
+  },
+  {
+    "id": "request-parameter-min-length-decreased",
+    "level": "info",
+    "description": "request-parameter-min-length-decreased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "decrease"
+  },
+  {
+    "id": "request-parameter-min-length-increased",
+    "level": "error",
+    "description": "request-parameter-min-length-increased-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "increase"
+  },
+  {
+    "id": "request-parameter-min-set",
+    "level": "warning",
+    "description": "request-parameter-min-set-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "set"
+  },
+  {
+    "id": "request-parameter-pattern-added",
+    "level": "warning",
+    "description": "request-parameter-pattern-added-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "add"
+  },
+  {
+    "id": "request-parameter-pattern-changed",
+    "level": "warning",
+    "description": "request-parameter-pattern-changed-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-pattern-generalized",
+    "level": "info",
+    "description": "request-parameter-pattern-generalized-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "generalize"
+  },
+  {
+    "id": "request-parameter-pattern-removed",
+    "level": "info",
+    "description": "request-parameter-pattern-removed-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "remove"
+  },
+  {
+    "id": "request-parameter-property-type-changed",
+    "level": "warning",
+    "description": "request-parameter-property-type-changed-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-property-type-generalized",
+    "level": "info",
+    "description": "request-parameter-property-type-generalized-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "generalize"
+  },
+  {
+    "id": "request-parameter-property-type-specialized",
+    "level": "error",
+    "description": "request-parameter-property-type-specialized-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "specialize"
+  },
+  {
+    "id": "request-parameter-reactivated",
+    "level": "info",
+    "description": "request-parameter-reactivated-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-removed",
+    "level": "warning",
+    "description": "request-parameter-removed-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "remove"
+  },
+  {
+    "id": "request-parameter-removed-before-sunset",
+    "level": "error",
+    "description": "request-parameter-removed-before-sunset-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "remove"
+  },
+  {
+    "id": "request-parameter-removed-with-deprecation",
+    "level": "info",
+    "description": "request-parameter-removed-with-deprecation-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "remove"
+  },
+  {
+    "id": "request-parameter-sunset-date-changed-too-small",
+    "level": "error",
+    "description": "request-parameter-sunset-date-changed-too-small-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-sunset-date-too-small",
+    "level": "error",
+    "description": "request-parameter-sunset-date-too-small-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-sunset-deleted",
+    "level": "error",
+    "description": "request-parameter-sunset-deleted-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-sunset-parse",
+    "level": "error",
+    "description": "request-parameter-sunset-parse-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-type-changed",
+    "level": "error",
+    "description": "request-parameter-type-changed-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "change"
+  },
+  {
+    "id": "request-parameter-type-generalized",
+    "level": "info",
+    "description": "request-parameter-type-generalized-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "generalize"
+  },
+  {
+    "id": "request-parameter-x-extensible-enum-value-removed",
+    "level": "error",
+    "description": "request-parameter-x-extensible-enum-value-removed-description",
+    "direction": "request",
+    "location": "parameters",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-all-of-added",
+    "level": "error",
+    "description": "request-property-all-of-added-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "request-property-all-of-removed",
+    "level": "warning",
+    "description": "request-property-all-of-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-any-of-added",
+    "level": "info",
+    "description": "request-property-any-of-added-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "request-property-any-of-removed",
+    "level": "error",
+    "description": "request-property-any-of-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-became-enum",
+    "level": "error",
+    "description": "request-property-became-enum-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-became-not-nullable",
+    "level": "error",
+    "description": "request-property-became-not-nullable-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-became-nullable",
+    "level": "info",
+    "description": "request-property-became-nullable-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-became-optional",
+    "level": "info",
+    "description": "request-property-became-optional-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-became-required",
+    "level": "error",
+    "description": "request-property-became-required-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-became-required-with-default",
+    "level": "info",
+    "description": "request-property-became-required-with-default-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-default-value-added",
+    "level": "info",
+    "description": "request-property-default-value-added-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "request-property-default-value-changed",
+    "level": "info",
+    "description": "request-property-default-value-changed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-default-value-removed",
+    "level": "info",
+    "description": "request-property-default-value-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-discriminator-added",
+    "level": "info",
+    "description": "request-property-discriminator-added-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "request-property-discriminator-mapping-added",
+    "level": "info",
+    "description": "request-property-discriminator-mapping-added-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "request-property-discriminator-mapping-changed",
+    "level": "info",
+    "description": "request-property-discriminator-mapping-changed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-discriminator-mapping-deleted",
+    "level": "info",
+    "description": "request-property-discriminator-mapping-deleted-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-discriminator-property-name-changed",
+    "level": "info",
+    "description": "request-property-discriminator-property-name-changed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-discriminator-removed",
+    "level": "info",
+    "description": "request-property-discriminator-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-enum-value-added",
+    "level": "info",
+    "description": "request-property-enum-value-added-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "request-property-enum-value-removed",
+    "level": "error",
+    "description": "request-property-enum-value-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-max-decreased",
+    "level": "error",
+    "description": "request-property-max-decreased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "decrease"
+  },
+  {
+    "id": "request-property-max-increased",
+    "level": "info",
+    "description": "request-property-max-increased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "increase"
+  },
+  {
+    "id": "request-property-max-length-decreased",
+    "level": "error",
+    "description": "request-property-max-length-decreased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "decrease"
+  },
+  {
+    "id": "request-property-max-length-increased",
+    "level": "info",
+    "description": "request-property-max-length-increased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "increase"
+  },
+  {
+    "id": "request-property-max-length-set",
+    "level": "warning",
+    "description": "request-property-max-length-set-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "set"
+  },
+  {
+    "id": "request-property-max-set",
+    "level": "warning",
+    "description": "request-property-max-set-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "set"
+  },
+  {
+    "id": "request-property-min-decreased",
+    "level": "info",
+    "description": "request-property-min-decreased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "decrease"
+  },
+  {
+    "id": "request-property-min-increased",
+    "level": "error",
+    "description": "request-property-min-increased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "increase"
+  },
+  {
+    "id": "request-property-min-items-increased",
+    "level": "error",
+    "description": "request-property-min-items-increased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "increase"
+  },
+  {
+    "id": "request-property-min-items-set",
+    "level": "warning",
+    "description": "request-property-min-items-set-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "set"
+  },
+  {
+    "id": "request-property-min-length-decreased",
+    "level": "info",
+    "description": "request-property-min-length-decreased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "decrease"
+  },
+  {
+    "id": "request-property-min-length-increased",
+    "level": "error",
+    "description": "request-property-min-length-increased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "increase"
+  },
+  {
+    "id": "request-property-min-set",
+    "level": "warning",
+    "description": "request-property-min-set-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "set"
+  },
+  {
+    "id": "request-property-one-of-added",
+    "level": "info",
+    "description": "request-property-one-of-added-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "request-property-one-of-removed",
+    "level": "error",
+    "description": "request-property-one-of-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-pattern-added",
+    "level": "warning",
+    "description": "request-property-pattern-added-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "request-property-pattern-changed",
+    "level": "warning",
+    "description": "request-property-pattern-changed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-pattern-generalized",
+    "level": "info",
+    "description": "request-property-pattern-generalized-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "generalize"
+  },
+  {
+    "id": "request-property-pattern-removed",
+    "level": "info",
+    "description": "request-property-pattern-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-removed",
+    "level": "warning",
+    "description": "request-property-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-property-type-changed",
+    "level": "error",
+    "description": "request-property-type-changed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-property-type-generalized",
+    "level": "info",
+    "description": "request-property-type-generalized-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "generalize"
+  },
+  {
+    "id": "request-property-x-extensible-enum-value-removed",
+    "level": "error",
+    "description": "request-property-x-extensible-enum-value-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-read-only-property-enum-value-removed",
+    "level": "info",
+    "description": "request-read-only-property-enum-value-removed-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "request-read-only-property-max-decreased",
+    "level": "info",
+    "description": "request-read-only-property-max-decreased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "decrease"
+  },
+  {
+    "id": "request-read-only-property-max-length-decreased",
+    "level": "info",
+    "description": "request-read-only-property-max-length-decreased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "decrease"
+  },
+  {
+    "id": "request-read-only-property-min-increased",
+    "level": "info",
+    "description": "request-read-only-property-min-increased-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "increase"
+  },
+  {
+    "id": "request-required-property-became-not-read-only",
+    "level": "info",
+    "description": "request-required-property-became-not-read-only-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-required-property-became-not-write-only",
+    "level": "info",
+    "description": "request-required-property-became-not-write-only-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-required-property-became-read-only",
+    "level": "info",
+    "description": "request-required-property-became-read-only-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "request-required-property-became-write-only",
+    "level": "info",
+    "description": "request-required-property-became-write-only-description",
+    "direction": "request",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "required-response-header-removed",
+    "level": "error",
+    "description": "required-response-header-removed-description",
+    "direction": "response",
+    "location": "headers",
+    "action": "remove"
+  },
+  {
+    "id": "response-body-all-of-added",
+    "level": "info",
+    "description": "response-body-all-of-added-description",
+    "direction": "response",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "response-body-all-of-removed",
+    "level": "info",
+    "description": "response-body-all-of-removed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-body-any-of-added",
+    "level": "info",
+    "description": "response-body-any-of-added-description",
+    "direction": "response",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "response-body-any-of-removed",
+    "level": "info",
+    "description": "response-body-any-of-removed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-body-became-nullable",
+    "level": "error",
+    "description": "response-body-became-nullable-description",
+    "direction": "response",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "response-body-default-value-added",
+    "level": "info",
+    "description": "response-body-default-value-added-description",
+    "direction": "response",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "response-body-default-value-changed",
+    "level": "info",
+    "description": "response-body-default-value-changed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "response-body-default-value-removed",
+    "level": "info",
+    "description": "response-body-default-value-removed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-body-discriminator-added",
+    "level": "info",
+    "description": "response-body-discriminator-added-description",
+    "direction": "response",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "response-body-discriminator-mapping-added",
+    "level": "info",
+    "description": "response-body-discriminator-mapping-added-description",
+    "direction": "response",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "response-body-discriminator-mapping-changed",
+    "level": "info",
+    "description": "response-body-discriminator-mapping-changed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "response-body-discriminator-mapping-deleted",
+    "level": "info",
+    "description": "response-body-discriminator-mapping-deleted-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-body-discriminator-property-name-changed",
+    "level": "info",
+    "description": "response-body-discriminator-property-name-changed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "response-body-discriminator-removed",
+    "level": "info",
+    "description": "response-body-discriminator-removed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-body-max-increased",
+    "level": "error",
+    "description": "response-body-max-increased-description",
+    "direction": "response",
+    "location": "body",
+    "action": "increase"
+  },
+  {
+    "id": "response-body-max-length-increased",
+    "level": "error",
+    "description": "response-body-max-length-increased-description",
+    "direction": "response",
+    "location": "body",
+    "action": "increase"
+  },
+  {
+    "id": "response-body-max-length-unset",
+    "level": "error",
+    "description": "response-body-max-length-unset-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-body-min-decreased",
+    "level": "error",
+    "description": "response-body-min-decreased-description",
+    "direction": "response",
+    "location": "body",
+    "action": "decrease"
+  },
+  {
+    "id": "response-body-min-items-decreased",
+    "level": "error",
+    "description": "response-body-min-items-decreased-description",
+    "direction": "response",
+    "location": "body",
+    "action": "decrease"
+  },
+  {
+    "id": "response-body-min-items-unset",
+    "level": "error",
+    "description": "response-body-min-items-unset-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-body-min-length-decreased",
+    "level": "error",
+    "description": "response-body-min-length-decreased-description",
+    "direction": "response",
+    "location": "body",
+    "action": "decrease"
+  },
+  {
+    "id": "response-body-one-of-added",
+    "level": "error",
+    "description": "response-body-one-of-added-description",
+    "direction": "response",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "response-body-one-of-removed",
+    "level": "info",
+    "description": "response-body-one-of-removed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-body-type-changed",
+    "level": "error",
+    "description": "response-body-type-changed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "change"
+  },
+  {
+    "id": "response-header-became-optional",
+    "level": "error",
+    "description": "response-header-became-optional-description",
+    "direction": "response",
+    "location": "headers",
+    "action": "change"
+  },
+  {
+    "id": "response-media-type-added",
+    "level": "info",
+    "description": "response-media-type-added-description",
+    "direction": "response",
+    "location": "body",
+    "action": "add"
+  },
+  {
+    "id": "response-media-type-removed",
+    "level": "error",
+    "description": "response-media-type-removed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-mediatype-enum-value-removed",
+    "level": "info",
+    "description": "response-mediatype-enum-value-removed-description",
+    "direction": "response",
+    "location": "body",
+    "action": "remove"
+  },
+  {
+    "id": "response-non-success-status-added",
+    "level": "info",
+    "description": "response-non-success-status-added-description",
+    "direction": "response",
+    "location": "none",
+    "action": "add"
+  },
+  {
+    "id": "response-non-success-status-removed",
+    "level": "info",
+    "description": "response-non-success-status-removed-description",
+    "direction": "response",
+    "location": "none",
+    "action": "remove"
+  },
+  {
+    "id": "response-optional-property-added",
+    "level": "info",
+    "description": "response-optional-property-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-optional-property-became-not-read-only",
+    "level": "info",
+    "description": "response-optional-property-became-not-read-only-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-optional-property-became-not-write-only",
+    "level": "info",
+    "description": "response-optional-property-became-not-write-only-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-optional-property-became-read-only",
+    "level": "info",
+    "description": "response-optional-property-became-read-only-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-optional-property-became-write-only",
+    "level": "info",
+    "description": "response-optional-property-became-write-only-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-optional-property-removed",
+    "level": "warning",
+    "description": "response-optional-property-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-optional-write-only-property-added",
+    "level": "info",
+    "description": "response-optional-write-only-property-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-optional-write-only-property-removed",
+    "level": "info",
+    "description": "response-optional-write-only-property-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-all-of-added",
+    "level": "info",
+    "description": "response-property-all-of-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-property-all-of-removed",
+    "level": "info",
+    "description": "response-property-all-of-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-any-of-added",
+    "level": "info",
+    "description": "response-property-any-of-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-property-any-of-removed",
+    "level": "info",
+    "description": "response-property-any-of-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-became-nullable",
+    "level": "error",
+    "description": "response-property-became-nullable-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-property-became-optional",
+    "level": "error",
+    "description": "response-property-became-optional-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-property-became-required",
+    "level": "info",
+    "description": "response-property-became-required-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-property-default-value-added",
+    "level": "info",
+    "description": "response-property-default-value-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-property-default-value-changed",
+    "level": "info",
+    "description": "response-property-default-value-changed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-property-default-value-removed",
+    "level": "info",
+    "description": "response-property-default-value-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-discriminator-added",
+    "level": "info",
+    "description": "response-property-discriminator-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-property-discriminator-mapping-added",
+    "level": "info",
+    "description": "response-property-discriminator-mapping-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-property-discriminator-mapping-changed",
+    "level": "info",
+    "description": "response-property-discriminator-mapping-changed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-property-discriminator-mapping-deleted",
+    "level": "info",
+    "description": "response-property-discriminator-mapping-deleted-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-discriminator-property-name-changed",
+    "level": "info",
+    "description": "response-property-discriminator-property-name-changed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-property-discriminator-removed",
+    "level": "info",
+    "description": "response-property-discriminator-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-enum-value-added",
+    "level": "warning",
+    "description": "response-property-enum-value-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-property-enum-value-removed",
+    "level": "info",
+    "description": "response-property-enum-value-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-max-increased",
+    "level": "error",
+    "description": "response-property-max-increased-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "increase"
+  },
+  {
+    "id": "response-property-max-length-increased",
+    "level": "error",
+    "description": "response-property-max-length-increased-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "increase"
+  },
+  {
+    "id": "response-property-max-length-unset",
+    "level": "error",
+    "description": "response-property-max-length-unset-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-min-decreased",
+    "level": "error",
+    "description": "response-property-min-decreased-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "decrease"
+  },
+  {
+    "id": "response-property-min-items-decreased",
+    "level": "error",
+    "description": "response-property-min-items-decreased-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "decrease"
+  },
+  {
+    "id": "response-property-min-items-unset",
+    "level": "error",
+    "description": "response-property-min-items-unset-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-min-length-decreased",
+    "level": "error",
+    "description": "response-property-min-length-decreased-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "decrease"
+  },
+  {
+    "id": "response-property-one-of-added",
+    "level": "error",
+    "description": "response-property-one-of-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-property-one-of-removed",
+    "level": "info",
+    "description": "response-property-one-of-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-pattern-added",
+    "level": "info",
+    "description": "response-property-pattern-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-property-pattern-changed",
+    "level": "info",
+    "description": "response-property-pattern-changed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-property-pattern-removed",
+    "level": "info",
+    "description": "response-property-pattern-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-property-type-changed",
+    "level": "error",
+    "description": "response-property-type-changed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-required-property-added",
+    "level": "info",
+    "description": "response-required-property-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-required-property-became-not-read-only",
+    "level": "info",
+    "description": "response-required-property-became-not-read-only-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-required-property-became-not-write-only",
+    "level": "warning",
+    "description": "response-required-property-became-not-write-only-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-required-property-became-read-only",
+    "level": "info",
+    "description": "response-required-property-became-read-only-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-required-property-became-write-only",
+    "level": "info",
+    "description": "response-required-property-became-write-only-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-required-property-removed",
+    "level": "error",
+    "description": "response-required-property-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-required-write-only-property-added",
+    "level": "info",
+    "description": "response-required-write-only-property-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-required-write-only-property-removed",
+    "level": "info",
+    "description": "response-required-write-only-property-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-success-status-added",
+    "level": "info",
+    "description": "response-success-status-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "response-success-status-removed",
+    "level": "error",
+    "description": "response-success-status-removed-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "remove"
+  },
+  {
+    "id": "response-write-only-property-became-optional",
+    "level": "info",
+    "description": "response-write-only-property-became-optional-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-write-only-property-became-required",
+    "level": "info",
+    "description": "response-write-only-property-became-required-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "change"
+  },
+  {
+    "id": "response-write-only-property-enum-value-added",
+    "level": "info",
+    "description": "response-write-only-property-enum-value-added-description",
+    "direction": "response",
+    "location": "properties",
+    "action": "add"
+  },
+  {
+    "id": "sunset-deleted",
+    "level": "error",
+    "description": "sunset-deleted-description",
+    "direction": "none",
+    "location": "none",
+    "action": "remove"
+  }
+]

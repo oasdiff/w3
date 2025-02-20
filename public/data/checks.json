@@ -4,16 +4,18 @@
     "level": "error",
     "description": "api-deprecated-sunset-missing-description",
     "direction": "none",
-    "location": "none",
-    "action": "change"
+    "location": "endpoint",
+    "action": "change",
+    "detailed_description": "The specified sunset date is required but missing in the API definition. When deprecating an API element, a sunset date must be provided to indicate when the element will be removed. This change can break clients that rely on the sunset date to plan for the removal of deprecated elements, as they will not have a clear timeline for when the element will be unavailable."
   },
   {
     "id": "api-deprecated-sunset-parse",
     "level": "error",
     "description": "api-deprecated-sunset-parse-description",
     "direction": "none",
-    "location": "none",
-    "action": "change"
+    "location": "endpoint",
+    "action": "change",
+    "detailed_description": "The specified sunset date is not a valid date. The sunset date must be a valid date in the format YYYY-MM-DD. This change can break clients that rely on the sunset date to plan for the removal of deprecated elements, as they will not have a clear timeline for when the element will be unavailable."
   },
   {
     "id": "api-global-security-added",
@@ -21,7 +23,8 @@
     "description": "api-global-security-added-description",
     "direction": "none",
     "location": "security",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A global security requirement was added to the API definition. This security requirement will be applied to all operations in the API."
   },
   {
     "id": "api-global-security-removed",
@@ -29,7 +32,8 @@
     "description": "api-global-security-removed-description",
     "direction": "none",
     "location": "security",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "A global security requirement was removed from the API definition. This security requirement will no longer be applied to all operations in the API."
   },
   {
     "id": "api-global-security-scope-added",
@@ -37,7 +41,8 @@
     "description": "api-global-security-scope-added-description",
     "direction": "none",
     "location": "security",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A scope was added to a global security requirement in the API definition. This scope will be required for all operations in the API."
   },
   {
     "id": "api-global-security-scope-removed",
@@ -45,87 +50,98 @@
     "description": "api-global-security-scope-removed-description",
     "direction": "none",
     "location": "security",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "A scope was removed from a global security requirement in the API definition. This scope will no longer be required for all operations in the API."
   },
   {
     "id": "api-invalid-stability-level",
     "level": "error",
     "description": "api-invalid-stability-level-description",
     "direction": "none",
-    "location": "none",
-    "action": "change"
+    "location": "endpoint",
+    "action": "change",
+    "detailed_description": "The specified stability level is not valid. The stability level must be one of 'stable', 'beta', 'alpha', or 'deprecated'."
   },
   {
     "id": "api-operation-id-added",
     "level": "info",
     "description": "api-operation-id-added-description",
     "direction": "none",
-    "location": "none",
-    "action": "add"
+    "location": "endpoint",
+    "action": "add",
+    "detailed_description": "An operation ID was added to an operation in the API definition. The operation ID is a unique identifier for the operation and is used to reference the operation in other parts of the API definition."
   },
   {
     "id": "api-operation-id-removed",
     "level": "info",
     "description": "api-operation-id-removed-description",
     "direction": "none",
-    "location": "none",
-    "action": "remove"
+    "location": "endpoint",
+    "action": "remove",
+    "detailed_description": "An operation ID was removed from an operation in the API definition. The operation ID is a unique identifier for the operation and is used to reference the operation in other parts of the API definition."
   },
   {
     "id": "api-path-removed-before-sunset",
     "level": "error",
     "description": "api-path-removed-before-sunset-description",
     "direction": "none",
-    "location": "none",
-    "action": "remove"
+    "location": "endpoint",
+    "action": "remove",
+    "detailed_description": "The specified path was removed from the API definition before the specified sunset date. When removing an API element, the element must be deprecated before it is removed. This change can break clients that rely on the sunset date to plan for the removal of deprecated paths, as they will not have a clear timeline for when the path will be unavailable."
   },
   {
     "id": "api-path-removed-with-deprecation",
     "level": "info",
     "description": "api-path-removed-with-deprecation-description",
     "direction": "none",
-    "location": "none",
-    "action": "remove"
+    "location": "endpoint",
+    "action": "remove",
+    "detailed_description": "The specified path was removed from the API definition after being deprecated. When removing an API element, the element must be deprecated before it is removed."
   },
   {
     "id": "api-path-removed-without-deprecation",
     "level": "error",
     "description": "api-path-removed-without-deprecation-description",
     "direction": "none",
-    "location": "none",
-    "action": "remove"
+    "location": "endpoint",
+    "action": "remove",
+    "detailed_description": "The specified path was removed from the API definition without being deprecated. When removing an API element, the element must be deprecated before it is removed. This change can break clients that rely on the deprecated path to transition to new paths or functionalities, as they will not have a clear timeline or warning for when the path will be unavailable."
   },
   {
     "id": "api-path-sunset-parse",
     "level": "error",
     "description": "api-path-sunset-parse-description",
     "direction": "none",
-    "location": "none",
-    "action": "change"
-  },
+    "location": "endpoint",
+    "action": "change",
+    "detailed_description": "The specified path was removed from the API definition without being deprecated. Removing an API element without prior deprecation can break clients that depend on the deprecated path to transition to new paths or functionalities. Without a clear timeline or warning, clients will not have the opportunity to update their implementations, leading to potential failures in their applications when the path becomes unavailable."
+    },
   {
     "id": "api-removed-before-sunset",
     "level": "error",
     "description": "api-removed-before-sunset-description",
     "direction": "none",
-    "location": "none",
-    "action": "remove"
+    "location": "endpoint",
+    "action": "remove",
+    "detailed_description": "The API was removed from the API definition before the specified sunset date. When removing an API, the API must be deprecated before it is removed. This change can break clients that rely on the sunset date to plan for the removal of deprecated APIs, as they will not have a clear timeline for when the API will be unavailable, leading to potential failures in their applications."
   },
   {
     "id": "api-removed-with-deprecation",
     "level": "info",
     "description": "api-removed-with-deprecation-description",
     "direction": "none",
-    "location": "none",
-    "action": "remove"
+    "location": "endpoint",
+    "action": "remove",
+    "detailed_description": "The API was removed from the API definition after being deprecated. When removing an API, the API must be deprecated before it is removed. This change can break clients that rely on the deprecated API to transition to new APIs or functionalities, as they will not have a clear timeline or warning for when the API will be unavailable."
   },
   {
     "id": "api-removed-without-deprecation",
     "level": "error",
     "description": "api-removed-without-deprecation-description",
     "direction": "none",
-    "location": "none",
-    "action": "remove"
+    "location": "endpoint",
+    "action": "remove",
+    "detailed_description": "The API was removed from the API definition without being deprecated. When removing an API, the API must be deprecated before it is removed. This change can break clients that rely on the deprecated API to transition to new APIs or functionalities, as they will not have a clear timeline or warning for when the API will be unavailable, leading to potential failures in their applications."
   },
   {
     "id": "api-schema-removed",
@@ -133,7 +149,8 @@
     "description": "api-schema-removed-description",
     "direction": "none",
     "location": "components",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "A schema was removed from the API definition. This schema will no longer be available for use in the API."
   },
   {
     "id": "api-security-added",
@@ -141,7 +158,8 @@
     "description": "api-security-added-description",
     "direction": "none",
     "location": "security",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A security requirement was added to the API definition. This security requirement will be applied to specific operations in the API."
   },
   {
     "id": "api-security-component-added",
@@ -149,7 +167,8 @@
     "description": "api-security-component-added-description",
     "direction": "none",
     "location": "components",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A security component was added to the API definition. This security component will be used to define security requirements in the API."
   },
   {
     "id": "api-security-component-oauth-scope-added",
@@ -157,7 +176,8 @@
     "description": "api-security-component-oauth-scope-added-description",
     "direction": "none",
     "location": "components",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A scope was added to an OAuth security component in the API definition. This scope will be required for the OAuth security component."
   },
   {
     "id": "api-security-component-oauth-scope-changed",
@@ -165,7 +185,8 @@
     "description": "api-security-component-oauth-scope-changed-description",
     "direction": "none",
     "location": "components",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "A scope was changed in an OAuth security component in the API definition. This scope will be required for the OAuth security component."
   },
   {
     "id": "api-security-component-oauth-scope-removed",
@@ -173,7 +194,8 @@
     "description": "api-security-component-oauth-scope-removed-description",
     "direction": "none",
     "location": "components",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "A scope was removed from an OAuth security component in the API definition. This scope will no longer be required for the OAuth security component."
   },
   {
     "id": "api-security-component-oauth-token-url-changed",
@@ -181,7 +203,8 @@
     "description": "api-security-component-oauth-token-url-changed-description",
     "direction": "none",
     "location": "components",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The token URL was changed in an OAuth security component in the API definition. This URL will be used to obtain access tokens for the OAuth security component."
   },
   {
     "id": "api-security-component-oauth-url-changed",
@@ -189,7 +212,8 @@
     "description": "api-security-component-oauth-url-changed-description",
     "direction": "none",
     "location": "components",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The authorization URL was changed in an OAuth security component in the API definition. This URL will be used to authorize access for the OAuth security component."
   },
   {
     "id": "api-security-component-removed",
@@ -197,7 +221,8 @@
     "description": "api-security-component-removed-description",
     "direction": "none",
     "location": "components",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "A security component was removed from the API definition. This security component will no longer be used to define security requirements in the API."
   },
   {
     "id": "api-security-component-type-changed",
@@ -205,7 +230,8 @@
     "description": "api-security-component-type-changed-description",
     "direction": "none",
     "location": "components",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The type of a security component was changed in the API definition. This type will be used to define security requirements in the API."
   },
   {
     "id": "api-security-removed",
@@ -213,7 +239,8 @@
     "description": "api-security-removed-description",
     "direction": "none",
     "location": "security",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "A security requirement was removed from the API definition. This security requirement will no longer be applied to specific operations in the API."
   },
   {
     "id": "api-security-scope-added",
@@ -221,7 +248,8 @@
     "description": "api-security-scope-added-description",
     "direction": "none",
     "location": "security",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A scope was added to a security requirement in the API definition. This scope will be required for specific operations in the API."
   },
   {
     "id": "api-security-scope-removed",
@@ -229,71 +257,80 @@
     "description": "api-security-scope-removed-description",
     "direction": "none",
     "location": "security",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "A scope was removed from a security requirement in the API definition. This scope will no longer be required for specific operations in the API."
   },
   {
     "id": "api-stability-decreased",
     "level": "error",
     "description": "api-stability-decreased-description",
     "direction": "none",
-    "location": "none",
-    "action": "decrease"
+    "location": "endpoint",
+    "action": "decrease",
+    "detailed_description": "The stability level of the API was decreased in the API definition. The stability level must be one of 'stable', 'beta', 'alpha', or 'deprecated'."
   },
   {
     "id": "api-sunset-date-changed-too-small",
     "level": "error",
     "description": "api-sunset-date-changed-too-small-description",
     "direction": "none",
-    "location": "none",
-    "action": "change"
+    "location": "endpoint",
+    "action": "change",
+    "detailed_description": "The specified sunset date is before the current date. The sunset date must be a date in the future. This change can break clients that rely on the sunset date to plan for the removal of deprecated elements, as they will not have a clear timeline for when the element will be unavailable, leading to potential failures in their applications."
   },
   {
     "id": "api-sunset-date-too-small",
     "level": "error",
     "description": "api-sunset-date-too-small-description",
     "direction": "none",
-    "location": "none",
-    "action": "change"
+    "location": "endpoint",
+    "action": "change",
+    "detailed_description": "The specified sunset date is before the current date. The sunset date must be a date in the future. This change can break clients that rely on the sunset date to plan for the removal of deprecated elements, as they will not have a clear timeline for when the element will be unavailable, leading to potential failures in their applications."
   },
   {
     "id": "api-tag-added",
     "level": "info",
     "description": "api-tag-added-description",
     "direction": "none",
-    "location": "none",
-    "action": "add"
+    "location": "endpoint",
+    "action": "add",
+    "detailed_description": "A tag was added to the API definition. This tag will be used to group operations in the API."
   },
   {
     "id": "api-tag-removed",
     "level": "info",
     "description": "api-tag-removed-description",
     "direction": "none",
-    "location": "none",
-    "action": "remove"
+    "location": "endpoint",
+    "action": "remove",
+    "detailed_description": "A tag was removed from the API definition. This tag will no longer be used to group operations in the API."
   },
   {
     "id": "endpoint-added",
     "level": "info",
     "description": "endpoint-added-description",
     "direction": "none",
-    "location": "none",
-    "action": "add"
+    "location": "endpoint",
+    "action": "add",
+    "detailed_description": "An endpoint was added to the API definition. This endpoint will be available for use in the API."
   },
   {
     "id": "endpoint-deprecated",
     "level": "info",
     "description": "endpoint-deprecated-description",
     "direction": "none",
-    "location": "none",
-    "action": "change"
+    "location": "endpoint",
+    "action": "change",
+    "detailed_description": "The specified endpoint was deprecated in the API definition. The endpoint will be removed from the API in the future."
   },
   {
     "id": "endpoint-reactivated",
     "level": "info",
     "description": "endpoint-reactivated-description",
     "direction": "none",
-    "location": "none",
-    "action": "change"
+    "location": "endpoint",
+    "action": "change",
+    "detailed_description": "The specified endpoint was reactivated in the API definition. The endpoint will be available for use in the API."
   },
   {
     "id": "new-optional-request-default-parameter-to-existing-path",
@@ -301,7 +338,8 @@
     "description": "new-optional-request-default-parameter-to-existing-path-description",
     "direction": "request",
     "location": "parameters",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "An optional request parameter has been added to an existing path in the API definition. This change is backward-compatible and will not break existing clients, as the parameter is optional and the API will continue to function as before if the parameter is not provided."
   },
   {
     "id": "new-optional-request-parameter",
@@ -309,7 +347,8 @@
     "description": "new-optional-request-parameter-description",
     "direction": "request",
     "location": "parameters",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new optional request parameter was added to the API definition. This parameter will be available for use in the API. Since it is optional, existing clients that do not use this parameter will not be affected, ensuring backward compatibility."
   },
   {
     "id": "new-optional-request-property",
@@ -317,15 +356,17 @@
     "description": "new-optional-request-property-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
-  },
+    "action": "add",
+    "detailed_description": "A new optional request property was added to the API definition. This property will be available for use in the API. Since it is optional, existing clients that do not use this property will not be affected, ensuring backward compatibility."
+    },
   {
     "id": "new-request-path-parameter",
     "level": "error",
     "description": "new-request-path-parameter-description",
     "direction": "request",
     "location": "parameters",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new request path parameter was added to the API definition. This parameter is required for the specified path in the API. This change can break existing clients that do not include the new required path parameter in their requests, as the API will now expect this parameter to be present and will return an error if it is missing."
   },
   {
     "id": "new-required-request-default-parameter-to-existing-path",
@@ -333,7 +374,8 @@
     "description": "new-required-request-default-parameter-to-existing-path-description",
     "direction": "request",
     "location": "parameters",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new required request parameter was added to an existing path in the API definition. This parameter is required for the specified path in the API. This change can break existing clients that do not include the new required parameter in their requests, as the API will now expect this parameter to be present and will return an error if it is missing."
   },
   {
     "id": "new-required-request-header-property",
@@ -341,7 +383,8 @@
     "description": "new-required-request-header-property-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new required request header property was added to the API definition. This property is required for the specified header in the API. This change can break existing clients that do not include the new required header property in their requests, as the API will now expect this property to be present and will return an error if it is missing."
   },
   {
     "id": "new-required-request-parameter",
@@ -349,7 +392,8 @@
     "description": "new-required-request-parameter-description",
     "direction": "request",
     "location": "parameters",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new required request parameter was added to the API definition. This parameter is required for the specified operation in the API. This change can break existing clients that do not include the new required parameter in their requests, as the API will now expect this parameter to be present and will return an error if it is missing."
   },
   {
     "id": "new-required-request-property",
@@ -357,7 +401,8 @@
     "description": "new-required-request-property-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new required request property was added to the API definition. This property is required for the specified operation in the API. This change can break existing clients that do not include the new required property in their requests, as the API will now expect this property to be present and will return an error if it is missing. Clients must update their requests to include this new property to avoid validation errors."
   },
   {
     "id": "new-required-request-property-with-default",
@@ -365,7 +410,8 @@
     "description": "new-required-request-property-with-default-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new required request property with a default value was added to the API definition. This property is required for the specified operation in the API. However, since a default value is provided, existing clients that do not include this property in their requests will not be affected, as the default value will be used automatically."
   },
   {
     "id": "optional-response-header-removed",
@@ -373,7 +419,8 @@
     "description": "optional-response-header-removed-description",
     "direction": "response",
     "location": "headers",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "An optional response header was removed from the API definition. This header will no longer be available in the response for the specified operation in the API. This change may impact clients that rely on this optional header for additional information, hence it is marked as a warning."
   },
   {
     "id": "request-body-added-optional",
@@ -381,7 +428,8 @@
     "description": "request-body-added-optional-description",
     "direction": "request",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new optional request body was added to the API definition. This body will be available for use in the API. Since it is optional, existing clients that do not include this body in their requests will not be affected, ensuring backward compatibility."
   },
   {
     "id": "request-body-added-required",
@@ -389,7 +437,8 @@
     "description": "request-body-added-required-description",
     "direction": "request",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new required request body was added to the API definition. This body is required for the specified operation in the API. This change can break existing clients that do not include the new required request body in their requests, as the API will now expect this body to be present and will return an error if it is missing. Clients must update their requests to include this new body to avoid validation errors."
   },
   {
     "id": "request-body-all-of-added",
@@ -397,7 +446,8 @@
     "description": "request-body-all-of-added-description",
     "direction": "request",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'allOf' schema was added to the request body in the API definition. This schema will be used to define the request body in the API. This change can break existing clients that do not conform to the new schema requirements, as they may not include all the necessary properties defined in the 'allOf' schema. Clients must update their request bodies to match the new schema to avoid validation errors."
   },
   {
     "id": "request-body-all-of-removed",
@@ -405,7 +455,8 @@
     "description": "request-body-all-of-removed-description",
     "direction": "request",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'allOf' schema was removed from the request body in the API definition. This schema will no longer be used to define the request body in the API."
   },
   {
     "id": "request-body-any-of-added",
@@ -413,7 +464,8 @@
     "description": "request-body-any-of-added-description",
     "direction": "request",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'anyOf' schema was added to the request body in the API definition. This schema will be used to define the request body in the API."
   },
   {
     "id": "request-body-any-of-removed",
@@ -421,7 +473,8 @@
     "description": "request-body-any-of-removed-description",
     "direction": "request",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'anyOf' schema was removed from the request body in the API definition. This schema will no longer be used to define the request body in the API."
   },
   {
     "id": "request-body-became-enum",
@@ -429,7 +482,8 @@
     "description": "request-body-became-enum-description",
     "direction": "request",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request body became an enum in the API definition. The request body must be an object or array."
   },
   {
     "id": "request-body-became-not-nullable",
@@ -437,7 +491,8 @@
     "description": "request-body-became-not-nullable-description",
     "direction": "request",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request body became not nullable in the API definition. The request body must be nullable."
   },
   {
     "id": "request-body-became-nullable",
@@ -445,7 +500,8 @@
     "description": "request-body-became-nullable-description",
     "direction": "request",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request body became nullable in the API definition. The request body must be nullable."
   },
   {
     "id": "request-body-became-optional",
@@ -453,7 +509,8 @@
     "description": "request-body-became-optional-description",
     "direction": "request",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request body became optional in the API definition. The request body must be required."
   },
   {
     "id": "request-body-became-required",
@@ -461,7 +518,8 @@
     "description": "request-body-became-required-description",
     "direction": "request",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request body became required in the API definition. The request body must be optional."
   },
   {
     "id": "request-body-default-value-added",
@@ -469,7 +527,8 @@
     "description": "request-body-default-value-added-description",
     "direction": "request",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A default value was added to the request body in the API definition. This default value will be used when the request body is not provided."
   },
   {
     "id": "request-body-default-value-changed",
@@ -477,7 +536,8 @@
     "description": "request-body-default-value-changed-description",
     "direction": "request",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The default value was changed in the request body in the API definition. This default value will be used when the request body is not provided."
   },
   {
     "id": "request-body-default-value-removed",
@@ -485,7 +545,8 @@
     "description": "request-body-default-value-removed-description",
     "direction": "request",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The default value was removed from the request body in the API definition. This default value will no longer be used when the request body is not provided."
   },
   {
     "id": "request-body-discriminator-added",
@@ -493,7 +554,8 @@
     "description": "request-body-discriminator-added-description",
     "direction": "request",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A discriminator was added to the request body in the API definition. This discriminator will be used to differentiate between different types of objects in the request body."
   },
   {
     "id": "request-body-discriminator-mapping-added",
@@ -501,7 +563,8 @@
     "description": "request-body-discriminator-mapping-added-description",
     "direction": "request",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A mapping was added to the discriminator in the request body in the API definition. This mapping will be used to map values to specific types of objects in the request body."
   },
   {
     "id": "request-body-discriminator-mapping-changed",
@@ -509,7 +572,8 @@
     "description": "request-body-discriminator-mapping-changed-description",
     "direction": "request",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The mapping was changed in the discriminator in the request body in the API definition. This mapping will be used to map values to specific types of objects in the request body."
   },
   {
     "id": "request-body-discriminator-mapping-deleted",
@@ -517,7 +581,8 @@
     "description": "request-body-discriminator-mapping-deleted-description",
     "direction": "request",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The mapping was removed from the discriminator in the request body in the API definition. This mapping will no longer be used to map values to specific types of objects in the request body."
   },
   {
     "id": "request-body-discriminator-property-name-changed",
@@ -525,7 +590,8 @@
     "description": "request-body-discriminator-property-name-changed-description",
     "direction": "request",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The property name was changed in the discriminator in the request body in the API definition. This property name will be used to differentiate between different types of objects in the request body."
   },
   {
     "id": "request-body-discriminator-removed",
@@ -533,7 +599,8 @@
     "description": "request-body-discriminator-removed-description",
     "direction": "request",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The discriminator was removed from the request body in the API definition. This discriminator will no longer be used to differentiate between different types of objects in the request body."
   },
   {
     "id": "request-body-enum-value-removed",
@@ -541,7 +608,8 @@
     "description": "request-body-enum-value-removed-description",
     "direction": "request",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "An enum value was removed from the request body in the API definition. This value will no longer be allowed in the request body."
   },
   {
     "id": "request-body-max-decreased",
@@ -549,7 +617,8 @@
     "description": "request-body-max-decreased-description",
     "direction": "request",
     "location": "body",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The maximum value was decreased in the request body in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "request-body-max-increased",
@@ -557,7 +626,8 @@
     "description": "request-body-max-increased-description",
     "direction": "request",
     "location": "body",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum value was increased in the request body in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "request-body-max-length-decreased",
@@ -565,7 +635,8 @@
     "description": "request-body-max-length-decreased-description",
     "direction": "request",
     "location": "body",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The maximum length was decreased in the request body in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "request-body-max-length-increased",
@@ -573,7 +644,8 @@
     "description": "request-body-max-length-increased-description",
     "direction": "request",
     "location": "body",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum length was increased in the request body in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "request-body-max-length-set",
@@ -581,7 +653,8 @@
     "description": "request-body-max-length-set-description",
     "direction": "request",
     "location": "body",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The maximum length was set in the request body in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "request-body-max-set",
@@ -589,7 +662,8 @@
     "description": "request-body-max-set-description",
     "direction": "request",
     "location": "body",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The maximum value was set in the request body in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "request-body-media-type-added",
@@ -597,7 +671,8 @@
     "description": "request-body-media-type-added-description",
     "direction": "request",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new media type was added to the request body in the API definition. This media type will be used to define the request body in the API."
   },
   {
     "id": "request-body-media-type-removed",
@@ -605,7 +680,8 @@
     "description": "request-body-media-type-removed-description",
     "direction": "request",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The media type was removed from the request body in the API definition. This media type will no longer be used to define the request body in the API."
   },
   {
     "id": "request-body-min-decreased",
@@ -613,7 +689,8 @@
     "description": "request-body-min-decreased-description",
     "direction": "request",
     "location": "body",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum value was decreased in the request body in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "request-body-min-increased",
@@ -621,7 +698,8 @@
     "description": "request-body-min-increased-description",
     "direction": "request",
     "location": "body",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum value was increased in the request body in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "request-body-min-items-increased",
@@ -629,7 +707,8 @@
     "description": "request-body-min-items-increased-description",
     "direction": "request",
     "location": "body",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum items was increased in the request body in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "request-body-min-items-set",
@@ -637,7 +716,8 @@
     "description": "request-body-min-items-set-description",
     "direction": "request",
     "location": "body",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The minimum items was set in the request body in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "request-body-min-length-decreased",
@@ -645,7 +725,8 @@
     "description": "request-body-min-length-decreased-description",
     "direction": "request",
     "location": "body",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum length was decreased in the request body in the API definition. The minimum length must be less than or equal to the maximum length."
   },
   {
     "id": "request-body-min-length-increased",
@@ -653,7 +734,8 @@
     "description": "request-body-min-length-increased-description",
     "direction": "request",
     "location": "body",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum length was increased in the request body in the API definition. The minimum length must be less than or equal to the maximum length."
   },
   {
     "id": "request-body-min-set",
@@ -661,7 +743,8 @@
     "description": "request-body-min-set-description",
     "direction": "request",
     "location": "body",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The minimum value was set in the request body in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "request-body-one-of-added",
@@ -669,7 +752,8 @@
     "description": "request-body-one-of-added-description",
     "direction": "request",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'oneOf' schema was added to the request body in the API definition. This schema will be used to define the request body in the API."
   },
   {
     "id": "request-body-one-of-removed",
@@ -677,7 +761,8 @@
     "description": "request-body-one-of-removed-description",
     "direction": "request",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'oneOf' schema was removed from the request body in the API definition. This schema will no longer be used to define the request body in the API."
   },
   {
     "id": "request-body-type-changed",
@@ -685,7 +770,8 @@
     "description": "request-body-type-changed-description",
     "direction": "request",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The type of the request body was changed in the API definition. The type must be one of 'object', 'array', 'string', 'number', 'integer', 'boolean', or 'null'."
   },
   {
     "id": "request-body-type-generalized",
@@ -693,7 +779,8 @@
     "description": "request-body-type-generalized-description",
     "direction": "request",
     "location": "body",
-    "action": "generalize"
+    "action": "generalize",
+    "detailed_description": "The type of the request body was generalized in the API definition. The type must be one of 'object', 'array', 'string', 'number', 'integer', 'boolean', or 'null'."
   },
   {
     "id": "request-header-property-became-enum",
@@ -701,7 +788,8 @@
     "description": "request-header-property-became-enum-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request header property became an enum in the API definition. The request header property must be a string."
   },
   {
     "id": "request-header-property-became-required",
@@ -709,7 +797,8 @@
     "description": "request-header-property-became-required-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request header property became required in the API definition. The request header property must be optional."
   },
   {
     "id": "request-optional-property-became-not-read-only",
@@ -717,7 +806,8 @@
     "description": "request-optional-property-became-not-read-only-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The optional property became not read-only in the API definition. The optional property must be read-only."
   },
   {
     "id": "request-optional-property-became-not-write-only",
@@ -725,7 +815,8 @@
     "description": "request-optional-property-became-not-write-only-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The optional property became not write-only in the API definition. The optional property must be write-only."
   },
   {
     "id": "request-optional-property-became-read-only",
@@ -733,7 +824,8 @@
     "description": "request-optional-property-became-read-only-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The optional property became read-only in the API definition. The optional property must be write-only."
   },
   {
     "id": "request-optional-property-became-write-only",
@@ -741,7 +833,8 @@
     "description": "request-optional-property-became-write-only-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The optional property became write-only in the API definition. The optional property must be read-only."
   },
   {
     "id": "request-parameter-became-enum",
@@ -749,7 +842,8 @@
     "description": "request-parameter-became-enum-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request parameter became an enum in the API definition. The request parameter must be a string."
   },
   {
     "id": "request-parameter-became-optional",
@@ -757,7 +851,8 @@
     "description": "request-parameter-became-optional-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request parameter became optional in the API definition. The request parameter must be required."
   },
   {
     "id": "request-parameter-became-required",
@@ -765,7 +860,8 @@
     "description": "request-parameter-became-required-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request parameter became required in the API definition. The request parameter must be optional."
   },
   {
     "id": "request-parameter-default-value-added",
@@ -773,7 +869,8 @@
     "description": "request-parameter-default-value-added-description",
     "direction": "request",
     "location": "parameters",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A default value was added to the request parameter in the API definition. This default value will be used when the request parameter is not provided."
   },
   {
     "id": "request-parameter-default-value-changed",
@@ -781,7 +878,8 @@
     "description": "request-parameter-default-value-changed-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The default value was changed in the request parameter in the API definition. This default value will be used when the request parameter is not provided."
   },
   {
     "id": "request-parameter-default-value-removed",
@@ -789,7 +887,8 @@
     "description": "request-parameter-default-value-removed-description",
     "direction": "request",
     "location": "parameters",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The default value was removed from the request parameter in the API definition. This default value will no longer be used when the request parameter is not provided."
   },
   {
     "id": "request-parameter-deprecated",
@@ -797,7 +896,8 @@
     "description": "request-parameter-deprecated-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified request parameter was deprecated in the API definition. The request parameter will be removed from the API in the future."
   },
   {
     "id": "request-parameter-deprecated-sunset-missing",
@@ -805,7 +905,8 @@
     "description": "request-parameter-deprecated-sunset-missing-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified request parameter was deprecated in the API definition, but the sunset date was not provided. The request parameter will be removed from the API in the future."
   },
   {
     "id": "request-parameter-enum-value-added",
@@ -813,7 +914,8 @@
     "description": "request-parameter-enum-value-added-description",
     "direction": "request",
     "location": "parameters",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new enum value was added to the request parameter in the API definition. This value will be allowed in the request parameter."
   },
   {
     "id": "request-parameter-enum-value-removed",
@@ -821,7 +923,8 @@
     "description": "request-parameter-enum-value-removed-description",
     "direction": "request",
     "location": "parameters",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "An enum value was removed from the request parameter in the API definition. This value will no longer be allowed in the request parameter."
   },
   {
     "id": "request-parameter-max-decreased",
@@ -829,7 +932,8 @@
     "description": "request-parameter-max-decreased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The maximum value was decreased in the request parameter in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "request-parameter-max-increased",
@@ -837,7 +941,8 @@
     "description": "request-parameter-max-increased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum value was increased in the request parameter in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "request-parameter-max-items-decreased",
@@ -845,7 +950,8 @@
     "description": "request-parameter-max-items-decreased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The maximum items was decreased in the request parameter in the API definition. The maximum items must be greater than or equal to the minimum items."
   },
   {
     "id": "request-parameter-max-items-increased",
@@ -853,7 +959,8 @@
     "description": "request-parameter-max-items-increased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum items was increased in the request parameter in the API definition. The maximum items must be greater than or equal to the minimum items."
   },
   {
     "id": "request-parameter-max-length-decreased",
@@ -861,7 +968,8 @@
     "description": "request-parameter-max-length-decreased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The maximum length was decreased in the request parameter in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "request-parameter-max-length-increased",
@@ -869,7 +977,8 @@
     "description": "request-parameter-max-length-increased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum length was increased in the request parameter in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "request-parameter-max-length-set",
@@ -877,7 +986,8 @@
     "description": "request-parameter-max-length-set-description",
     "direction": "request",
     "location": "parameters",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The maximum length was set in the request parameter in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "request-parameter-max-set",
@@ -885,7 +995,8 @@
     "description": "request-parameter-max-set-description",
     "direction": "request",
     "location": "parameters",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The maximum value was set in the request parameter in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "request-parameter-min-decreased",
@@ -893,7 +1004,8 @@
     "description": "request-parameter-min-decreased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum value was decreased in the request parameter in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "request-parameter-min-increased",
@@ -901,7 +1013,8 @@
     "description": "request-parameter-min-increased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum value was increased in the request parameter in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "request-parameter-min-items-decreased",
@@ -909,7 +1022,8 @@
     "description": "request-parameter-min-items-decreased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum items was decreased in the request parameter in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "request-parameter-min-items-increased",
@@ -917,7 +1031,8 @@
     "description": "request-parameter-min-items-increased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum items was increased in the request parameter in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "request-parameter-min-items-set",
@@ -925,7 +1040,8 @@
     "description": "request-parameter-min-items-set-description",
     "direction": "request",
     "location": "parameters",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The minimum items was set in the request parameter in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "request-parameter-min-length-decreased",
@@ -933,7 +1049,8 @@
     "description": "request-parameter-min-length-decreased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum length was decreased in the request parameter in the API definition. The minimum length must be less than or equal to the maximum length."
   },
   {
     "id": "request-parameter-min-length-increased",
@@ -941,7 +1058,8 @@
     "description": "request-parameter-min-length-increased-description",
     "direction": "request",
     "location": "parameters",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum length was increased in the request parameter in the API definition. The minimum length must be less than or equal to the maximum length."
   },
   {
     "id": "request-parameter-min-set",
@@ -949,7 +1067,8 @@
     "description": "request-parameter-min-set-description",
     "direction": "request",
     "location": "parameters",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The minimum value was set in the request parameter in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "request-parameter-pattern-added",
@@ -957,7 +1076,8 @@
     "description": "request-parameter-pattern-added-description",
     "direction": "request",
     "location": "parameters",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new pattern was added to the request parameter in the API definition. This pattern will be used to validate the request parameter."
   },
   {
     "id": "request-parameter-pattern-changed",
@@ -965,7 +1085,8 @@
     "description": "request-parameter-pattern-changed-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The pattern was changed in the request parameter in the API definition. This pattern will be used to validate the request parameter."
   },
   {
     "id": "request-parameter-pattern-generalized",
@@ -973,7 +1094,8 @@
     "description": "request-parameter-pattern-generalized-description",
     "direction": "request",
     "location": "parameters",
-    "action": "generalize"
+    "action": "generalize",
+    "detailed_description": "The pattern was generalized in the request parameter in the API definition. This pattern will be used to validate the request parameter."
   },
   {
     "id": "request-parameter-pattern-removed",
@@ -981,7 +1103,8 @@
     "description": "request-parameter-pattern-removed-description",
     "direction": "request",
     "location": "parameters",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The pattern was removed from the request parameter in the API definition. This pattern will no longer be used to validate the request parameter."
   },
   {
     "id": "request-parameter-property-type-changed",
@@ -989,7 +1112,8 @@
     "description": "request-parameter-property-type-changed-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The property type was changed in the request parameter in the API definition. The property type must be one of 'string', 'number', 'integer', 'boolean', 'array', 'object', or 'null'."
   },
   {
     "id": "request-parameter-property-type-generalized",
@@ -997,7 +1121,8 @@
     "description": "request-parameter-property-type-generalized-description",
     "direction": "request",
     "location": "parameters",
-    "action": "generalize"
+    "action": "generalize",
+    "detailed_description": "The property type was generalized in the request parameter in the API definition. The property type must be one of 'string', 'number', 'integer', 'boolean', 'array', 'object', or 'null'."
   },
   {
     "id": "request-parameter-property-type-specialized",
@@ -1005,7 +1130,8 @@
     "description": "request-parameter-property-type-specialized-description",
     "direction": "request",
     "location": "parameters",
-    "action": "specialize"
+    "action": "specialize",
+    "detailed_description": "The property type was specialized in the request parameter in the API definition. The property type must be one of 'string', 'number', 'integer', 'boolean', 'array', 'object', or 'null'."
   },
   {
     "id": "request-parameter-reactivated",
@@ -1013,7 +1139,8 @@
     "description": "request-parameter-reactivated-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified request parameter was reactivated in the API definition. The request parameter will be used in the API."
   },
   {
     "id": "request-parameter-removed",
@@ -1021,7 +1148,8 @@
     "description": "request-parameter-removed-description",
     "direction": "request",
     "location": "parameters",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The specified request parameter was removed from the API definition. The request parameter will no longer be used in the API."
   },
   {
     "id": "request-parameter-removed-before-sunset",
@@ -1029,7 +1157,8 @@
     "description": "request-parameter-removed-before-sunset-description",
     "direction": "request",
     "location": "parameters",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The specified request parameter was removed from the API definition before the sunset date. The request parameter will no longer be used in the API."
   },
   {
     "id": "request-parameter-removed-with-deprecation",
@@ -1037,7 +1166,8 @@
     "description": "request-parameter-removed-with-deprecation-description",
     "direction": "request",
     "location": "parameters",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The specified request parameter was removed from the API definition with a deprecation warning. The request parameter will no longer be used in the API."
   },
   {
     "id": "request-parameter-sunset-date-changed-too-small",
@@ -1045,7 +1175,8 @@
     "description": "request-parameter-sunset-date-changed-too-small-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The sunset date was changed to a date that is too small in the request parameter in the API definition. The sunset date must be greater than or equal to the current date."
   },
   {
     "id": "request-parameter-sunset-date-too-small",
@@ -1053,7 +1184,8 @@
     "description": "request-parameter-sunset-date-too-small-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The sunset date was set to a date that is too small in the request parameter in the API definition. The sunset date must be greater than or equal to the current date."
   },
   {
     "id": "request-parameter-sunset-deleted",
@@ -1061,7 +1193,8 @@
     "description": "request-parameter-sunset-deleted-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The sunset date was removed from the request parameter in the API definition. The sunset date will no longer be used to remove the request parameter from the API."
   },
   {
     "id": "request-parameter-sunset-parse",
@@ -1069,7 +1202,8 @@
     "description": "request-parameter-sunset-parse-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The sunset date could not be parsed in the request parameter in the API definition. The sunset date must be a valid date."
   },
   {
     "id": "request-parameter-type-changed",
@@ -1077,7 +1211,8 @@
     "description": "request-parameter-type-changed-description",
     "direction": "request",
     "location": "parameters",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The type of the request parameter was changed in the API definition. The type must be one of 'string', 'number', 'integer', 'boolean', 'array', 'object', or 'null'."
   },
   {
     "id": "request-parameter-type-generalized",
@@ -1085,7 +1220,8 @@
     "description": "request-parameter-type-generalized-description",
     "direction": "request",
     "location": "parameters",
-    "action": "generalize"
+    "action": "generalize",
+    "detailed_description": "The type of the request parameter was generalized in the API definition. The type must be one of 'string', 'number', 'integer', 'boolean', 'array', 'object', or 'null'."
   },
   {
     "id": "request-parameter-x-extensible-enum-value-removed",
@@ -1093,7 +1229,8 @@
     "description": "request-parameter-x-extensible-enum-value-removed-description",
     "direction": "request",
     "location": "parameters",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "An enum value was removed from the x-extensible request parameter in the API definition. This value will no longer be allowed in the x-extensible request parameter."
   },
   {
     "id": "request-property-all-of-added",
@@ -1101,7 +1238,8 @@
     "description": "request-property-all-of-added-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'allOf' schema was added to the request property in the API definition. This schema will be used to define the request property in the API."
   },
   {
     "id": "request-property-all-of-removed",
@@ -1109,7 +1247,8 @@
     "description": "request-property-all-of-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'allOf' schema was removed from the request property in the API definition. This schema will no longer be used to define the request property in the API."
   },
   {
     "id": "request-property-any-of-added",
@@ -1117,7 +1256,8 @@
     "description": "request-property-any-of-added-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'anyOf' schema was added to the request property in the API definition. This schema will be used to define the request property in the API."
   },
   {
     "id": "request-property-any-of-removed",
@@ -1125,7 +1265,8 @@
     "description": "request-property-any-of-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'anyOf' schema was removed from the request property in the API definition. This schema will no longer be used to define the request property in the API."
   },
   {
     "id": "request-property-became-enum",
@@ -1133,7 +1274,8 @@
     "description": "request-property-became-enum-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request property type was changed to an enum in the API definition. This change restricts the allowed values and may break existing clients."
   },
   {
     "id": "request-property-became-not-nullable",
@@ -1141,7 +1283,8 @@
     "description": "request-property-became-not-nullable-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request property became not nullable in the API definition. This change restricts values and may break existing clients."
   },
   {
     "id": "request-property-became-nullable",
@@ -1149,7 +1292,8 @@
     "description": "request-property-became-nullable-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request property became nullable in the API definition. This change allows the property to be omitted or set to null."
   },
   {
     "id": "request-property-became-optional",
@@ -1157,7 +1301,8 @@
     "description": "request-property-became-optional-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request property became optional in the API definition. This change allows the property to be omitted."
   },
   {
     "id": "request-property-became-required",
@@ -1165,15 +1310,17 @@
     "description": "request-property-became-required-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request property became required in the API definition. This is a breaking change because existing clients that do not provide this property will receive validation errors, as they must now include this property in their requests."
   },
   {
     "id": "request-property-became-required-with-default",
     "level": "info",
-    "description": "request-property-became-required-with-default-description",
+    "description": "request-property-became-required-with-default-description", 
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The request property became required but includes a default value in the API definition. Since there is a default value, this is not a breaking change - if clients don't provide the property, the default value will be used."
   },
   {
     "id": "request-property-default-value-added",
@@ -1181,7 +1328,8 @@
     "description": "request-property-default-value-added-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A default value was added to the request property in the API definition. This default value will be used when the request property is not provided."
   },
   {
     "id": "request-property-default-value-changed",
@@ -1189,7 +1337,8 @@
     "description": "request-property-default-value-changed-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The default value was changed in the request property in the API definition. This default value will be used when the request property is not provided."
   },
   {
     "id": "request-property-default-value-removed",
@@ -1197,7 +1346,8 @@
     "description": "request-property-default-value-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The default value was removed from the request property in the API definition. This default value will no longer be used when the request property is not provided."
   },
   {
     "id": "request-property-discriminator-added",
@@ -1205,7 +1355,8 @@
     "description": "request-property-discriminator-added-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A discriminator was added to the request property in the API definition. This discriminator will be used to differentiate between different types of objects in the request property."
   },
   {
     "id": "request-property-discriminator-mapping-added",
@@ -1213,7 +1364,8 @@
     "description": "request-property-discriminator-mapping-added-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new mapping was added to the request property discriminator in the API definition. This mapping will be used to differentiate between different types of objects in the request property."
   },
   {
     "id": "request-property-discriminator-mapping-changed",
@@ -1221,7 +1373,8 @@
     "description": "request-property-discriminator-mapping-changed-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The mapping was changed in the request property discriminator in the API definition. This mapping will be used to differentiate between different types of objects in the request property."
   },
   {
     "id": "request-property-discriminator-mapping-deleted",
@@ -1229,7 +1382,8 @@
     "description": "request-property-discriminator-mapping-deleted-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The mapping was removed from the request property discriminator in the API definition. This mapping will no longer be used to differentiate between different types of objects in the request property."
   },
   {
     "id": "request-property-discriminator-property-name-changed",
@@ -1237,7 +1391,8 @@
     "description": "request-property-discriminator-property-name-changed-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The property name was changed in the request property discriminator in the API definition. This property name will be used to differentiate between different types of objects in the request property."
   },
   {
     "id": "request-property-discriminator-removed",
@@ -1245,7 +1400,8 @@
     "description": "request-property-discriminator-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The discriminator was removed from the request property in the API definition. This discriminator will no longer be used to differentiate between different types of objects in the request property."
   },
   {
     "id": "request-property-enum-value-added",
@@ -1253,7 +1409,8 @@
     "description": "request-property-enum-value-added-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new enum value was added to the request property in the API definition. This value will be allowed in the request property."
   },
   {
     "id": "request-property-enum-value-removed",
@@ -1261,7 +1418,8 @@
     "description": "request-property-enum-value-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "An enum value was removed from the request property in the API definition. This value will no longer be allowed in the request property."
   },
   {
     "id": "request-property-max-decreased",
@@ -1269,7 +1427,8 @@
     "description": "request-property-max-decreased-description",
     "direction": "request",
     "location": "properties",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The maximum value was decreased in the request property in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "request-property-max-increased",
@@ -1277,7 +1436,8 @@
     "description": "request-property-max-increased-description",
     "direction": "request",
     "location": "properties",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum value was increased in the request property in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "request-property-max-length-decreased",
@@ -1285,7 +1445,8 @@
     "description": "request-property-max-length-decreased-description",
     "direction": "request",
     "location": "properties",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The maximum length was decreased in the request property in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "request-property-max-length-increased",
@@ -1293,7 +1454,8 @@
     "description": "request-property-max-length-increased-description",
     "direction": "request",
     "location": "properties",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum allowed length for this request property was increased. This is a backwards compatible change since existing clients sending shorter values will continue to work. Clients can optionally send longer values up to the new maximum length."
   },
   {
     "id": "request-property-max-length-set",
@@ -1301,7 +1463,8 @@
     "description": "request-property-max-length-set-description",
     "direction": "request",
     "location": "properties",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "A maximum length constraint was added to this request property. This may break clients that send values longer than the new maximum. Required Action: Review client code to ensure all values sent for this property are within the new length limit. Update any code generating values exceeding the maximum."
   },
   {
     "id": "request-property-max-set",
@@ -1309,7 +1472,8 @@
     "description": "request-property-max-set-description",
     "direction": "request",
     "location": "properties",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "A maximum value constraint was added to this request property. This may break clients sending values larger than the new maximum. Required Action: Review client code to ensure all values sent for this property are within the new maximum value. Update any code generating values exceeding the limit."
   },
   {
     "id": "request-property-min-decreased",
@@ -1317,7 +1481,8 @@
     "description": "request-property-min-decreased-description",
     "direction": "request",
     "location": "properties",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum allowed value for this request property was decreased. This is a backwards compatible change since existing clients sending larger values will continue to work. Clients can optionally send smaller values down to the new minimum."
   },
   {
     "id": "request-property-min-increased",
@@ -1325,7 +1490,8 @@
     "description": "request-property-min-increased-description",
     "direction": "request",
     "location": "properties",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum value was increased in the request property in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "request-property-min-items-increased",
@@ -1333,7 +1499,8 @@
     "description": "request-property-min-items-increased-description",
     "direction": "request",
     "location": "properties",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum items was increased in the request property in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "request-property-min-items-set",
@@ -1341,7 +1508,8 @@
     "description": "request-property-min-items-set-description",
     "direction": "request",
     "location": "properties",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The minimum items was set in the request property in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "request-property-min-length-decreased",
@@ -1349,7 +1517,8 @@
     "description": "request-property-min-length-decreased-description",
     "direction": "request",
     "location": "properties",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum allowed length for this request property was decreased. This is a backwards compatible change since existing clients sending longer values will continue to work. Clients can optionally send shorter values down to the new minimum."
   },
   {
     "id": "request-property-min-length-increased",
@@ -1357,7 +1526,8 @@
     "description": "request-property-min-length-increased-description",
     "direction": "request",
     "location": "properties",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum length was increased in the request property in the API definition. The minimum length must be less than or equal to the maximum length."
   },
   {
     "id": "request-property-min-set",
@@ -1365,7 +1535,8 @@
     "description": "request-property-min-set-description",
     "direction": "request",
     "location": "properties",
-    "action": "set"
+    "action": "set",
+    "detailed_description": "The minimum value was set in the request property in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "request-property-one-of-added",
@@ -1373,7 +1544,8 @@
     "description": "request-property-one-of-added-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'oneOf' schema was added to the request property in the API definition. This schema will be used to define the request property in the API."
   },
   {
     "id": "request-property-one-of-removed",
@@ -1381,7 +1553,8 @@
     "description": "request-property-one-of-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'oneOf' schema was removed from the request property in the API definition. This schema will no longer be used to define the request property in the API."
   },
   {
     "id": "request-property-pattern-added",
@@ -1389,7 +1562,8 @@
     "description": "request-property-pattern-added-description",
     "direction": "request",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new pattern was added to the request property in the API definition. This pattern will be used to validate the request property."
   },
   {
     "id": "request-property-pattern-changed",
@@ -1397,7 +1571,8 @@
     "description": "request-property-pattern-changed-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The pattern was changed in the request property in the API definition. This pattern will be used to validate the request property."
   },
   {
     "id": "request-property-pattern-generalized",
@@ -1405,7 +1580,8 @@
     "description": "request-property-pattern-generalized-description",
     "direction": "request",
     "location": "properties",
-    "action": "generalize"
+    "action": "generalize",
+    "detailed_description": "The pattern was generalized in the request property in the API definition. This pattern will be used to validate the request property."
   },
   {
     "id": "request-property-pattern-removed",
@@ -1413,7 +1589,8 @@
     "description": "request-property-pattern-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The pattern was removed from the request property in the API definition. This pattern will no longer be used to validate the request property."
   },
   {
     "id": "request-property-removed",
@@ -1421,7 +1598,8 @@
     "description": "request-property-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The specified request property was removed from the API definition. The request property will no longer be used in the API."
   },
   {
     "id": "request-property-type-changed",
@@ -1429,7 +1607,8 @@
     "description": "request-property-type-changed-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The property type was changed in the request property in the API definition. The property type must be one of 'string', 'number', 'integer', 'boolean', 'array', 'object', or 'null'."
   },
   {
     "id": "request-property-type-generalized",
@@ -1437,7 +1616,8 @@
     "description": "request-property-type-generalized-description",
     "direction": "request",
     "location": "properties",
-    "action": "generalize"
+    "action": "generalize",
+    "detailed_description": "The property type was generalized in the request property in the API definition. The property type must be one of 'string', 'number', 'integer', 'boolean', 'array', 'object', or 'null'."
   },
   {
     "id": "request-property-x-extensible-enum-value-removed",
@@ -1445,7 +1625,8 @@
     "description": "request-property-x-extensible-enum-value-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "An enum value was removed from the x-extensible request property in the API definition. This value will no longer be allowed in the x-extensible request property."
   },
   {
     "id": "request-read-only-property-enum-value-removed",
@@ -1453,7 +1634,8 @@
     "description": "request-read-only-property-enum-value-removed-description",
     "direction": "request",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "An enum value was removed from the read-only request property in the API definition. This value will no longer be allowed in the read-only request property."
   },
   {
     "id": "request-read-only-property-max-decreased",
@@ -1461,7 +1643,8 @@
     "description": "request-read-only-property-max-decreased-description",
     "direction": "request",
     "location": "properties",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The maximum value was decreased in the read-only request property in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "request-read-only-property-max-length-decreased",
@@ -1469,7 +1652,8 @@
     "description": "request-read-only-property-max-length-decreased-description",
     "direction": "request",
     "location": "properties",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The maximum length was decreased in the read-only request property in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "request-read-only-property-min-increased",
@@ -1477,7 +1661,8 @@
     "description": "request-read-only-property-min-increased-description",
     "direction": "request",
     "location": "properties",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The minimum value was increased in the read-only request property in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "request-required-property-became-not-read-only",
@@ -1485,7 +1670,8 @@
     "description": "request-required-property-became-not-read-only-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The required property became not read-only in the API definition. This change allows the property to be modified in the request."
   },
   {
     "id": "request-required-property-became-not-write-only",
@@ -1493,7 +1679,8 @@
     "description": "request-required-property-became-not-write-only-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The required property became not write-only in the API definition. This change allows the property to be read in the request."
   },
   {
     "id": "request-required-property-became-read-only",
@@ -1501,7 +1688,8 @@
     "description": "request-required-property-became-read-only-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The required property became read-only in the API definition. This change restricts the property to be read-only in the request."
   },
   {
     "id": "request-required-property-became-write-only",
@@ -1509,7 +1697,8 @@
     "description": "request-required-property-became-write-only-description",
     "direction": "request",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The required property became write-only in the API definition. This change restricts the property to be write-only in the request."
   },
   {
     "id": "required-response-header-removed",
@@ -1517,7 +1706,8 @@
     "description": "required-response-header-removed-description",
     "direction": "response",
     "location": "headers",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "A required response header was removed from the API definition. This header must be included in the response."
   },
   {
     "id": "response-body-all-of-added",
@@ -1525,7 +1715,8 @@
     "description": "response-body-all-of-added-description",
     "direction": "response",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'allOf' schema was added to the response body in the API definition. This schema will be used to define the response body in the API."
   },
   {
     "id": "response-body-all-of-removed",
@@ -1533,7 +1724,8 @@
     "description": "response-body-all-of-removed-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'allOf' schema was removed from the response body in the API definition. This schema will no longer be used to define the response body in the API."
   },
   {
     "id": "response-body-any-of-added",
@@ -1541,7 +1733,8 @@
     "description": "response-body-any-of-added-description",
     "direction": "response",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'anyOf' schema was added to the response body in the API definition. This schema will be used to define the response body in the API."
   },
   {
     "id": "response-body-any-of-removed",
@@ -1549,7 +1742,8 @@
     "description": "response-body-any-of-removed-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'anyOf' schema was removed from the response body in the API definition. This schema will no longer be used to define the response body in the API."
   },
   {
     "id": "response-body-became-nullable",
@@ -1557,7 +1751,8 @@
     "description": "response-body-became-nullable-description",
     "direction": "response",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The response body became nullable in the API definition. This change allows the response body to be omitted or set to null."
   },
   {
     "id": "response-body-default-value-added",
@@ -1565,7 +1760,8 @@
     "description": "response-body-default-value-added-description",
     "direction": "response",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A default value was added to the response body in the API definition. This default value will be used when the response body is not provided."
   },
   {
     "id": "response-body-default-value-changed",
@@ -1573,7 +1769,8 @@
     "description": "response-body-default-value-changed-description",
     "direction": "response",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The default value was changed in the response body in the API definition. This default value will be used when the response body is not provided."
   },
   {
     "id": "response-body-default-value-removed",
@@ -1581,7 +1778,8 @@
     "description": "response-body-default-value-removed-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The default value was removed from the response body in the API definition. This default value will no longer be used when the response body is not provided."
   },
   {
     "id": "response-body-discriminator-added",
@@ -1589,7 +1787,8 @@
     "description": "response-body-discriminator-added-description",
     "direction": "response",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A discriminator was added to the response body in the API definition. This discriminator will be used to differentiate between different types of objects in the response body."
   },
   {
     "id": "response-body-discriminator-mapping-added",
@@ -1597,7 +1796,8 @@
     "description": "response-body-discriminator-mapping-added-description",
     "direction": "response",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new mapping was added to the response body discriminator in the API definition. This mapping will be used to differentiate between different types of objects in the response body."
   },
   {
     "id": "response-body-discriminator-mapping-changed",
@@ -1605,7 +1805,8 @@
     "description": "response-body-discriminator-mapping-changed-description",
     "direction": "response",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The mapping was changed in the response body discriminator in the API definition. This mapping will be used to differentiate between different types of objects in the response body."
   },
   {
     "id": "response-body-discriminator-mapping-deleted",
@@ -1613,7 +1814,8 @@
     "description": "response-body-discriminator-mapping-deleted-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The mapping was removed from the response body discriminator in the API definition. This mapping will no longer be used to differentiate between different types of objects in the response body."
   },
   {
     "id": "response-body-discriminator-property-name-changed",
@@ -1621,7 +1823,8 @@
     "description": "response-body-discriminator-property-name-changed-description",
     "direction": "response",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The property name was changed in the response body discriminator in the API definition. This property name will be used to differentiate between different types of objects in the response body."
   },
   {
     "id": "response-body-discriminator-removed",
@@ -1629,7 +1832,8 @@
     "description": "response-body-discriminator-removed-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The discriminator was removed from the response body in the API definition. This discriminator will no longer be used to differentiate between different types of objects in the response body."
   },
   {
     "id": "response-body-max-increased",
@@ -1637,7 +1841,8 @@
     "description": "response-body-max-increased-description",
     "direction": "response",
     "location": "body",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum value was increased in the response body in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "response-body-max-length-increased",
@@ -1645,7 +1850,8 @@
     "description": "response-body-max-length-increased-description",
     "direction": "response",
     "location": "body",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum length was increased in the response body in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "response-body-max-length-unset",
@@ -1653,7 +1859,8 @@
     "description": "response-body-max-length-unset-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The maximum length was removed from the response body in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "response-body-min-decreased",
@@ -1661,7 +1868,8 @@
     "description": "response-body-min-decreased-description",
     "direction": "response",
     "location": "body",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum value was decreased in the response body in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "response-body-min-items-decreased",
@@ -1669,7 +1877,8 @@
     "description": "response-body-min-items-decreased-description",
     "direction": "response",
     "location": "body",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum items was decreased in the response body in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "response-body-min-items-unset",
@@ -1677,7 +1886,8 @@
     "description": "response-body-min-items-unset-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The minimum items was removed from the response body in the API definition. The minimum items must be less than or equal to the maximum items."  
   },
   {
     "id": "response-body-min-length-decreased",
@@ -1685,7 +1895,8 @@
     "description": "response-body-min-length-decreased-description",
     "direction": "response",
     "location": "body",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum allowed length for this response body was decreased. This is a backwards compatible change since existing clients receiving longer values will continue to work. Clients can optionally receive shorter values down to the new minimum."
   },
   {
     "id": "response-body-one-of-added",
@@ -1693,7 +1904,8 @@
     "description": "response-body-one-of-added-description",
     "direction": "response",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'oneOf' schema was added to the response body in the API definition. This schema will be used to define the response body in the API."
   },
   {
     "id": "response-body-one-of-removed",
@@ -1701,7 +1913,8 @@
     "description": "response-body-one-of-removed-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'oneOf' schema was removed from the response body in the API definition. This schema will no longer be used to define the response body in the API."
   },
   {
     "id": "response-body-type-changed",
@@ -1709,7 +1922,8 @@
     "description": "response-body-type-changed-description",
     "direction": "response",
     "location": "body",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The property type was changed in the response body in the API definition. The property type must be one of 'string', 'number', 'integer', 'boolean', 'array', 'object', or 'null'."
   },
   {
     "id": "response-header-became-optional",
@@ -1717,7 +1931,8 @@
     "description": "response-header-became-optional-description",
     "direction": "response",
     "location": "headers",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The response header became optional in the API definition. This is a breaking change because existing clients that do not provide this header will receive validation errors, as they must now include this header in their responses."
   },
   {
     "id": "response-media-type-added",
@@ -1725,7 +1940,8 @@
     "description": "response-media-type-added-description",
     "direction": "response",
     "location": "body",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new media type was added to the response body in the API definition. This media type will be used to define the response body in the API."
   },
   {
     "id": "response-media-type-removed",
@@ -1733,7 +1949,8 @@
     "description": "response-media-type-removed-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The media type was removed from the response body in the API definition. This media type will no longer be used to define the response body in the API."
   },
   {
     "id": "response-mediatype-enum-value-removed",
@@ -1741,23 +1958,26 @@
     "description": "response-mediatype-enum-value-removed-description",
     "direction": "response",
     "location": "body",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "An enum value was removed from the media type in the response body in the API definition. This value will no longer be allowed in the media type."
   },
   {
     "id": "response-non-success-status-added",
     "level": "info",
     "description": "response-non-success-status-added-description",
     "direction": "response",
-    "location": "none",
-    "action": "add"
+    "location": "response status",
+    "action": "add",
+    "detailed_description": "A new non-success status was added to the API definition. This status will be used to define the response in the API."
   },
   {
     "id": "response-non-success-status-removed",
     "level": "info",
     "description": "response-non-success-status-removed-description",
     "direction": "response",
-    "location": "none",
-    "action": "remove"
+    "location": "response status",
+    "action": "remove",
+    "detailed_description": "The specified non-success status was removed from the API definition. The non-success status will no longer be used in the API."
   },
   {
     "id": "response-optional-property-added",
@@ -1765,7 +1985,8 @@
     "description": "response-optional-property-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new optional property was added to the response in the API definition. This property will be used to define the response in the API."
   },
   {
     "id": "response-optional-property-became-not-read-only",
@@ -1773,7 +1994,8 @@
     "description": "response-optional-property-became-not-read-only-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified response property became not read-only in the API definition. This change allows the property to be modified in the response."
   },
   {
     "id": "response-optional-property-became-not-write-only",
@@ -1781,7 +2003,8 @@
     "description": "response-optional-property-became-not-write-only-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified response property became not write-only in the API definition. This change allows the property to be read in the response."
   },
   {
     "id": "response-optional-property-became-read-only",
@@ -1789,7 +2012,8 @@
     "description": "response-optional-property-became-read-only-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified response property became read-only in the API definition. This change restricts the property to be read-only in the response."
   },
   {
     "id": "response-optional-property-became-write-only",
@@ -1797,7 +2021,8 @@
     "description": "response-optional-property-became-write-only-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified response property became write-only in the API definition. This change restricts the property to be write-only in the response."
   },
   {
     "id": "response-optional-property-removed",
@@ -1805,7 +2030,8 @@
     "description": "response-optional-property-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The specified response property was removed from the API definition. The response property will no longer be used in the API."
   },
   {
     "id": "response-optional-write-only-property-added",
@@ -1813,7 +2039,8 @@
     "description": "response-optional-write-only-property-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new write-only property was added to the response in the API definition. This property will be used to define the response in the API."
   },
   {
     "id": "response-optional-write-only-property-removed",
@@ -1821,7 +2048,8 @@
     "description": "response-optional-write-only-property-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The specified response property was removed from the API definition. The response property will no longer be used in the API."
   },
   {
     "id": "response-property-all-of-added",
@@ -1829,7 +2057,8 @@
     "description": "response-property-all-of-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'allOf' schema was added to the response property in the API definition. This schema will be used to define the response property in the API."
   },
   {
     "id": "response-property-all-of-removed",
@@ -1837,7 +2066,8 @@
     "description": "response-property-all-of-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'allOf' schema was removed from the response property in the API definition. This schema will no longer be used to define the response property in the API."
   },
   {
     "id": "response-property-any-of-added",
@@ -1845,7 +2075,8 @@
     "description": "response-property-any-of-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'anyOf' schema was added to the response property in the API definition. This schema will be used to define the response property in the API."
   },
   {
     "id": "response-property-any-of-removed",
@@ -1853,7 +2084,8 @@
     "description": "response-property-any-of-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'anyOf' schema was removed from the response property in the API definition. This schema will no longer be used to define the response property in the API."
   },
   {
     "id": "response-property-became-nullable",
@@ -1861,7 +2093,8 @@
     "description": "response-property-became-nullable-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified response property became nullable in the API definition. This change allows the response property to be omitted or set to null."
   },
   {
     "id": "response-property-became-optional",
@@ -1869,7 +2102,8 @@
     "description": "response-property-became-optional-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified response property became optional in the API definition. This property is not required in the response."
   },
   {
     "id": "response-property-became-required",
@@ -1877,7 +2111,8 @@
     "description": "response-property-became-required-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The specified response property became required in the API definition. This property must be provided in the response."
   },
   {
     "id": "response-property-default-value-added",
@@ -1885,7 +2120,8 @@
     "description": "response-property-default-value-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A default value was added to the response property in the API definition. This default value will be used when the response property is not provided."
   },
   {
     "id": "response-property-default-value-changed",
@@ -1893,7 +2129,8 @@
     "description": "response-property-default-value-changed-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The default value was changed in the response property in the API definition. This default value will be used when the response property is not provided."
   },
   {
     "id": "response-property-default-value-removed",
@@ -1901,7 +2138,8 @@
     "description": "response-property-default-value-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The default value was removed from the response property in the API definition. This default value will no longer be used when the response property is not provided."
   },
   {
     "id": "response-property-discriminator-added",
@@ -1909,7 +2147,8 @@
     "description": "response-property-discriminator-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A discriminator was added to the response property in the API definition. This discriminator will be used to differentiate between different types of objects in the response property."
   },
   {
     "id": "response-property-discriminator-mapping-added",
@@ -1917,7 +2156,8 @@
     "description": "response-property-discriminator-mapping-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new mapping was added to the response property discriminator in the API definition. This mapping will be used to differentiate between different types of objects in the response property."
   },
   {
     "id": "response-property-discriminator-mapping-changed",
@@ -1925,7 +2165,8 @@
     "description": "response-property-discriminator-mapping-changed-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The mapping was changed in the response property discriminator in the API definition. This mapping will be used to differentiate between different types of objects in the response property."
   },
   {
     "id": "response-property-discriminator-mapping-deleted",
@@ -1933,7 +2174,8 @@
     "description": "response-property-discriminator-mapping-deleted-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The mapping was removed from the response property discriminator in the API definition. This mapping will no longer be used to differentiate between different types of objects in the response property."
   },
   {
     "id": "response-property-discriminator-property-name-changed",
@@ -1941,7 +2183,8 @@
     "description": "response-property-discriminator-property-name-changed-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The property name was changed in the response property discriminator in the API definition. This property name will be used to differentiate between different types of objects in the response property."
   },
   {
     "id": "response-property-discriminator-removed",
@@ -1949,7 +2192,8 @@
     "description": "response-property-discriminator-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The discriminator was removed from the response property in the API definition. This discriminator will no longer be used to differentiate between different types of objects in the response property."
   },
   {
     "id": "response-property-enum-value-added",
@@ -1957,7 +2201,8 @@
     "description": "response-property-enum-value-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new enum value was added to the response property in the API definition. This value will be allowed in the response property."
   },
   {
     "id": "response-property-enum-value-removed",
@@ -1965,7 +2210,8 @@
     "description": "response-property-enum-value-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "An enum value was removed from the response property in the API definition. This value will no longer be allowed in the response property."
   },
   {
     "id": "response-property-max-increased",
@@ -1973,7 +2219,8 @@
     "description": "response-property-max-increased-description",
     "direction": "response",
     "location": "properties",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum value was increased in the response property in the API definition. The maximum value must be greater than or equal to the minimum value."
   },
   {
     "id": "response-property-max-length-increased",
@@ -1981,7 +2228,8 @@
     "description": "response-property-max-length-increased-description",
     "direction": "response",
     "location": "properties",
-    "action": "increase"
+    "action": "increase",
+    "detailed_description": "The maximum length was increased in the response property in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "response-property-max-length-unset",
@@ -1989,7 +2237,8 @@
     "description": "response-property-max-length-unset-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The maximum length was unset in the response property in the API definition. The maximum length must be greater than or equal to the minimum length."
   },
   {
     "id": "response-property-min-decreased",
@@ -1997,7 +2246,8 @@
     "description": "response-property-min-decreased-description",
     "direction": "response",
     "location": "properties",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum value was decreased in the response property in the API definition. The minimum value must be less than or equal to the maximum value."
   },
   {
     "id": "response-property-min-items-decreased",
@@ -2005,7 +2255,8 @@
     "description": "response-property-min-items-decreased-description",
     "direction": "response",
     "location": "properties",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum items was decreased in the response property in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "response-property-min-items-unset",
@@ -2013,7 +2264,8 @@
     "description": "response-property-min-items-unset-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The minimum items was unset in the response property in the API definition. The minimum items must be less than or equal to the maximum items."
   },
   {
     "id": "response-property-min-length-decreased",
@@ -2021,7 +2273,8 @@
     "description": "response-property-min-length-decreased-description",
     "direction": "response",
     "location": "properties",
-    "action": "decrease"
+    "action": "decrease",
+    "detailed_description": "The minimum length was decreased in the response property in the API definition. The minimum length must be less than or equal to the maximum length."
   },
   {
     "id": "response-property-one-of-added",
@@ -2029,7 +2282,8 @@
     "description": "response-property-one-of-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new 'oneOf' schema was added to the response property in the API definition. This schema will be used to define the response property in the API."
   },
   {
     "id": "response-property-one-of-removed",
@@ -2037,7 +2291,8 @@
     "description": "response-property-one-of-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The 'oneOf' schema was removed from the response property in the API definition. This schema will no longer be used to define the response property in the API."
   },
   {
     "id": "response-property-pattern-added",
@@ -2045,7 +2300,8 @@
     "description": "response-property-pattern-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "A new pattern was added to the response property in the API definition. This pattern will be used to validate the response property."
   },
   {
     "id": "response-property-pattern-changed",
@@ -2053,7 +2309,8 @@
     "description": "response-property-pattern-changed-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The pattern was changed in the response property in the API definition. This pattern will be used to validate the response property."
   },
   {
     "id": "response-property-pattern-removed",
@@ -2061,7 +2318,8 @@
     "description": "response-property-pattern-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The pattern was removed from the response property in the API definition. This pattern will no longer be used to validate the response property."
   },
   {
     "id": "response-property-type-changed",
@@ -2069,7 +2327,8 @@
     "description": "response-property-type-changed-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The property type was changed in the response property in the API definition. The property type must be one of 'string', 'number', 'integer', 'boolean', 'array', 'object', or 'null'."
   },
   {
     "id": "response-required-property-added",
@@ -2077,7 +2336,8 @@
     "description": "response-required-property-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "The required property was added to the API definition. The required property must be included in the API definition."
   },
   {
     "id": "response-required-property-became-not-read-only",
@@ -2085,7 +2345,8 @@
     "description": "response-required-property-became-not-read-only-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The required property became not read-only in the API definition. This change allows the property to be modified in the response."
   },
   {
     "id": "response-required-property-became-not-write-only",
@@ -2093,7 +2354,8 @@
     "description": "response-required-property-became-not-write-only-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The required property became not write-only in the API definition. This change allows the property to be read in the response."
   },
   {
     "id": "response-required-property-became-read-only",
@@ -2101,7 +2363,8 @@
     "description": "response-required-property-became-read-only-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The required property became read-only in the API definition. This change restricts the property to be read-only in the response."
   },
   {
     "id": "response-required-property-became-write-only",
@@ -2109,7 +2372,8 @@
     "description": "response-required-property-became-write-only-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The required property became write-only in the API definition. This change restricts the property to be write-only in the response."
   },
   {
     "id": "response-required-property-removed",
@@ -2117,7 +2381,8 @@
     "description": "response-required-property-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The required property was removed from the API definition. The required property must be included in the API definition."
   },
   {
     "id": "response-required-write-only-property-added",
@@ -2125,7 +2390,8 @@
     "description": "response-required-write-only-property-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "The required write-only property was added to the API definition. The required write-only property must be included in the API definition."
   },
   {
     "id": "response-required-write-only-property-removed",
@@ -2133,23 +2399,26 @@
     "description": "response-required-write-only-property-removed-description",
     "direction": "response",
     "location": "properties",
-    "action": "remove"
+    "action": "remove",
+    "detailed_description": "The required write-only property was removed from the API definition. The required write-only property must be included in the API definition."
   },
   {
     "id": "response-success-status-added",
     "level": "info",
     "description": "response-success-status-added-description",
     "direction": "response",
-    "location": "properties",
-    "action": "add"
+    "location": "response status",
+    "action": "add",
+    "detailed_description": "The success status was added to the API definition. The success status must be included in the API definition."
   },
   {
     "id": "response-success-status-removed",
     "level": "error",
     "description": "response-success-status-removed-description",
     "direction": "response",
-    "location": "properties",
-    "action": "remove"
+    "location": "response status",
+    "action": "remove",
+    "detailed_description": "The success status was removed from the API definition. The success status must be included in the API definition."
   },
   {
     "id": "response-write-only-property-became-optional",
@@ -2157,7 +2426,8 @@
     "description": "response-write-only-property-became-optional-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The write-only property became optional in the API definition. This change allows the property to be omitted in the response."
   },
   {
     "id": "response-write-only-property-became-required",
@@ -2165,7 +2435,8 @@
     "description": "response-write-only-property-became-required-description",
     "direction": "response",
     "location": "properties",
-    "action": "change"
+    "action": "change",
+    "detailed_description": "The write-only property became required in the API definition. This change requires the property to be included in the response."
   },
   {
     "id": "response-write-only-property-enum-value-added",
@@ -2173,14 +2444,16 @@
     "description": "response-write-only-property-enum-value-added-description",
     "direction": "response",
     "location": "properties",
-    "action": "add"
+    "action": "add",
+    "detailed_description": "An enum value was added to the write-only property in the API definition. This value will be allowed in the write-only property."
   },
   {
     "id": "sunset-deleted",
     "level": "error",
     "description": "sunset-deleted-description",
     "direction": "none",
-    "location": "none",
-    "action": "remove"
+    "location": "endpoint",
+    "action": "remove",
+    "detailed_description": "The sunset was deleted from the API definition. The sunset must be included in the API definition."
   }
 ]

@@ -1,7 +1,5 @@
 "use client";
 
-// import '@/styles/global.css';
-
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
@@ -44,21 +42,21 @@ export default function Home() {
   };
   
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-6 max-w-6xl mx-auto text-white bg-gray-900">
       <h1 className="text-2xl font-bold mb-4">OASDiff Checks</h1>
-      <Card>
+      <Card className="bg-gray-800 text-white">
         <CardContent>
-          <Table>
+          <Table className="bg-gray-800 text-white">
             <TableHeader>
-              <TableRow>
-                <TableHead>#</TableHead>
-                <TableHead>ID</TableHead>
-                <TableHead>Level</TableHead>
-                <TableHead>Direction</TableHead>
-                <TableHead>Location</TableHead>
-                <TableHead>Action</TableHead>
+              <TableRow className="bg-gray-800">
+                <TableHead className="text-white">#</TableHead>
+                <TableHead className="text-white">ID</TableHead>
+                <TableHead className="text-white">Level</TableHead>
+                <TableHead className="text-white">Direction</TableHead>
+                <TableHead className="text-white">Location</TableHead>
+                <TableHead className="text-white">Action</TableHead>
               </TableRow>
-              <TableRow>
+              <TableRow className="bg-gray-800">
                 <TableCell></TableCell>
                 <TableCell>
                   <Input id="IdFilter"
@@ -108,13 +106,13 @@ export default function Home() {
             </TableHeader>
             <TableBody>
               {filteredChecks.map((check, index) => (
-                <TableRow key={check.id} onClick={() => setSelectedCheck(check)} className="cursor-pointer">
-                  <TableCell>{index}</TableCell>
-                  <TableCell>{check.id}</TableCell>
-                  <TableCell>{check.level}</TableCell>
-                  <TableCell>{check.direction}</TableCell>
-                  <TableCell>{check.location}</TableCell>
-                  <TableCell>{check.action}</TableCell>
+                <TableRow key={check.id} onClick={() => setSelectedCheck(check)} className="cursor-pointer bg-gray-800 hover:bg-gray-700">
+                  <TableCell className="text-white">{index}</TableCell>
+                  <TableCell className="text-white">{check.id}</TableCell>
+                  <TableCell className="text-white">{check.level}</TableCell>
+                  <TableCell className="text-white">{check.direction}</TableCell>
+                  <TableCell className="text-white">{check.location}</TableCell>
+                  <TableCell className="text-white">{check.action}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -123,7 +121,7 @@ export default function Home() {
       </Card>
       {/* Side Panel */}
       {selectedCheck && (
-        <div className="fixed top-0 right-0 w-96 h-full bg-white shadow-lg p-6 overflow-auto">
+        <div className="fixed top-0 right-0 w-96 h-full bg-gray-800 text-white shadow-lg p-6 overflow-auto">
           <button onClick={() => setSelectedCheck(null)} className="absolute top-2 right-2">
             <X size={24} />
           </button>
@@ -133,9 +131,9 @@ export default function Home() {
           <p><strong>Direction:</strong> {selectedCheck.direction}</p>
           <p><strong>Location:</strong> {selectedCheck.location}</p>
           <p><strong>Action:</strong> {selectedCheck.action}</p>
-          <p className="mt-4"><strong>Details:</strong> {selectedCheck.details}</p>
+          <p className="mt-4"><strong>Details:</strong> {selectedCheck.detailed_description}</p>
         </div>
       )}
     </div>
-   );
+  );
 }

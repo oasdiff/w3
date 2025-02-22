@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Select } from "@/components/ui/select";
 import { X } from "lucide-react";
 
-export default function Home() {
+export default function Page() {
   const [searchID, setSearchID] = useState("");
   const [searchLevel, setSearchLevel] = useState("");
   const [searchDirection, setSearchDirection] = useState("");

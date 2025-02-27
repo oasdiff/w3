@@ -31,7 +31,6 @@ export default function RootLayout({
         <nav className="bg-gray-800 text-white p-4">
             <Link className='navBarLink' href="/">Home</Link>
             <Link className='navBarLink' href="/checks">Checks</Link>
-            {/* <Link href="/checks">Checks</Link>   */}
         </nav>
         <main className="p-4">
           {children}

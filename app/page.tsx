@@ -2,23 +2,68 @@ import Link from "next/link";
 
 export default function Test() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
-      <header className="w-full py-6 bg-blue-500 text-center">
-        <h1 className="text-4xl font-bold">OASDiff</h1>
-        <p className="text-lg">OpenAPI Diff and Breaking Changes</p>
-      </header>
-      <main className="flex-1 flex flex-col items-center justify-center px-4">
-        <h2 className="text-3xl font-bold mb-4">Compare OpenAPI Specifications</h2>
-        <p className="text-lg mb-8 text-center">
-          Easily identify differences and breaking changes between OpenAPI specifications.
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <main className="flex-1 flex flex-col items-center px-4 max-w-4xl">
+        
+        <p className="text-lg text-left mb-8">
+        Welcome to oasdiff, an <a href="https://github.com/Tufin/oasdiff" className="font-medium text-blue-600 underline dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:no-underline">open source</a> tool for comparing API contracts written in <a className="font-medium text-blue-600 underline dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:no-underline" href="https://swagger.io/specification/v3/">OpenAPI Specification v3</a>,
+        designed to help developers and teams understand the changes between different versions of their APIs.
         </p>
-        <Link href="https://github.com/Tufin/oasdiff" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Get Started
-        </Link>
+
+        <h3 className="text-2xl text-left font-bold mb-2 w-full max-w-full">Detecting breaking changes with oasdiff</h3>
+        <p className="text-lg text-left w-full max-w-full">
+        You can use oasdiff to compare two OpenAPI specs and get a list of the breaking changes between them:
+        </p>
+
+        <div className="w-full max-w-full overflow-x-auto mb-8">
+          <pre className="bg-gray-800 text-white p-2 rounded-md text-sm whitespace-pre">
+        <code className="language-bash">
+        &gt; <span className="text-green-300">oasdiff</span> breaking spec1.yaml spec2.yaml<br/>
+        1 changes: 1 <span className="text-red-500">error</span>, 0 <span className="text-pink-500">warning</span>, 0 <span className="text-cyan-500">info</span><br/>
+        <span className="text-red-500">error</span>	  [<span className="text-yellow-500">api-removed-without-deprecation</span>] at simple1.yaml<br/>
+          <pre>        in API <span className="text-green-300">GET /api/test</span><br/></pre>
+          <pre>                api removed without deprecation <br/></pre>
+        </code>
+          </pre>
+        </div>
+
+        <h3 className="text-2xl text-left font-bold mb-2 w-full max-w-full">What are breaking changes?</h3>
+        <p className="text-lg text-left w-full max-w-full">
+        An OpenAPI breaking change is a change made to an API's contract (defined using the OpenAPI Specification) that introduces incompatibilities with existing client applications or consumers of the API. These changes can disrupt the functionality of client applications and potentially cause them to break or malfunction.
+        <br/>
+        Generally speaking, there are two kinds of breaking changes.<br/>
+        </p>
+        
+        <div className="mb-8 w-full">
+          <h4 className="text-xl font-semibold text-left mb-3 mt-3">1. Changes that require the client to send something new or different</h4>
+          <div className="border-4 border-gray-300 rounded-lg shadow-lg p-2">
+        <img
+          src="/breaking-request.png"
+          alt="Diagram illustrating breaking changes"
+          className="w-full"
+        />
+          </div>
+        </div>
+        
+        <div className="mb-4 w-full">
+          <h4 className="text-xl font-semibold text-left mb-3">2. Changes that omit or change something that the client was expecting</h4>
+          <div className="border-4 border-gray-300 rounded-lg shadow-lg p-2">
+        <img
+          src="/breaking-response.png"
+          alt="Diagram illustrating breaking changes"
+          className="w-full"
+        />
+          </div>
+        </div>
+
+        <p className="text-lg text-left w-full max-w-full">However, this is a simplification. In reality, there are many types of breaking changes that can occur in an API contract, and unfortunatly, there is no standard definition.<br/>
+          This was one of the challenges we faced when creating oasdiff and to tackle it, we, the oasdiff community, have created <a href="/checks" className="font-medium text-blue-600 underline dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:no-underline">a comprehensive set of checks for testing changes in API contracts</a>.<br/>
+          The checks are implemented as open source and we welcome feedback to continue refining and improving them.<br/>
+        </p>
       </main>
-      <footer className="w-full py-4 bg-gray-800 text-center">
-        <p>&copy; 2023 OASDiff. All rights reserved.</p>
-      </footer>
+            <footer className="w-full py-4 bg-gray-800 text-center text-white">
+        <p>&copy; 2025 oasdiff. All rights reserved.</p>
+            </footer>
     </div>
   );
 }

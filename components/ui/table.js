@@ -15,7 +15,7 @@ export function Table({ children, className = "" }) {
   }
   
   export function TableHead({ children, className = "" }) {
-    return <th className={`p-2 text-left ${className}`}>{children}</th>;
+    return <th className={`text-left ${className}`}>{children}</th>;
   }
   
   export function TableBody({ children }) {
@@ -23,5 +23,5 @@ export function Table({ children, className = "" }) {
   }
   
   export function TableCell({ children, className = "" }) {
-    return <td className={`p-2 border ${className}`}>{children}</td>;
+    return <td className={`border ${className}`}>{children}</td>;
   }

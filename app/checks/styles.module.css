@@ -1,0 +1,51 @@
+.tableCell {
+  padding: 0.5rem;
+  color: white;
+  min-width: 0;
+}
+
+.tableCellIndex {
+  width: 5%;
+  text-align: center;
+}
+
+.tableCellId {
+  width: 35%;
+}
+
+.tableCellStandard {
+  width: 15%;
+}
+
+.tableRow {
+  background-color: var(--background-card);
+}
+
+.tableRowHover {
+  cursor: pointer;
+}
+
+.tableRowHover:hover {
+  background-color: var(--background-hover);
+}
+
+.tableRowSelected {
+  background-color: var(--background-hover);
+}
+
+.tableContainer {
+  background-color: var(--background-card);
+  color: white;
+  width: 100%;
+}
+
+.tableHeader {
+  top: 0;
+  background-color: var(--background-card);
+}
+
+.tableBody {
+  overflow: auto;
+  height: calc(100vh - 15rem);
+  border-bottom: 1px solid var(--background-hover);
+} 

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select } from "@/components/ui/select";
+import styles from './styles.module.css';
 
 export default function Page() {
   const [searchID, setSearchID] = useState("");
@@ -42,20 +43,20 @@ export default function Page() {
           {/* Left side - Table */}
           <div className="w-[calc(100%-24rem)]">
               {/* Fixed Header */}
-              <div className="top-0 bg-gray-800">
-                <Table className="bg-gray-800 text-white w-full">
+              <div className={styles.tableHeader}>
+                <Table className={styles.tableContainer}>
                   <TableHeader>
-                    <TableRow className="bg-gray-800">
-                      <TableHead className="p-2 text-white w-[5%] text-center min-w-0">#</TableHead>
-                      <TableHead className="p-2 text-white w-[35%] min-w-0">ID</TableHead>
-                      <TableHead className="p-2 text-white w-[15%] min-w-0">Level</TableHead>
-                      <TableHead className="p-2 text-white w-[15%] min-w-0">Direction</TableHead>
-                      <TableHead className="p-2 text-white w-[15%] min-w-0">Location</TableHead>
-                      <TableHead className="p-2 text-white w-[15%] min-w-0">Action</TableHead>
+                    <TableRow className={styles.tableRow}>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellIndex}`}>#</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellId}`}>ID</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard}`}>Level</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard}`}>Direction</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard}`}>Location</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard}`}>Action</TableHead>
                     </TableRow>
-                    <TableRow className="bg-gray-800">
-                      <TableCell className="w-[5%] min-w-0"></TableCell>
-                      <TableCell className="w-[35%] min-w-0">
+                    <TableRow className={styles.tableRow}>
+                      <TableCell className={`${styles.tableCell} ${styles.tableCellIndex}`}></TableCell>
+                      <TableCell className={`${styles.tableCell} ${styles.tableCellId}`}>
                         <Input id="IdFilter"
                           placeholder="Search ID..."
                           value={searchID}
@@ -63,7 +64,7 @@ export default function Page() {
                           className="w-full"
                         />
                       </TableCell>
-                      <TableCell className="w-[15%] min-w-0">
+                      <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>
                         <Select id="levelFilter"
                           placeholder="All Levels"
                           value={searchLevel}
@@ -72,7 +73,7 @@ export default function Page() {
                           className="w-full"
                         />
                       </TableCell>
-                      <TableCell className="w-[15%] min-w-0">
+                      <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>
                         <Select id="directionFilter"
                           placeholder="All Directions"
                           value={searchDirection}
@@ -81,7 +82,7 @@ export default function Page() {
                           className="w-full"
                         />
                       </TableCell>
-                      <TableCell className="w-[15%] min-w-0">
+                      <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>
                         <Select 
                           placeholder="All Locations"
                           value={searchLocation}
@@ -90,7 +91,7 @@ export default function Page() {
                           className="w-full"
                         />
                       </TableCell>
-                      <TableCell className="w-[15%] min-w-0">
+                      <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>
                         <Select
                           placeholder="All Actions"
                           value={searchActions}
@@ -105,21 +106,21 @@ export default function Page() {
               </div>
 
               {/* Scrollable Body */}
-              <div className="overflow-auto h-[calc(100vh-15rem)] border-b">
-                <Table className="bg-gray-800 text-white w-full">
+              <div className={styles.tableBody}>
+                <Table className={styles.tableContainer}>
                   <TableBody>
                     {filteredChecks.map((check, index) => (
                       <TableRow 
                         key={check.id} 
                         onClick={() => setSelectedCheck(check)} 
-                        className={`cursor-pointer hover:bg-gray-700 ${selectedCheck && selectedCheck.id === check.id ? 'bg-gray-700' : 'bg-gray-800'}`}
+                        className={`${styles.tableRow} ${styles.tableRowHover} ${selectedCheck && selectedCheck.id === check.id ? styles.tableRowSelected : ''}`}
                       >
-                        <TableCell className="p-2 text-white w-[5%] min-w-0 text-center">{index}</TableCell>
-                        <TableCell className="p-2 text-white w-[35%] min-w-0">{check.id}</TableCell>
-                        <TableCell className="p-2 text-white w-[15%] min-w-0">{check.level}</TableCell>
-                        <TableCell className="p-2 text-white w-[15%] min-w-0">{check.direction}</TableCell>
-                        <TableCell className="p-2 text-white w-[15%] min-w-0">{check.location}</TableCell>
-                        <TableCell className="p-2 text-white w-[15%] min-w-0">{check.action}</TableCell>
+                        <TableCell className={`${styles.tableCell} ${styles.tableCellIndex}`}>{index}</TableCell>
+                        <TableCell className={`${styles.tableCell} ${styles.tableCellId}`}>{check.id}</TableCell>
+                        <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>{check.level}</TableCell>
+                        <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>{check.direction}</TableCell>
+                        <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>{check.location}</TableCell>
+                        <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>{check.action}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

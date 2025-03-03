@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select } from "@/components/ui/select";
-import { X } from "lucide-react";
 
 export default function Page() {
   const [searchID, setSearchID] = useState("");
@@ -38,13 +37,11 @@ export default function Page() {
   );
 
   return (
-    <div className="fixed inset-0 pt-16 px-6 pb-6 text-white bg-gray-900 overflow-hidden">
-      <Card className="bg-gray-800 text-white h-full !rounded-none !border-0">
-        <CardContent className="h-full">
+      <Card className="fixed inset-0 pt-16 px-6 pb-6 text-white bg-gray-900 overflow-hidden">
+        {/* <CardContent className="h-full"> */}
           <div className="flex flex-row gap-6 h-full">
             {/* Left side - Table */}
             <div className="w-[calc(100%-24rem)]">
-              <div className="relative">
                 {/* Fixed Header */}
                 <div className="sticky top-0 bg-gray-800 z-10">
                   <Table className="bg-gray-800 text-white w-full">
@@ -109,7 +106,7 @@ export default function Page() {
                 </div>
 
                 {/* Scrollable Body */}
-                <div className="overflow-auto h-[calc(100vh-20rem)] border-b border-gray-700">
+                <div className="overflow-auto h-[calc(100vh-15rem)] border-b">
                   <Table className="bg-gray-800 text-white w-full">
                     <TableBody>
                       {filteredChecks.map((check, index) => (
@@ -129,7 +126,6 @@ export default function Page() {
                     </TableBody>
                   </Table>
                 </div>
-              </div>
             </div>
 
             {/* Right side - Panel */}
@@ -151,8 +147,7 @@ export default function Page() {
               )}
             </div>
           </div>
-        </CardContent>
+        {/* </CardContent> */}
       </Card>
-    </div>
   );
 }

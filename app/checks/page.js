@@ -39,9 +39,9 @@ export default function Page() {
 
   return (
     <div className="fixed inset-0 pt-16 px-6 pb-6 text-white bg-gray-900 overflow-hidden">
-      <Card className="bg-gray-800 text-white h-full">
-        <CardContent>
-          <div className="flex flex-row gap-6">
+      <Card className="bg-gray-800 text-white h-full !rounded-none !border-0">
+        <CardContent className="h-full">
+          <div className="flex flex-row gap-6 h-full">
             {/* Left side - Table */}
             <div className="w-[calc(100%-24rem)]">
               <div className="relative">
@@ -109,7 +109,7 @@ export default function Page() {
                 </div>
 
                 {/* Scrollable Body */}
-                <div className="overflow-auto h-[calc(100vh-20rem)]">
+                <div className="overflow-auto h-[calc(100vh-20rem)] border-b border-gray-700">
                   <Table className="bg-gray-800 text-white w-full">
                     <TableBody>
                       {filteredChecks.map((check, index) => (

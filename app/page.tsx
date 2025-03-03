@@ -61,9 +61,6 @@ export default function Test() {
           The checks are implemented as open source and we welcome feedback to continue refining and improving them.<br/>
         </p>
       </main>
-            <footer className="w-full py-4 bg-gray-800 text-center text-white">
-        <p>&copy; 2025 oasdiff. All rights reserved.</p>
-            </footer>
     </div>
   );
 }

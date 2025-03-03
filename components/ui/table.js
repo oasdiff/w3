@@ -14,14 +14,14 @@ export function Table({ children }) {
     );
   }
   
-  export function TableHead({ children }) {
-    return <th className="p-2 text-left">{children}</th>;
+  export function TableHead({ children, className = "" }) {
+    return <th className={`p-2 text-left ${className}`}>{children}</th>;
   }
   
   export function TableBody({ children }) {
     return <tbody>{children}</tbody>;
   }
   
-  export function TableCell({ children }) {
-    return <td className="p-2 border">{children}</td>;
+  export function TableCell({ children, className = "" }) {
+    return <td className={`p-2 border ${className}`}>{children}</td>;
   }

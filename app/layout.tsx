@@ -28,11 +28,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="bg-gray-800 text-white p-4">
+        <nav className="fixed top-0 left-0 right-0 bg-gray-800 text-white p-4 z-50">
             <Link className='navBarLink' href="/">Home</Link>
             <Link className='navBarLink' href="/checks">Checks</Link>
         </nav>
-        <main className="p-4">
+        <main className="p-4 mt-14">
           {children}
         </main>
       </body>

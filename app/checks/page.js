@@ -42,9 +42,9 @@ export default function Page() {
       <h1 className="text-2xl font-bold mb-4">OASDiff Checks</h1>
       <div className="flex flex-row gap-6">
         {/* Left side - Table */}
-        <div className="flex-1">
+        <div className="w-[calc(100%-24rem)]">
           <Card className="bg-gray-800 text-white">
-            <CardContent>
+            <CardContent className="h-[calc(100vh-12rem)] overflow-auto">
               <Table className="bg-gray-800 text-white">
                 <TableHeader>
                   <TableRow className="bg-gray-800">
@@ -121,7 +121,7 @@ export default function Page() {
         </div>
 
         {/* Right side - Panel */}
-        <div className="w-96 bg-gray-800 rounded-lg shadow-lg p-6">
+        <div className="w-96 bg-gray-800 rounded-lg shadow-lg p-6 fixed top-24 right-6 bottom-6 overflow-y-auto">
           {selectedCheck ? (
             <>
               <h2 className="text-xl font-bold mb-4">{selectedCheck.id}</h2>

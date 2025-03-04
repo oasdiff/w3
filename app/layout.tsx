@@ -23,12 +23,20 @@ export default function RootLayout({
             <Link className='navBarLink' href="/">
               <img src="/oasdiff-logo.png" alt="OASDiff Logo" className="h-8" />
             </Link>
-            <Link 
-              href="/checks" 
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              Checks
-            </Link>
+            <div className="flex gap-6">
+              <Link 
+                href="/checks" 
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                Checks
+              </Link>
+              <Link 
+                href="/diff-calculator" 
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                Diff Calculator
+              </Link>
+            </div>
           </div>
         </nav>
         <main className="p-4 mt-14">

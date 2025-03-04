@@ -27,7 +27,7 @@ export default function Test() {
               oasdiff
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              Welcome to oasdiff, an <a href="https://github.com/Tufin/oasdiff" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">open source</a> tool 
+              Welcome to oasdiff, an <a href="https://github.com/Tufin/oasdiff" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">open source</a> tool
               for comparing API contracts written with <a className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" href="https://swagger.io/specification/v3/">OpenAPI Specification v3</a>.
               Designed to help developers and teams understand the changes between different versions of their APIs.
             </p>
@@ -35,14 +35,14 @@ export default function Test() {
 
           <div className="space-y-8">
             <div id="breaking-changes">
-              <Collapsible 
+              <Collapsible
                 title="What are breaking changes?"
                 open={openSection === 'breaking-changes'}
                 onOpenChange={() => setOpenSection(openSection === 'breaking-changes' ? null : 'breaking-changes')}
               >
                 <div className="prose prose-invert max-w-none">
                   <p className="text-lg text-gray-300 leading-relaxed mb-4">
-                    A breaking change is a change made to an API's contract that introduces incompatibilities with existing client applications. 
+                    A breaking change is a change made to an API's contract that introduces incompatibilities with existing client applications.
                     These changes can disrupt the functionality of client applications and potentially cause them to break or malfunction.
                   </p>
                   <p className="text-lg text-gray-300 leading-relaxed">
@@ -52,9 +52,9 @@ export default function Test() {
                 </div>
               </Collapsible>
             </div>
-            
+
             <div id="preventing-changes">
-              <Collapsible 
+              <Collapsible
                 title="Preventing breaking changes manually"
                 open={openSection === 'preventing-changes'}
                 onOpenChange={() => setOpenSection(openSection === 'preventing-changes' ? null : 'preventing-changes')}
@@ -63,7 +63,7 @@ export default function Test() {
                   <p className="text-lg text-gray-300 leading-relaxed mb-6">
                     Generally speaking, there are only two rules to follow in order to prevent breaking changes:
                   </p>
-                  
+
                   <div className="grid grid-cols-1 gap-8">
                     <div className="border border-gray-700 rounded-xl overflow-hidden shadow-lg">
                       <img
@@ -72,7 +72,7 @@ export default function Test() {
                         className="w-full"
                       />
                     </div>
-                    
+
                     <div className="border border-gray-700 rounded-xl overflow-hidden shadow-lg">
                       <img
                         src="/breaking-response.png"
@@ -86,7 +86,7 @@ export default function Test() {
             </div>
 
             <div id="detect-changes">
-              <Collapsible 
+              <Collapsible
                 title="Using oasdiff to detect breaking changes"
                 open={openSection === 'detect-changes'}
                 onOpenChange={() => setOpenSection(openSection === 'detect-changes' ? null : 'detect-changes')}
@@ -98,11 +98,11 @@ export default function Test() {
                   <div className="overflow-x-auto rounded-lg">
                     <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm">
                       <code className="language-bash">
-                        <span className="text-emerald-400">❯ oasdiff</span> breaking spec1.yaml spec2.yaml<br/>
-                        1 changes: 1 <span className="text-red-400">error</span>, 0 <span className="text-pink-400">warning</span>, 0 <span className="text-cyan-400">info</span><br/>
-                        <span className="text-red-400">error</span>	  [<span className="text-yellow-400">api-removed-without-deprecation</span>] at spec1.yaml<br/>
-                        <pre>        in API <span className="text-emerald-400">GET /api/test</span><br/></pre>
-                        <pre>                api removed without deprecation <br/></pre>
+                        <span className="text-emerald-400">❯ oasdiff</span> breaking spec1.yaml spec2.yaml<br />
+                        1 changes: 1 <span className="text-red-400">error</span>, 0 <span className="text-pink-400">warning</span>, 0 <span className="text-cyan-400">info</span><br />
+                        <span className="text-red-400">error</span>	  [<span className="text-yellow-400">api-removed-without-deprecation</span>] at spec1.yaml<br />
+                        <pre>        in API <span className="text-emerald-400">GET /api/test</span><br /></pre>
+                        <pre>                api removed without deprecation <br /></pre>
                       </code>
                     </pre>
                   </div>
@@ -111,7 +111,7 @@ export default function Test() {
             </div>
 
             <div id="prevent-breaking">
-              <Collapsible 
+              <Collapsible
                 title="Using oasdiff to prevent breaking changes"
                 open={openSection === 'prevent-breaking'}
                 onOpenChange={() => setOpenSection(openSection === 'prevent-breaking' ? null : 'prevent-breaking')}
@@ -124,12 +124,12 @@ export default function Test() {
                   <div className="overflow-x-auto rounded-lg">
                     <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm">
                       <code className="language-bash">
-                        <span className="text-emerald-400">❯ oasdiff</span> breaking --fail-on ERR spec1.yaml spec2.yaml<br/>
-                        1 changes: 1 <span className="text-red-400">error</span>, 0 <span className="text-pink-400">warning</span>, 0 <span className="text-cyan-400">info</span><br/>
-                        <span className="text-red-400">error</span>	  [<span className="text-yellow-400">api-removed-without-deprecation</span>] at spec1.yaml<br/>
-                        <pre>        in API <span className="text-emerald-400">GET /api/test</span><br/></pre>
-                        <pre>                api removed without deprecation <br/></pre>
-                        <span className="text-emerald-400">❯ echo</span> $?<br/>
+                        <span className="text-emerald-400">❯ oasdiff</span> breaking --fail-on ERR spec1.yaml spec2.yaml<br />
+                        1 changes: 1 <span className="text-red-400">error</span>, 0 <span className="text-pink-400">warning</span>, 0 <span className="text-cyan-400">info</span><br />
+                        <span className="text-red-400">error</span>	  [<span className="text-yellow-400">api-removed-without-deprecation</span>] at spec1.yaml<br />
+                        <pre>        in API <span className="text-emerald-400">GET /api/test</span><br /></pre>
+                        <pre>                api removed without deprecation <br /></pre>
+                        <span className="text-emerald-400">❯ echo</span> $?<br />
                         1
                       </code>
                     </pre>
@@ -142,15 +142,15 @@ export default function Test() {
             </div>
 
             <div id="cicd">
-              <Collapsible 
+              <Collapsible
                 title="Using oasdiff in CI/CD"
                 open={openSection === 'cicd'}
                 onOpenChange={() => setOpenSection(openSection === 'cicd' ? null : 'cicd')}
               >
                 <div className="prose prose-invert max-w-none">
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    Oasdiff can be useful in continuous integration/continuous deployment (CI/CD) pipelines, where it can automatically compare API versions to ensure that modifications are thoroughly reviewed and tested before deployment.<br/><br/>
-                    If you're using github, check out the <a href="https://github.com/oasdiff/oasdiff-action" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">oasdiff GitHub Action</a>.<br/>
+                    Oasdiff can be useful in continuous integration/continuous deployment (CI/CD) pipelines, where it can automatically compare API versions to ensure that modifications are thoroughly reviewed and tested before deployment.<br /><br />
+                    If you're using github, check out the <a href="https://github.com/oasdiff/oasdiff-action" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">oasdiff GitHub Action</a>.<br />
                     <a href="https://github.com/oasdiff/github-demo" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">This repo</a> shows how to run oasdiff directly in your pipeline.
                   </p>
                 </div>
@@ -158,7 +158,7 @@ export default function Test() {
             </div>
 
             <div id="changelog">
-              <Collapsible 
+              <Collapsible
                 title="Generating a changelog"
                 open={openSection === 'changelog'}
                 onOpenChange={() => setOpenSection(openSection === 'changelog' ? null : 'changelog')}
@@ -172,15 +172,15 @@ export default function Test() {
                   <div className="overflow-x-auto rounded-lg mb-6">
                     <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm">
                       <code className="language-bash">
-                        <span className="text-emerald-400">❯ oasdiff</span> changelog spec1.yaml spec2.yaml<br/>
-                        1 changes: 1 <span className="text-red-400">error</span>, 0 <span className="text-pink-400">warning</span>, 1 <span className="text-cyan-400">info</span><br/>
-                        <span className="text-red-400">error</span>	  [<span className="text-yellow-400">api-removed-without-deprecation</span>] at spec1.yaml<br/>
-                        <pre>        in API <span className="text-emerald-400">GET /api/test</span><br/></pre>
-                        <pre>                api removed without deprecation <br/></pre>
-                        <br/>
-                        <span className="text-cyan-400">info</span>	   [<span className="text-yellow-400">endpoint-added</span>] at spec2.yaml<br/>
-                        <pre>        in API <span className="text-emerald-400">POST /api/test</span><br/></pre>
-                        <pre>                endpoint added <br/></pre>
+                        <span className="text-emerald-400">❯ oasdiff</span> changelog spec1.yaml spec2.yaml<br />
+                        1 changes: 1 <span className="text-red-400">error</span>, 0 <span className="text-pink-400">warning</span>, 1 <span className="text-cyan-400">info</span><br />
+                        <span className="text-red-400">error</span>	  [<span className="text-yellow-400">api-removed-without-deprecation</span>] at spec1.yaml<br />
+                        <pre>        in API <span className="text-emerald-400">GET /api/test</span><br /></pre>
+                        <pre>                api removed without deprecation <br /></pre>
+                        <br />
+                        <span className="text-cyan-400">info</span>	   [<span className="text-yellow-400">endpoint-added</span>] at spec2.yaml<br />
+                        <pre>        in API <span className="text-emerald-400">POST /api/test</span><br /></pre>
+                        <pre>                endpoint added <br /></pre>
                       </code>
                     </pre>
                   </div>
@@ -202,7 +202,7 @@ export default function Test() {
             </div>
 
             <div id="raw-diff">
-              <Collapsible 
+              <Collapsible
                 title="Raw diff"
                 open={openSection === 'raw-diff'}
                 onOpenChange={() => setOpenSection(openSection === 'raw-diff' ? null : 'raw-diff')}
@@ -230,11 +230,10 @@ export default function Test() {
                         <pre>          path: /api/test</pre>
                         <pre>    deleted:</pre>
                         <pre>        - method: GET</pre>
-                        <pre>          path: /api/test</pre>              
-
+                        <pre>          path: /api/test</pre>
                       </code>
-              </pre>
-              </div>
+                    </pre>
+                  </div>
                 </div>
               </Collapsible>
             </div>

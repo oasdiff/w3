@@ -102,7 +102,7 @@ export default function DiffCalculator() {
             onChange={(e) => handleFileChange(e, 1)}
             className="block w-full text-sm text-gray-300
               file:mr-4 file:py-2 file:px-4
-              file:rounded-md file:border-0
+              file:rounded file:border-0
               file:text-sm file:font-medium
               file:bg-emerald-600 file:text-white
               hover:file:bg-emerald-700
@@ -125,7 +125,7 @@ export default function DiffCalculator() {
             onChange={(e) => handleFileChange(e, 2)}
             className="block w-full text-sm text-gray-300
               file:mr-4 file:py-2 file:px-4
-              file:rounded-md file:border-0
+              file:rounded file:border-0
               file:text-sm file:font-medium
               file:bg-emerald-600 file:text-white
               hover:file:bg-emerald-700
@@ -142,7 +142,7 @@ export default function DiffCalculator() {
       <div className="flex gap-4 mb-8">
         <button
           onClick={() => setMode('breaking')}
-          className={`px-4 py-2 rounded-md font-medium ${
+          className={`px-4 py-2 rounded font-medium ${
             mode === 'breaking'
               ? 'bg-emerald-600 text-white'
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
@@ -152,7 +152,7 @@ export default function DiffCalculator() {
         </button>
         <button
           onClick={() => setMode('changelog')}
-          className={`px-4 py-2 rounded-md font-medium ${
+          className={`px-4 py-2 rounded font-medium ${
             mode === 'changelog'
               ? 'bg-emerald-600 text-white'
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
@@ -162,7 +162,7 @@ export default function DiffCalculator() {
         </button>
         <button
           onClick={() => setMode('diff')}
-          className={`px-4 py-2 rounded-md font-medium ${
+          className={`px-4 py-2 rounded font-medium ${
             mode === 'diff'
               ? 'bg-emerald-600 text-white'
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
@@ -175,14 +175,14 @@ export default function DiffCalculator() {
       <button
         onClick={handleCompare}
         disabled={!file1 || !file2}
-        className="w-full py-3 px-4 rounded-md font-medium bg-emerald-600 text-white 
+        className="w-full py-3 px-4 rounded font-medium bg-emerald-600 text-white 
           hover:bg-emerald-700 disabled:bg-gray-600 disabled:cursor-not-allowed mb-8"
       >
         Compare Specifications
       </button>
 
       {result && (
-        <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700/50">
+        <div className="bg-gray-800/50 backdrop-blur-sm rounded p-6 border border-gray-700/50">
           <pre 
             className="text-sm text-gray-300 whitespace-pre-wrap"
             dangerouslySetInnerHTML={{ 

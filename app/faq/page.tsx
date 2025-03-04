@@ -6,6 +6,17 @@ import { useSearchParams } from "next/navigation";
 
 export default function FAQ() {
   const [openSection, setOpenSection] = useState<string | null>(null);
+  const [selectedTitle, setSelectedTitle] = useState<string | null>(null);
+
+  const faqItems = [
+    { id: "breaking-changes", title: "What are breaking changes?" },
+    { id: "preventing-changes", title: "Preventing breaking changes" },
+    { id: "detect-changes", title: "Using oasdiff to detect changes" },
+    { id: "prevent-breaking", title: "Using oasdiff to prevent changes" },
+    { id: "cicd", title: "Using oasdiff in CI/CD" },
+    { id: "changelog", title: "Generating a changelog" },
+    { id: "raw-diff", title: "Raw diff" },
+  ];
 
   // Handle hash changes for direct navigation
   useEffect(() => {
@@ -13,12 +24,22 @@ export default function FAQ() {
       const hash = window.location.hash.slice(1); // Remove the # symbol
       if (hash) {
         setOpenSection(hash);
+        // Find the matching section title
+        const section = faqItems.find(item => item.id === hash);
+        setSelectedTitle(section ? section.title : null);
         const element = document.getElementById(hash);
         if (element) {
           setTimeout(() => {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const navHeight = 64; // height of the nav bar
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({
+              top: elementPosition - navHeight - 24, // Additional 24px for comfortable spacing
+              behavior: 'smooth'
+            });
           }, 100);
         }
+      } else {
+        setSelectedTitle(null);
       }
     };
 
@@ -32,10 +53,10 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1 flex flex-col px-8 py-12 max-w-[1000px] mx-auto w-full">
+      <main className="flex-1 flex flex-col px-8 pt-24 pb-12 max-w-[1000px] mx-auto w-full">
         <header className="mb-12">
           <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-emerald-400 to-pink-500 text-transparent bg-clip-text">
-            Frequently Asked Questions
+            {selectedTitle || "Frequently Asked Questions"}
           </h1>
         </header>
 

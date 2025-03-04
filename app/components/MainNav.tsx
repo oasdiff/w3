@@ -28,7 +28,7 @@ export function MainNav() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/50 backdrop-blur-sm border-b border-gray-800">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900 border-b border-gray-800">
       <div className="max-w-[1400px] mx-auto px-8">
         <div className="flex h-16 items-center space-x-8">
           <Link

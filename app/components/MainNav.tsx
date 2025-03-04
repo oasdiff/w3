@@ -38,28 +38,40 @@ export function MainNav() {
             Home
           </Link>
           <div className="relative group">
-            <button
-              className={`${
-                pathname === "/faq"
-                  ? "text-emerald-400"
-                  : "text-gray-300 hover:text-emerald-300"
-              } transition-colors font-medium flex items-center gap-1`}
-            >
-              FAQ
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <div className="flex items-center gap-1">
+              <Link
+                href="/faq"
+                className={`${
+                  pathname === "/faq"
+                    ? "text-emerald-400"
+                    : "text-gray-300 hover:text-emerald-300"
+                } transition-colors font-medium`}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
+                FAQ
+              </Link>
+              <button
+                className={`${
+                  pathname === "/faq"
+                    ? "text-emerald-400"
+                    : "text-gray-300 hover:text-emerald-300"
+                } transition-colors`}
+                aria-label="Toggle FAQ menu"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </div>
             <div className="absolute top-full left-0 mt-1 py-2 w-64 bg-gray-900/95 backdrop-blur-sm border border-gray-800 rounded shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
               {faqItems.map((item) => (
                 <button

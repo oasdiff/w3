@@ -62,28 +62,28 @@ export default function DiffCalculator() {
     }
   };
 
-  const handleCompare = async () => {
-    if (!file1 || !file2) {
-      alert('Please select both files');
-      return;
-    }
+  const handleModeChange = async (newMode: DiffMode) => {
+    setMode(newMode);
+    setResult('');
+    
+    if (file1 && file2) {
+      const formData = new FormData();
+      formData.append('file1', file1);
+      formData.append('file2', file2);
+      formData.append('mode', newMode);
 
-    const formData = new FormData();
-    formData.append('file1', file1);
-    formData.append('file2', file2);
-    formData.append('mode', mode);
-
-    try {
-      const response = await fetch('/api/diff', {
-        method: 'POST',
-        body: formData,
-      });
-      
-      const data = await response.text();
-      setResult(data);
-    } catch (error) {
-      console.error('Error:', error);
-      setResult('Error comparing files');
+      try {
+        const response = await fetch('/api/diff', {
+          method: 'POST',
+          body: formData,
+        });
+        
+        const data = await response.text();
+        setResult(data);
+      } catch (error) {
+        console.error('Error:', error);
+        setResult('Error comparing files');
+      }
     }
   };
 
@@ -141,45 +141,39 @@ export default function DiffCalculator() {
 
       <div className="flex gap-4 mb-8">
         <button
-          onClick={() => setMode('breaking')}
+          onClick={() => handleModeChange('breaking')}
+          disabled={!file1 || !file2}
           className={`px-4 py-2 rounded font-medium ${
             mode === 'breaking'
               ? 'bg-emerald-600 text-white'
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          }`}
+          } disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed`}
         >
           Breaking Changes
         </button>
         <button
-          onClick={() => setMode('changelog')}
+          onClick={() => handleModeChange('changelog')}
+          disabled={!file1 || !file2}
           className={`px-4 py-2 rounded font-medium ${
             mode === 'changelog'
               ? 'bg-emerald-600 text-white'
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          }`}
+          } disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed`}
         >
           Changelog
         </button>
         <button
-          onClick={() => setMode('diff')}
+          onClick={() => handleModeChange('diff')}
+          disabled={!file1 || !file2}
           className={`px-4 py-2 rounded font-medium ${
             mode === 'diff'
               ? 'bg-emerald-600 text-white'
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          }`}
+          } disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed`}
         >
           Raw Diff
         </button>
       </div>
-
-      <button
-        onClick={handleCompare}
-        disabled={!file1 || !file2}
-        className="w-full py-3 px-4 rounded font-medium bg-emerald-600 text-white 
-          hover:bg-emerald-700 disabled:bg-gray-600 disabled:cursor-not-allowed mb-8"
-      >
-        Compare Specifications
-      </button>
 
       {result && (
         <div className="bg-gray-800/50 backdrop-blur-sm rounded p-6 border border-gray-700/50">

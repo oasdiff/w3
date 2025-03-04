@@ -94,7 +94,6 @@ export default function Test() {
             </p>
           </Collapsible>
 
-
           <Collapsible title="Generating a changelog">
             <p className="text-lg text-left w-full max-w-full">
               Oasdiff can generate a changelog by comparing two API specifications.<br/>
@@ -129,6 +128,35 @@ export default function Test() {
               <p className="text-lg text-left w-full max-w-full">
               See <a href="https://github.com/Tufin/oasdiff/blob/main/docs/BREAKING-CHANGES.md#output-formats" className="font-medium text-blue-600 underline dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:no-underline">here</a> for supported formats.
             </p>
+          </Collapsible>
+
+          <Collapsible title="Raw diff">
+            <p className="text-lg text-left w-full max-w-full">
+              Use the <i>diff</i> command to see a raw diff between two API specifications.
+            </p>
+            <div className="w-full max-w-full overflow-x-auto mb-8 mt-2">
+              <pre className="bg-gray-800 text-white p-2 rounded-md text-sm whitespace-pre">
+              <code className="language-bash">
+                  <span className="text-green-300">❯ oasdiff</span> diff spec1.yaml spec2.yaml 
+              </code>              
+              </pre> 
+              <pre>paths:</pre>
+              <pre>    modified:</pre>
+              <pre>    get:</pre>
+              <pre>         /api/test:</pre>
+              <pre>            operations:</pre>
+              <pre>                added:</pre>
+              <pre>                    - POST</pre>
+              <pre>                deleted:</pre>
+              <pre>                    - GET</pre>
+              <pre>endpoints:</pre>
+              <pre>    added:</pre>
+              <pre>        - method: POST</pre>
+              <pre>          path: /api/test</pre>
+              <pre>    deleted:</pre>
+              <pre>        - method: GET</pre>
+              <pre>          path: /api/test</pre>              
+            </div>
           </Collapsible>
         </div>
       </main>

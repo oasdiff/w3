@@ -215,27 +215,26 @@ export default function Test() {
                     <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm">
                       <code className="language-bash">
                         <span className="text-emerald-400">❯ oasdiff</span> diff spec1.yaml spec2.yaml
+                        <pre>paths:</pre>
+                        <pre>    modified:</pre>
+                        <pre>        get:</pre>
+                        <pre>            /api/test:</pre>
+                        <pre>                operations:</pre>
+                        <pre>                    added:</pre>
+                        <pre>                        - POST</pre>
+                        <pre>                    deleted:</pre>
+                        <pre>                        - GET</pre>
+                        <pre>endpoints:</pre>
+                        <pre>    added:</pre>
+                        <pre>        - method: POST</pre>
+                        <pre>          path: /api/test</pre>
+                        <pre>    deleted:</pre>
+                        <pre>        - method: GET</pre>
+                        <pre>          path: /api/test</pre>              
+
                       </code>
-                    </pre>
-                    <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm mt-2">
-paths:
-    modified:
-    get:
-         /api/test:
-            operations:
-                added:
-                    - POST
-                deleted:
-                    - GET
-endpoints:
-    added:
-        - method: POST
-          path: /api/test
-    deleted:
-        - method: GET
-          path: /api/test
-                    </pre>
-                  </div>
+              </pre>
+              </div>
                 </div>
               </Collapsible>
             </div>

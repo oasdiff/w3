@@ -4,6 +4,51 @@ import { useState } from 'react';
 
 type DiffMode = 'breaking' | 'changelog' | 'diff';
 
+function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Name: string) {
+  if (mode === 'diff') return text;
+
+  return text.split('\n').map((line, i) => {
+    // Replace temporary file paths with actual file names
+    line = line.replace(/at .*?spec1\.yaml/g, `at ${file1Name}`);
+    line = line.replace(/at .*?spec2\.yaml/g, `at ${file2Name}`);
+
+    // Color the summary line
+    if (line.includes('changes:')) {
+      return line.replace(
+        /(\d+) (error)|\b(warning)\b|\b(info)\b/g,
+        (match, num, error, warning, info) => {
+          if (error) return `${num} <span class="text-red-400">error</span>`;
+          if (warning) return `<span class="text-pink-400">warning</span>`;
+          if (info) return `<span class="text-cyan-400">info</span>`;
+          return match;
+        }
+      );
+    }
+
+    // Color the error/warning/info lines
+    if (line.includes('error')) {
+      return line
+        .replace(/error/, '<span class="text-red-400">error</span>')
+        .replace(/\[(.*?)\]/, '[$1]'.replace(/\[(.+?)\]/, '<span class="text-yellow-400">[$1]</span>'))
+        .replace(/GET|POST|PUT|DELETE|PATCH.*$/, match => `<span class="text-emerald-400">${match}</span>`);
+    }
+    if (line.includes('warning')) {
+      return line
+        .replace(/warning/, '<span class="text-pink-400">warning</span>')
+        .replace(/\[(.*?)\]/, '[$1]'.replace(/\[(.+?)\]/, '<span class="text-yellow-400">[$1]</span>'))
+        .replace(/GET|POST|PUT|DELETE|PATCH.*$/, match => `<span class="text-emerald-400">${match}</span>`);
+    }
+    if (line.includes('info')) {
+      return line
+        .replace(/info/, '<span class="text-cyan-400">info</span>')
+        .replace(/\[(.*?)\]/, '[$1]'.replace(/\[(.+?)\]/, '<span class="text-yellow-400">[$1]</span>'))
+        .replace(/GET|POST|PUT|DELETE|PATCH.*$/, match => `<span class="text-emerald-400">${match}</span>`);
+    }
+
+    return line;
+  }).join('\n');
+}
+
 export default function DiffCalculator() {
   const [file1, setFile1] = useState<File | null>(null);
   const [file2, setFile2] = useState<File | null>(null);
@@ -138,9 +183,12 @@ export default function DiffCalculator() {
 
       {result && (
         <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700/50">
-          <pre className="text-sm text-gray-300 whitespace-pre-wrap">
-            {result}
-          </pre>
+          <pre 
+            className="text-sm text-gray-300 whitespace-pre-wrap"
+            dangerouslySetInnerHTML={{ 
+              __html: colorizeOutput(result, mode, file1?.name || 'First Specification', file2?.name || 'Second Specification') 
+            }}
+          />
         </div>
       )}
     </div>

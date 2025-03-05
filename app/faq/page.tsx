@@ -265,6 +265,9 @@ export default function FAQ() {
                       </code>
                     </pre>
                   </div>
+                  <p className="text-lg text-gray-300 leading-relaxed mt-4">
+                    See <a href="https://github.com/Tufin/oasdiff/blob/main/docs/DIFFS.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">here</a> for supported formats.
+                  </p>
                 </>
               )
             }

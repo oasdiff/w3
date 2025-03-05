@@ -4,13 +4,19 @@ import { useState } from 'react';
 
 type DiffMode = 'breaking' | 'changelog' | 'diff';
 
-function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Name: string) {
+export function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Name: string) {
   if (mode === 'diff') return text;
 
-  return text.split('\n').map((line, i) => {
+  return text.split('\n').map((line, i, lines) => {
     // Replace temporary file paths with actual file names
     line = line.replace(/at .*?spec1\.yaml/g, `at ${file1Name}`);
     line = line.replace(/at .*?spec2\.yaml/g, `at ${file2Name}`);
+
+    // Add indentation to lines that should align with the opening bracket above
+    if (i > 0 && !line.trim().startsWith('[') && lines[i-1].includes('[')) {
+    //   const bracketIndex = lines[i-1].indexOf('[');
+      line = ' '.repeat(8) + line.trimStart();
+    }
 
     // Color the summary line
     if (line.includes('changes:')) {
@@ -89,18 +95,18 @@ export default function DiffCalculator() {
 
   return (
     <div className="max-w-4xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-white">Diff Calculator</h1>
+      <h1 className="text-4xl font-bold mb-8 text-[var(--foreground)]">Diff Calculator</h1>
       
       <div className="grid grid-cols-2 gap-8 mb-8">
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
             First OpenAPI Specification
           </label>
           <input
             type="file"
             accept=".yaml,.yml,.json"
             onChange={(e) => handleFileChange(e, 1)}
-            className="block w-full text-sm text-gray-300
+            className="block w-full text-sm text-[var(--foreground)]
               file:mr-4 file:py-2 file:px-4
               file:rounded file:border-0
               file:text-sm file:font-medium
@@ -109,21 +115,21 @@ export default function DiffCalculator() {
               file:cursor-pointer"
           />
           {file1 && (
-            <p className="mt-2 text-sm text-gray-400">
+            <p className="mt-2 text-sm text-[var(--foreground)]/70">
               Selected: {file1.name}
             </p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
             Second OpenAPI Specification
           </label>
           <input
             type="file"
             accept=".yaml,.yml,.json"
             onChange={(e) => handleFileChange(e, 2)}
-            className="block w-full text-sm text-gray-300
+            className="block w-full text-sm text-[var(--foreground)]
               file:mr-4 file:py-2 file:px-4
               file:rounded file:border-0
               file:text-sm file:font-medium
@@ -132,7 +138,7 @@ export default function DiffCalculator() {
               file:cursor-pointer"
           />
           {file2 && (
-            <p className="mt-2 text-sm text-gray-400">
+            <p className="mt-2 text-sm text-[var(--foreground)]/70">
               Selected: {file2.name}
             </p>
           )}
@@ -146,8 +152,8 @@ export default function DiffCalculator() {
           className={`px-4 py-2 rounded font-medium ${
             mode === 'breaking'
               ? 'bg-emerald-600 text-white'
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          } disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed`}
+              : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
+          } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
           Breaking Changes
         </button>
@@ -157,8 +163,8 @@ export default function DiffCalculator() {
           className={`px-4 py-2 rounded font-medium ${
             mode === 'changelog'
               ? 'bg-emerald-600 text-white'
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          } disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed`}
+              : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
+          } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
           Changelog
         </button>
@@ -168,17 +174,17 @@ export default function DiffCalculator() {
           className={`px-4 py-2 rounded font-medium ${
             mode === 'diff'
               ? 'bg-emerald-600 text-white'
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          } disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed`}
+              : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
+          } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
           Raw Diff
         </button>
       </div>
 
       {result && (
-        <div className="bg-gray-800/50 backdrop-blur-sm rounded p-6 border border-gray-700/50">
+        <div className="bg-[var(--background-card)]/50 backdrop-blur-sm rounded p-6 border border-[var(--background-hover)]">
           <pre 
-            className="text-sm text-gray-300 whitespace-pre-wrap"
+            className="text-sm text-[var(--foreground)] whitespace-pre-wrap"
             dangerouslySetInnerHTML={{ 
               __html: colorizeOutput(result, mode, file1?.name || 'First Specification', file2?.name || 'Second Specification') 
             }}

@@ -38,7 +38,7 @@ export default function Page() {
   );
 
   return (
-      <Card className="fixed inset-0 pt-16 px-6 pb-6 text-white bg-gray-900 overflow-hidden">
+      <Card className="fixed inset-0 pt-24 px-6 pb-6 text-[var(--foreground)] bg-[var(--background)] overflow-hidden">
         <div className="flex flex-row gap-6 h-full">
           {/* Left side - Table */}
           <div className="w-[calc(100%-24rem)]">
@@ -47,12 +47,12 @@ export default function Page() {
                 <Table className={styles.tableContainer}>
                   <TableHeader>
                     <TableRow className={styles.tableRow}>
-                      <TableHead className={`${styles.tableCell} ${styles.tableCellIndex}`}>#</TableHead>
-                      <TableHead className={`${styles.tableCell} ${styles.tableCellId}`}>ID</TableHead>
-                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard}`}>Level</TableHead>
-                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard}`}>Direction</TableHead>
-                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard}`}>Location</TableHead>
-                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard}`}>Action</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellIndex} text-[var(--foreground)]`}>#</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellId} text-[var(--foreground)]`}>ID</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)]`}>Level</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)]`}>Direction</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)]`}>Location</TableHead>
+                      <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)]`}>Action</TableHead>
                     </TableRow>
                     <TableRow className={styles.tableRow}>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellIndex}`}></TableCell>
@@ -61,7 +61,7 @@ export default function Page() {
                           placeholder="Search ID..."
                           value={searchID}
                           onChange={(e) => setSearchID(e.target.value)}
-                          className="w-full"
+                          className="w-full bg-[var(--background-card)] text-[var(--foreground)] border-[var(--background-hover)]"
                         />
                       </TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>
@@ -70,7 +70,7 @@ export default function Page() {
                           value={searchLevel}
                           onChange={(e) => setSearchLevel(e.target.value)}
                           options={levels}
-                          className="w-full"
+                          className="w-full bg-[var(--background-card)] text-[var(--foreground)] border-[var(--background-hover)]"
                         />
                       </TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>
@@ -79,7 +79,7 @@ export default function Page() {
                           value={searchDirection}
                           onChange={(e) => setSearchDirection(e.target.value)}
                           options={directions}
-                          className="w-full"
+                          className="w-full bg-[var(--background-card)] text-[var(--foreground)] border-[var(--background-hover)]"
                         />
                       </TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>
@@ -88,7 +88,7 @@ export default function Page() {
                           value={searchLocation}
                           onChange={(e) => setSearchLocation(e.target.value)}
                           options={locations}
-                          className="w-full"
+                          className="w-full bg-[var(--background-card)] text-[var(--foreground)] border-[var(--background-hover)]"
                         />
                       </TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>
@@ -97,7 +97,7 @@ export default function Page() {
                           value={searchActions}
                           onChange={(e) => setSearchActions(e.target.value)}
                           options={actions}
-                          className="w-full"
+                          className="w-full bg-[var(--background-card)] text-[var(--foreground)] border-[var(--background-hover)]"
                         />
                       </TableCell>
                     </TableRow>
@@ -132,16 +132,16 @@ export default function Page() {
           <div className="w-96 overflow-y-auto">
             {selectedCheck ? (
               <>
-                <h2 className="text-xl font-bold mb-4">{selectedCheck.id}</h2>
-                <p><strong>ID:</strong> {selectedCheck.id}</p>
-                <p><strong>Level:</strong> {selectedCheck.level}</p>
-                <p><strong>Direction:</strong> {selectedCheck.direction}</p>
-                <p><strong>Location:</strong> {selectedCheck.location}</p>
-                <p><strong>Action:</strong> {selectedCheck.action}</p>
-                <p className="mt-4"><strong>Details:</strong> {selectedCheck.detailed_description}</p>
+                <h2 className="text-xl font-bold mb-4 text-[var(--foreground)]">{selectedCheck.id}</h2>
+                <p className="text-[var(--foreground)]"><strong>ID:</strong> {selectedCheck.id}</p>
+                <p className="text-[var(--foreground)]"><strong>Level:</strong> {selectedCheck.level}</p>
+                <p className="text-[var(--foreground)]"><strong>Direction:</strong> {selectedCheck.direction}</p>
+                <p className="text-[var(--foreground)]"><strong>Location:</strong> {selectedCheck.location}</p>
+                <p className="text-[var(--foreground)]"><strong>Action:</strong> {selectedCheck.action}</p>
+                <p className="mt-4 text-[var(--foreground)]"><strong>Details:</strong> {selectedCheck.detailed_description}</p>
               </>
             ) : (
-              <div className="flex items-center justify-center h-full text-gray-500">
+              <div className="flex items-center justify-center h-full text-[var(--foreground)]/50">
                 <p>Select a check to view details</p>
               </div>
             )}

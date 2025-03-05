@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="bg-gray-900 text-gray-50 antialiased pt-16">
         <MainNav />
-        <main className="p-4 mt-14">
+        <main className="">
           {children}
         </main>
       </body>

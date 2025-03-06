@@ -211,7 +211,7 @@ export default function DiffCalculator() {
           disabled={!file1 || !file2}
           className={`px-4 py-2 rounded font-medium ${
             mode === 'breaking'
-              ? 'bg-emerald-600 text-white'
+              ? 'bg-emerald-600 text-[var(--foreground)]'
               : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
           } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
@@ -222,7 +222,7 @@ export default function DiffCalculator() {
           disabled={!file1 || !file2}
           className={`px-4 py-2 rounded font-medium ${
             mode === 'changelog'
-              ? 'bg-emerald-600 text-white'
+              ? 'bg-emerald-600 text-[var(--foreground)]'
               : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
           } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
@@ -233,7 +233,7 @@ export default function DiffCalculator() {
           disabled={!file1 || !file2}
           className={`px-4 py-2 rounded font-medium ${
             mode === 'diff'
-              ? 'bg-emerald-600 text-white'
+              ? 'bg-emerald-600 text-[var(--foreground)]'
               : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
           } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >

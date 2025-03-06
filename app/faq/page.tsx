@@ -68,6 +68,9 @@ export default function FAQ() {
           width: 100% !important;
           max-width: 100% !important;
         }
+        code {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
       `}</style>
 
       <div className="space-y-8 w-full">

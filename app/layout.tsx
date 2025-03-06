@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <body className="bg-[var(--background)] text-[var(--foreground)] antialiased pt-16">
         <MainNav />
         <main className="">

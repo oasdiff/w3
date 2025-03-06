@@ -250,17 +250,15 @@ export default function FAQ() {
           }
         ].map((section) => (
           <div key={section.id} id={section.id} className="w-full">
-            <div className="bg-[var(--background-card)]/30 backdrop-blur-sm rounded border border-[var(--border-color)] w-full">
-              <Collapsible
-                title={section.title}
-                open={openSection === section.id}
-                onOpenChange={() => setOpenSection(openSection === section.id ? null : section.id)}
-              >
-                <div className="prose prose-invert max-w-none p-6 border-t border-[var(--border-color)] w-full">
-                  {section.content}
-                </div>
-              </Collapsible>
-            </div>
+            <Collapsible
+              title={section.title}
+              open={openSection === section.id}
+              onOpenChange={() => setOpenSection(openSection === section.id ? null : section.id)}
+            >
+              <div className="prose prose-invert max-w-none p-6 border-t border-[var(--border-color)] w-full">
+                {section.content}
+              </div>
+            </Collapsible>
           </div>
         ))}
       </div>

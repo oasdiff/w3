@@ -23,7 +23,7 @@ export function Collapsible({ title, children, open, onOpenChange }: Collapsible
   };
 
   return (
-    <div className="border border-[var(--border-color)] rounded-xl overflow-hidden">
+    <div className="border border-[var(--border-color)] rounded-md overflow-hidden">
       <button
         onClick={handleToggle}
         className="w-full px-6 py-4 flex justify-between items-center bg-[var(--background-card)] hover:bg-[var(--background-hover)] transition-colors"

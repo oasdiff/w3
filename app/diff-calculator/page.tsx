@@ -174,11 +174,6 @@ export default function DiffCalculator() {
               hover:file:bg-emerald-700
               file:cursor-pointer"
           />
-          {file1 && (
-            <p className="mt-2 text-sm text-[var(--foreground)]/70">
-              Selected: {file1.name}
-            </p>
-          )}
         </div>
 
         <div>
@@ -197,11 +192,6 @@ export default function DiffCalculator() {
               hover:file:bg-emerald-700
               file:cursor-pointer"
           />
-          {file2 && (
-            <p className="mt-2 text-sm text-[var(--foreground)]/70">
-              Selected: {file2.name}
-            </p>
-          )}
         </div>
       </div>
 
@@ -243,27 +233,33 @@ export default function DiffCalculator() {
 
       {result && (
         <div className="bg-[var(--background-card)]/50 backdrop-blur-sm rounded p-6 border border-[var(--background-hover)]">
-          <pre className="text-sm text-[var(--foreground)] whitespace-pre-wrap">
-            {colorizeOutput(result, mode, file1?.name || 'First Specification', file2?.name || 'Second Specification',
-              (checkId, event) => {
-                const check = checks.find(c => c.id === checkId);
-                if (check) {
-                  setSelectedCheck(check);
-                  setModalPosition({ x: event.clientX + 10, y: event.clientY });
-                  if (modalRef.current) {
-                    modalRef.current.style.display = 'block';
+          {result.trim() === '' ? (
+            <p className="text-[var(--foreground)] text-center py-4">
+              No differences found between the specifications.
+            </p>
+          ) : (
+            <pre className="text-sm text-[var(--foreground)] whitespace-pre-wrap">
+              {colorizeOutput(result, mode, file1?.name || 'First Specification', file2?.name || 'Second Specification',
+                (checkId, event) => {
+                  const check = checks.find(c => c.id === checkId);
+                  if (check) {
+                    setSelectedCheck(check);
+                    setModalPosition({ x: event.clientX + 10, y: event.clientY });
+                    if (modalRef.current) {
+                      modalRef.current.style.display = 'block';
+                    }
                   }
+                  console.log('in');
+                },
+                () => {
+                  if (modalRef.current) {
+                    modalRef.current.style.display = 'none';
+                  }
+                  console.log('out');
                 }
-                console.log('in');
-              },
-              () => {
-                if (modalRef.current) {
-                  modalRef.current.style.display = 'none';
-                }
-                console.log('out');
-              }
-            )}
-          </pre>
+              )}
+            </pre>
+          )}
         </div>
       )}
 

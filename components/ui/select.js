@@ -3,7 +3,7 @@ export function Select({ value, onChange, options = [], placeholder }) {
       <select 
         value={value} 
         onChange={onChange} 
-        className="border border-[var(--border-color)] p-2 rounded bg-[var(--background-card)] text-[var(--foreground)]"
+        className="border border-[var(--border-color)] p-2 rounded bg-[var(--background-card)] text-[var(--foreground)] w-full"
       >
         <option value="" className="bg-[var(--background-card)] text-[var(--foreground)]">
           {placeholder}

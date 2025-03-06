@@ -2,20 +2,11 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { faqNavItems } from "../constants";
 
 export function MainNav() {
   const pathname = usePathname();
   const router = useRouter();
-
-  const faqItems = [
-    { href: "/faq#breaking-changes", label: "What are breaking changes?" },
-    { href: "/faq#preventing-changes", label: "Preventing breaking changes" },
-    { href: "/faq#detect-changes", label: "Using oasdiff to detect changes" },
-    { href: "/faq#prevent-breaking", label: "Using oasdiff to prevent changes" },
-    { href: "/faq#cicd", label: "Using oasdiff in CI/CD" },
-    { href: "/faq#changelog", label: "Generating a changelog" },
-    { href: "/faq#raw-diff", label: "Raw diff" },
-  ];
 
   const handleFaqItemClick = (href: string) => {
     // If we're already on the FAQ page, manually trigger the hash change
@@ -94,7 +85,7 @@ export function MainNav() {
               </button>
             </div>
             <div className="absolute top-full left-0 mt-1 py-2 w-64 bg-gray-900/95 backdrop-blur-sm border border-gray-800 rounded shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              {faqItems.map((item) => (
+              {faqNavItems.map((item) => (
                 <button
                   key={item.href}
                   onClick={() => handleFaqItemClick(item.href)}

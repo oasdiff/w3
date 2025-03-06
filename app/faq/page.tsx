@@ -3,19 +3,10 @@
 import { useState, useEffect } from "react";
 import { Collapsible } from "@/components/ui/collapsible";
 import { useSearchParams } from "next/navigation";
+import { faqItems } from '../constants';
 
 export default function FAQ() {
   const [openSection, setOpenSection] = useState<string | null>(null);
-
-  const faqItems = [
-    { id: "breaking-changes", title: "What are breaking changes?" },
-    { id: "preventing-changes", title: "Preventing breaking changes" },
-    { id: "detect-changes", title: "Using oasdiff to detect changes" },
-    { id: "prevent-breaking", title: "Using oasdiff to prevent changes" },
-    { id: "cicd", title: "Using oasdiff in CI/CD" },
-    { id: "changelog", title: "Generating a changelog" },
-    { id: "raw-diff", title: "Raw diff" },
-  ];
 
   // Handle hash changes for direct navigation
   useEffect(() => {
@@ -86,28 +77,15 @@ export default function FAQ() {
             title: 'What are breaking changes?',
             content: (
               <>
-                <p className="text-lg text-gray-300 leading-relaxed mb-4">
-                  A breaking change is a change made to an API's contract that introduces incompatibilities with existing client applications.
-                  These changes can disrupt the functionality of client applications and potentially cause them to break or malfunction.
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  A breaking change is a change made to an API's contract that introduces incompatibilities with existing client applications and potentially cause them to break or malfunction.
                 </p>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                  Many types of breaking changes can occur in an API contract, and there is no universally accepted definition.
-                  To address this issue, the oasdiff community created <a href="/checks" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">a comprehensive set of open-source checks</a> for testing contract changes.
-                </p>
-              </>
-            )
-          },
-          {
-            id: 'preventing-changes',
-            title: 'Preventing breaking changes manually',
-            content: (
-              <>
-                <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                  Generally speaking, there are only two rules to follow in order to prevent breaking changes:
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  While there are numerous ways an API contract can introduce breaking changes, and definitions may vary across organizations, we can broadly categorize them into two fundamental types:
                 </p>
 
                 <div className="grid grid-cols-1 gap-8">
-                  <div className="border border-gray-700 rounded overflow-hidden shadow-lg">
+                  <div className="border border-[var(--border-color)] rounded overflow-hidden shadow-lg">
                     <img
                       src="/breaking-request.png"
                       alt="Diagram illustrating breaking changes"
@@ -115,7 +93,7 @@ export default function FAQ() {
                     />
                   </div>
 
-                  <div className="border border-gray-700 rounded overflow-hidden shadow-lg">
+                  <div className="border border-[var(--border-color)] rounded overflow-hidden shadow-lg">
                     <img
                       src="/breaking-response.png"
                       alt="Diagram illustrating breaking changes"
@@ -131,11 +109,11 @@ export default function FAQ() {
             title: 'Using oasdiff to detect breaking changes',
             content: (
               <>
-                <p className="text-lg text-gray-300 leading-relaxed mb-4">
-                  Use the <code className="text-pink-400">breaking</code> command to see breaking changes:
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  Use the <code className="text-pink-400">breaking</code> command to detect breaking changes:
                 </p>
                 <div className="overflow-x-auto rounded">
-                  <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm">
+                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
                     <code className="language-bash">
                       <span className="text-emerald-400">❯ oasdiff</span> breaking spec1.yaml spec2.yaml<br />
                       1 changes: 1 <span className="text-red-400">error</span>, 0 <span className="text-pink-400">warning</span>, 0 <span className="text-cyan-400">info</span><br />
@@ -153,12 +131,12 @@ export default function FAQ() {
             title: 'Using oasdiff to prevent breaking changes',
             content: (
               <>
-                <p className="text-lg text-gray-300 leading-relaxed mb-4">
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
                   Run oasdiff with the <code className="text-pink-400">--fail-on</code> flag to return a non-zero value if any breaking changes are detected.
                   When run in the CI/CD, this will break the build and prevent deployments or other actions until breaking changes are addressed.
                 </p>
                 <div className="overflow-x-auto rounded">
-                  <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm">
+                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
                     <code className="language-bash">
                       <span className="text-emerald-400">❯ oasdiff</span> breaking --fail-on ERR spec1.yaml spec2.yaml<br />
                       1 changes: 1 <span className="text-red-400">error</span>, 0 <span className="text-pink-400">warning</span>, 0 <span className="text-cyan-400">info</span><br />
@@ -170,7 +148,7 @@ export default function FAQ() {
                     </code>
                   </pre>
                 </div>
-                <p className="text-lg text-gray-300 leading-relaxed mt-4">
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
                   See <a href="https://github.com/Tufin/oasdiff/blob/main/docs/BREAKING-CHANGES.md#preventing-breaking-changes" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">here</a> for more info.
                 </p>
               </>
@@ -181,7 +159,7 @@ export default function FAQ() {
             title: 'Using oasdiff in CI/CD',
             content: (
               <>
-                <p className="text-lg text-gray-300 leading-relaxed">
+                <p className="text-lg text-[var(--foreground)] leading-relaxed">
                   Oasdiff can be useful in continuous integration/continuous deployment (CI/CD) pipelines, where it can automatically compare API versions to ensure that modifications are thoroughly reviewed and tested before deployment.<br /><br />
                   If you're using github, check out the <a href="https://github.com/oasdiff/oasdiff-action" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">oasdiff GitHub Action</a>.<br />
                   <a href="https://github.com/oasdiff/github-demo" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">This repo</a> shows how to run oasdiff directly in your pipeline.
@@ -194,13 +172,13 @@ export default function FAQ() {
             title: 'Generating a changelog',
             content: (
               <>
-                <p className="text-lg text-gray-300 leading-relaxed mb-4">
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
                   Oasdiff can generate a changelog by comparing two API specifications.
                   The changelog includes both breaking and non-breaking changes, making it easy to track and communicate API evolution.
                   Use the <code className="text-pink-400">changelog</code> command to generate a detailed report:
                 </p>
                 <div className="overflow-x-auto rounded">
-                  <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm">
+                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
                     <code className="language-bash">
                       <span className="text-emerald-400">❯ oasdiff</span> changelog spec1.yaml spec2.yaml<br />
                       1 changes: 1 <span className="text-red-400">error</span>, 0 <span className="text-pink-400">warning</span>, 1 <span className="text-cyan-400">info</span><br />
@@ -214,17 +192,17 @@ export default function FAQ() {
                     </code>
                   </pre>
                 </div>
-                <p className="text-lg text-gray-300 leading-relaxed mb-4">
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
                   Use the <code className="text-pink-400">--format</code> flag to specify the format of the changelog:
                 </p>
                 <div className="overflow-x-auto rounded">
-                  <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm">
+                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
                     <code className="language-bash">
                       <span className="text-emerald-400">❯ oasdiff</span> changelog --format html spec1.yaml spec2.yaml &gt; <a href="https://html-preview.github.io/?url=https://github.com/Tufin/oasdiff/blob/main/docs/changelog.html" target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">changelog.html</a>
                     </code>
                   </pre>
                 </div>
-                <p className="text-lg text-gray-300 leading-relaxed mt-4">
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
                   See <a href="https://github.com/Tufin/oasdiff/blob/main/docs/BREAKING-CHANGES.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">here</a> for supported formats.
                 </p>
               </>
@@ -235,11 +213,11 @@ export default function FAQ() {
             title: 'Raw diff',
             content: (
               <>
-                <p className="text-lg text-gray-300 leading-relaxed mb-4">
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
                   Use the <code className="text-pink-400">diff</code> command to see a comprehensive diff between two API specifications:
                 </p>
                 <div className="overflow-x-auto rounded">
-                  <pre className="bg-gray-800/50 backdrop-blur-sm p-4 text-sm">
+                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
                     <code className="language-bash">
                       <span className="text-emerald-400">❯ oasdiff</span> diff spec1.yaml spec2.yaml
                       <pre>paths:</pre>
@@ -261,7 +239,7 @@ export default function FAQ() {
                     </code>
                   </pre>
                 </div>
-                <p className="text-lg text-gray-300 leading-relaxed mt-4">
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
                   See <a href="https://github.com/Tufin/oasdiff/blob/main/docs/DIFFS.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">here</a> for supported formats.
                 </p>
               </>
@@ -269,13 +247,13 @@ export default function FAQ() {
           }
         ].map((section) => (
           <div key={section.id} id={section.id} className="w-full">
-            <div className="bg-gray-800/30 backdrop-blur-sm rounded border border-gray-700/50 w-full">
+            <div className="bg-[var(--background-card)]/30 backdrop-blur-sm rounded border border-[var(--border-color)] w-full">
               <Collapsible
                 title={section.title}
                 open={openSection === section.id}
                 onOpenChange={() => setOpenSection(openSection === section.id ? null : section.id)}
               >
-                <div className="prose prose-invert max-w-none p-6 border-t border-gray-700/50 w-full">
+                <div className="prose prose-invert max-w-none p-6 border-t border-[var(--border-color)] w-full">
                   {section.content}
                 </div>
               </Collapsible>

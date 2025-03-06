@@ -8,6 +8,7 @@
   --background-dark: rgb(241, 245, 249);
   --background-card: rgb(226, 232, 240);
   --background-hover: rgb(203, 213, 225);
+  --border-color: rgb(226, 232, 240);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,11 +18,13 @@
     --background-dark: rgb(17, 24, 39);
     --background-card: rgb(31, 41, 55);
     --background-hover: rgb(55, 65, 81);
+    --border-color: rgb(55, 65, 81);
   }
 }
 
 body {
   color: var(--foreground);
+  background-color: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
 }

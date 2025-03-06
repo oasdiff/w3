@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-gray-900 text-gray-50 antialiased pt-16">
+    <html lang="en">
+      <body className="bg-[var(--background)] text-[var(--foreground)] antialiased pt-16">
         <MainNav />
         <main className="">
           {children}

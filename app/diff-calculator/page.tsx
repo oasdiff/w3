@@ -14,75 +14,113 @@ interface Check {
   detailed_description: string;
 }
 
+interface Change {
+  id: string;
+  text: string;
+  level: number;
+  operation?: string;
+  operationId?: string;
+  path?: string;
+  source?: string;
+  section?: string;
+  comment?: string;
+}
+
+interface DiffResponse {
+  changes: Change[];
+}
+
 export function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Name: string, onCheckHover: (checkId: string, event: React.MouseEvent) => void, onCheckLeave: () => void): ReactNode[] {
   if (mode === 'diff') return [text];
 
-  return text.split('\n').map((line, i, lines) => {
-    // Replace temporary file paths with actual file names
-    line = line.replace(/at .*?spec1\.yaml/g, `at ${file1Name}`);
-    line = line.replace(/at .*?spec2\.yaml/g, `at ${file2Name}`);
+  try {
+    const jsonData = JSON.parse(text) as DiffResponse;
+    const lines: ReactNode[] = [];
 
-    // Add indentation to lines that should align with the opening bracket above
-    if (i > 0 && !line.trim().startsWith('[') && lines[i-1].includes('[')) {
-      line = ' '.repeat(8) + line.trimStart();
+    // Handle the changes array
+    if (jsonData.changes && Array.isArray(jsonData.changes)) {
+      jsonData.changes.forEach((item: Change, index: number) => {
+        // First line: error/warning/info with check ID
+        const levelText = item.level === 3 ? 'info' : item.level === 2 ? 'warning' : 'error';
+        const levelColor = item.level === 3 ? 'text-cyan-400' : item.level === 2 ? 'text-pink-400' : 'text-red-400';
+        
+        // Replace temporary file paths with actual file names
+        let source = item.source;
+        if (source) {
+          // Replace base patterns
+          const basePatterns = [/\/tmp\/tmp[^/]+\/base/, /[^/]+\.yaml/];
+          const revisionPatterns = [/\/tmp\/tmp[^/]+\/revision/, /[^/]+\.yaml/];
+
+          // Check if it's a base file reference
+          if (source.includes('/base') || source.includes('base.yaml')) {
+            for (const pattern of basePatterns) {
+              source = source.replace(pattern, file1Name);
+            }
+          }
+          // Check if it's a revision file reference
+          else if (source.includes('/revision') || source.includes('revision.yaml')) {
+            for (const pattern of revisionPatterns) {
+              source = source.replace(pattern, file2Name);
+            }
+          }
+        }
+        
+        lines.push(
+          <Fragment key={`first-${index}`}>
+            <span className={levelColor}>{levelText}</span>{' '}
+            <span
+              className="text-yellow-400 cursor-pointer hover:text-yellow-300"
+              style={{ borderBottom: '1px dotted currentColor' }}
+              onMouseOver={(e) => onCheckHover(item.id, e)}
+              onMouseOut={onCheckLeave}
+            >
+              [{item.id}]
+            </span>
+            {source ? ` at ${source}` : ''}{'\n'}
+          </Fragment>
+        );
+
+        // Second line: in API operation path
+        if (item.operation && item.path) {
+          lines.push(
+            <Fragment key={`second-${index}`}>
+              {'      in API '}
+              <span className="text-emerald-400">{item.operation}</span>
+              {' '}
+              <span className="text-emerald-400">{item.path}</span>
+              {'\n'}
+            </Fragment>
+          );
+        }
+
+        // Third line: the actual change text
+        lines.push(
+          <Fragment key={`third-${index}`}>
+            {'          '}{item.text}{'\n'}
+          </Fragment>
+        );
+
+        // Fourth line (if present): the comment
+        if (item.comment) {
+          lines.push(
+            <Fragment key={`fourth-${index}`}>
+              {'          '}{item.comment}{'\n'}
+            </Fragment>
+          );
+        }
+
+        // Add a blank line between items unless it's the last item
+        if (index < jsonData.changes.length - 1) {
+          lines.push(<Fragment key={`space-${index}`}>{'\n'}</Fragment>);
+        }
+      });
     }
 
-    // Color the summary line
-    if (line.includes('changes:')) {
-      const parts = line.split(/(\d+ error|\bwarning\b|\binfo\b)/g);
-      return <Fragment key={i}>
-        {parts.map((part, index) => {
-          if (part.match(/\d+ error/)) {
-            const [num, type] = part.split(' ');
-            return <span key={index}>{num} <span className="text-red-400">{type}</span></span>;
-          }
-          if (part === 'warning') return <span key={index} className="text-pink-400">{part}</span>;
-          if (part === 'info') return <span key={index} className="text-cyan-400">{part}</span>;
-          return part;
-        })}
-        {'\n'}
-      </Fragment>;
-    }
-
-    // Color the error/warning/info lines and make check IDs clickable
-    if (line.includes('error') || line.includes('warning') || line.includes('info')) {
-      const parts = line.split(/(\[.*?\])/g);
-      return <Fragment key={i}>
-        {parts.map((part, index) => {
-          if (part.startsWith('[') && part.endsWith(']')) {
-            const checkId = part.slice(1, -1);
-            return (
-              <span
-                key={index}
-                className="text-yellow-400 cursor-pointer hover:text-yellow-300"
-                style={{ borderBottom: '1px dotted currentColor' }}
-                onMouseOver={(e) => onCheckHover(checkId, e)}
-                onMouseOut={onCheckLeave}
-              >
-                {part}
-              </span>
-            );
-          }
-          if (part.match(/^(GET|POST|PUT|DELETE|PATCH)/)) {
-            return <span key={index} className="text-emerald-400">{part}</span>;
-          }
-          if (part.includes('error')) {
-            return <span key={index} className="text-red-400">{part}</span>;
-          }
-          if (part.includes('warning')) {
-            return <span key={index} className="text-pink-400">{part}</span>;
-          }
-          if (part.includes('info')) {
-            return <span key={index} className="text-cyan-400">{part}</span>;
-          }
-          return part;
-        })}
-        {'\n'}
-      </Fragment>;
-    }
-
-    return <Fragment key={i}>{line}{'\n'}</Fragment>;
-  });
+    return lines;
+  } catch (e) {
+    console.error('Error parsing JSON:', e);
+    return [text];
+  }
 }
 
 interface Window {
@@ -97,6 +135,7 @@ export default function DiffCalculator() {
   const [file2, setFile2] = useState<File | null>(null);
   const [mode, setMode] = useState<DiffMode>('breaking');
   const [result, setResult] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(false);
   const [checks, setChecks] = useState<Check[]>([]);
   const checksRef = useRef<Check[]>([]);
   const [selectedCheck, setSelectedCheck] = useState<Check | null>(null);
@@ -128,6 +167,7 @@ export default function DiffCalculator() {
     setResult('');
     
     if (file1 && file2) {
+      setIsLoading(true);
       const formData = new FormData();
       formData.append('file1', file1);
       formData.append('file2', file2);
@@ -139,11 +179,19 @@ export default function DiffCalculator() {
           body: formData,
         });
         
+        if (!response.ok) {
+          const error = await response.text();
+          setResult(`Error: ${error}`);
+          return;
+        }
+
         const data = await response.text();
         setResult(data);
       } catch (error) {
         console.error('Error:', error);
         setResult('Error comparing files');
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -198,47 +246,53 @@ export default function DiffCalculator() {
       <div className="flex gap-4 mb-8">
         <button
           onClick={() => handleModeChange('breaking')}
-          disabled={!file1 || !file2}
+          disabled={!file1 || !file2 || isLoading}
           className={`px-4 py-2 rounded font-medium ${
             mode === 'breaking'
               ? 'bg-emerald-600 text-[var(--foreground)]'
               : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
           } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
-          Breaking Changes
+          {isLoading ? 'Processing...' : 'Breaking Changes'}
         </button>
         <button
           onClick={() => handleModeChange('changelog')}
-          disabled={!file1 || !file2}
+          disabled={!file1 || !file2 || isLoading}
           className={`px-4 py-2 rounded font-medium ${
             mode === 'changelog'
               ? 'bg-emerald-600 text-[var(--foreground)]'
               : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
           } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
-          Changelog
+          {isLoading ? 'Processing...' : 'Changelog'}
         </button>
         <button
           onClick={() => handleModeChange('diff')}
-          disabled={!file1 || !file2}
+          disabled={!file1 || !file2 || isLoading}
           className={`px-4 py-2 rounded font-medium ${
             mode === 'diff'
               ? 'bg-emerald-600 text-[var(--foreground)]'
               : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
           } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
-          Raw Diff
+          {isLoading ? 'Processing...' : 'Raw Diff'}
         </button>
       </div>
 
-      {result && (
+      {isLoading && (
+        <div className="text-center py-4 text-[var(--foreground)]/70">
+          Comparing specifications...
+        </div>
+      )}
+
+      {result && !isLoading && (
         <div className="bg-[var(--background-card)]/50 backdrop-blur-sm rounded p-6 border border-[var(--background-hover)]">
           {result.trim() === '' ? (
             <p className="text-[var(--foreground)] text-center py-4">
               No differences found between the specifications.
             </p>
           ) : (
-            <pre className="text-sm text-[var(--foreground)] whitespace-pre-wrap">
+            <pre className="text-sm text-[var(--foreground)] whitespace-pre-wrap font-mono">
               {colorizeOutput(result, mode, file1?.name || 'First Specification', file2?.name || 'Second Specification',
                 (checkId, event) => {
                   const check = checks.find(c => c.id === checkId);
@@ -249,13 +303,11 @@ export default function DiffCalculator() {
                       modalRef.current.style.display = 'block';
                     }
                   }
-                  console.log('in');
                 },
                 () => {
                   if (modalRef.current) {
                     modalRef.current.style.display = 'none';
                   }
-                  console.log('out');
                 }
               )}
             </pre>

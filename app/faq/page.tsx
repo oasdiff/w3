@@ -81,7 +81,7 @@ export default function FAQ() {
             content: (
               <>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
-                  A breaking change is a change made to an API's contract that introduces incompatibilities with existing client applications and potentially cause them to break or malfunction.
+                  A breaking change is a change made to an API's contract that introduces incompatibilities with existing client applications and may cause them to break or malfunction.
                 </p>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
                   While there are numerous ways an API contract can introduce breaking changes, and definitions may vary across organizations, we can broadly categorize them into two fundamental types:

@@ -23,20 +23,20 @@ export function Collapsible({ title, children, open, onOpenChange }: Collapsible
   };
 
   return (
-    <div className="border border-[var(--border-color)] rounded-md overflow-hidden">
+    <div className="border border-gray-700/50 rounded-xl overflow-hidden">
       <button
         onClick={handleToggle}
-        className="w-full px-6 py-4 flex justify-between items-center bg-[var(--background-card)] hover:bg-[var(--background-hover)] transition-colors"
+        className="w-full px-6 py-4 flex justify-between items-center bg-gray-800/30 hover:bg-gray-800/50 transition-colors"
       >
-        <h3 className="text-xl font-semibold text-[var(--foreground)]">{title}</h3>
+        <h3 className="text-xl font-semibold text-white">{title}</h3>
         <ChevronDownIcon 
-          className={`w-5 h-5 text-[var(--foreground)]/60 transition-transform duration-200 ${
+          className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
             isOpen ? 'transform rotate-180' : ''
           }`}
         />
       </button>
       {isOpen && (
-        <div className="px-6 py-4 bg-[var(--background)]">
+        <div className="px-6 py-4 bg-gray-800/10">
           {children}
         </div>
       )}

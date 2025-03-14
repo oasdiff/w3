@@ -14,6 +14,7 @@ export const faqItems: FaqItem[] = [
   { id: "prevent-breaking", title: "Using oasdiff to prevent changes" },
   { id: "cicd", title: "Using oasdiff in CI/CD" },
   { id: "changelog", title: "Generating a changelog" },
+  { id: "formats", title: "Output formats" },
   { id: "raw-diff", title: "Raw diff" },
 ];
 

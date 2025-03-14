@@ -26,7 +26,7 @@ export function Collapsible({ title, children, open, onOpenChange }: Collapsible
     <div className="border border-gray-700/50 rounded-xl overflow-hidden">
       <button
         onClick={handleToggle}
-        className="w-full px-6 py-4 flex justify-between items-center bg-gray-800/30 hover:bg-gray-800/50 transition-colors"
+        className="w-full px-6 py-4 flex justify-between items-center bg-gray-800/50 hover:bg-gray-800/70 transition-colors"
       >
         <h3 className="text-xl font-semibold text-white">{title}</h3>
         <ChevronDownIcon 

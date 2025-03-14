@@ -162,10 +162,16 @@ export default function FAQ() {
             title: 'Using oasdiff in CI/CD',
             content: (
               <>
-                <p className="text-lg text-[var(--foreground)] leading-relaxed">
-                  Oasdiff can be useful in continuous integration/continuous deployment (CI/CD) pipelines, where it can automatically compare API versions to ensure that modifications are thoroughly reviewed and tested before deployment.<br /><br />
-                  If you're using github, check out the <a href="https://github.com/oasdiff/oasdiff-action" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">oasdiff GitHub Action</a>.<br />
-                  <a href="https://github.com/oasdiff/github-demo" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">This repo</a> shows how to run oasdiff directly in your pipeline.
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  Oasdiff can be useful in continuous integration/continuous deployment (CI/CD) pipelines, where it can automatically compare API versions to ensure that modifications are thoroughly reviewed and tested before deployment.
+                </p>
+
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  The <a href="https://github.com/oasdiff/oasdiff-action" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">oasdiff GitHub Action</a> makes it easy to integrate breaking change checks into your CI/CD pipeline. It automatically runs when pull requests are created or updated, comparing the changes between the base branch and the pull request.
+                </p>
+
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
+                  You can also run oasdiff directly in your pipeline, as demonstrated in <a href="https://github.com/oasdiff/github-demo" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">this repo</a>.
                 </p>
               </>
             )
@@ -195,18 +201,93 @@ export default function FAQ() {
                     </code>
                   </pre>
                 </div>
+              </>
+            )
+          },
+          {
+            id: 'formats',
+            title: 'Output formats',
+            content: (
+              <>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
-                  Use the <code className="text-pink-400">--format</code> flag to specify the format of the changelog:
+                  oasdiff supports several output formats to suit different use cases. You can specify the format using the <code className="text-pink-400">--format</code> flag:
                 </p>
-                <div className="overflow-x-auto rounded">
-                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
-                    <code className="language-bash">
-                      <span className="text-emerald-400">❯ oasdiff</span> changelog --format html spec1.yaml spec2.yaml &gt; <a href="https://html-preview.github.io/?url=https://github.com/Tufin/oasdiff/blob/main/docs/changelog.html" target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">changelog.html</a>
-                    </code>
-                  </pre>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">JSON Format</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      The JSON format is ideal for programmatic processing and integration with other tools. It provides a structured representation of the differences between specifications.
+                    </p>
+                    <div className="overflow-x-auto rounded">
+                      <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
+                        <code className="language-bash">
+                          <span className="text-emerald-400">❯ oasdiff</span> &lt;diff|breaking|changelog&gt; --format json spec1.yaml spec2.yaml
+                        </code>
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">YAML Format</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      The YAML format provides a human-readable, hierarchical view of the differences between specifications. It's particularly useful for OpenAPI specifications since they are often written in YAML format.
+                    </p>
+                    <div className="overflow-x-auto rounded">
+                      <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
+                        <code className="language-bash">
+                          <span className="text-emerald-400">❯ oasdiff</span> &lt;diff|breaking|changelog&gt; --format yaml spec1.yaml spec2.yaml
+                        </code>
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">HTML Format</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      The HTML format generates a beautifully formatted, interactive report that's perfect for sharing with team members or stakeholders. It includes syntax highlighting and collapsible sections.
+                    </p>
+                    <div className="overflow-x-auto rounded">
+                      <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
+                        <code className="language-bash">
+                          <span className="text-emerald-400">❯ oasdiff</span> &lt;diff|breaking|changelog&gt; --format html spec1.yaml spec2.yaml
+                        </code>
+                      </pre>
+                    </div>
+                    <p className="text-[var(--foreground)] leading-relaxed">
+                      <a href="https://html-preview.github.io/?url=https://github.com/Tufin/oasdiff/blob/main/docs/changelog.html" target="_blank" rel="noopener noreferrer" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">See example</a>
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">Markdown Format</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      The Markdown format is great for documentation and can be easily converted to other formats or rendered in various Markdown viewers.
+                    </p>
+                    <div className="overflow-x-auto rounded">
+                      <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
+                        <code className="language-bash">
+                          <span className="text-emerald-400">❯ oasdiff</span> &lt;diff|breaking|changelog&gt; --format markdown spec1.yaml spec2.yaml
+                        </code>
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">Text Formatfor more details about output formats and their specific features.</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      The text format provides a simple, human-readable output that's perfect for quick reviews and terminal-based workflows.
+                    </p>
+                    <div className="overflow-x-auto rounded">
+                      <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
+                        <code className="language-bash">
+                          <span className="text-emerald-400">❯ oasdiff</span> &lt;diff|breaking|changelog&gt; spec1.yaml spec2.yaml
+                        </code>
+                      </pre>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
-                  See <a href="https://github.com/Tufin/oasdiff/blob/main/docs/BREAKING-CHANGES.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">here</a> for supported formats.
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mt-6">
+                  See <a href="https://github.com/oasdiff/oasdiff/blob/main/docs/BREAKING-CHANGES.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">here</a> for more details about output formats and their specific features.
                 </p>
               </>
             )
@@ -242,9 +323,6 @@ export default function FAQ() {
                     </code>
                   </pre>
                 </div>
-                <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
-                  See <a href="https://github.com/Tufin/oasdiff/blob/main/docs/DIFFS.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">here</a> for supported formats.
-                </p>
               </>
             )
           }

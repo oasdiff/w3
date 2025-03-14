@@ -313,7 +313,8 @@ export default function FAQ() {
             content: (
               <>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
-                  Use the <code className="text-pink-400">diff</code> command to see a comprehensive diff between two API specifications:
+                  The <code className="text-pink-400">diff</code> command shows a comprehensive diff between two API specifications.
+                  The YAML and JSON output formats contain a detailed diff including all changes, and are useful for programmatic processing and integration with other tools.
                 </p>
                 <div className="overflow-x-auto rounded">
                   <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
@@ -335,6 +336,25 @@ export default function FAQ() {
                       <pre>    deleted:</pre>
                       <pre>        - method: GET</pre>
                       <pre>          path: /api/test</pre>
+                    </code>
+                  </pre>
+                </div>
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
+                  The text, markdown and HTML formats contain a summary of the important changes, and are useful for quick reviews.
+                </p>
+                <div className="overflow-x-auto rounded">
+                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
+                    <code className="language-bash">
+                      <span className="text-emerald-400">❯ oasdiff</span> diff spec1.yaml spec2.yaml -f text
+                      <pre>### New Endpoints: 1</pre>
+                      <pre>--------------------</pre>
+                      <pre>POST /api/test</pre>
+                      <pre><br /></pre>
+                      <pre>### Deleted Endpoints: 1</pre>
+                      <pre>GET /api/test</pre>
+                      <pre><br /></pre>
+                      <pre>### Modified Endpoints: None</pre>
+                      <pre>----------------------------</pre>
                     </code>
                   </pre>
                 </div>
@@ -395,6 +415,83 @@ export default function FAQ() {
                       <span className="text-emerald-400">❯ oasdiff</span> flatten spec.yaml
                     </code>
                   </pre>
+                </div>
+              </>
+            )
+          },
+          {
+            id: 'maturity-model',
+            title: 'API Change Management',
+            content: (
+              <>
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  Becoming a mature API provider requires a systematic approach to managing API changes. Here's an outline of the key steps, with a focus on change management:
+                </p>
+
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">1. Define an OpenAPI spec</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      The first step is having an API specification. You can be API-first (generating code from specs) or code-first (generating specs from code). Each approach has its pros and cons.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">2. Check for breaking changes in CI</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      Use tools like oasdiff in your CI pipeline to automatically detect breaking changes. This enables a fully automated process that stops the build when breaking changes are detected.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">3. Version your API</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      When breaking changes are detected, you have several options:
+                    </p>
+                    <ul className="list-disc list-inside text-[var(--foreground)] leading-relaxed mb-4">
+                      <li>Disallow the change and ask developers to revert it</li>
+                      <li>Defer the change to a future API version (e.g., v2)</li>
+                      <li>Allow the breaking change as an exception</li>
+                    </ul>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      You can use either semantic versioning (v1.0, v2.0) or date-based versioning (Jan2024, 24-1).
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">4. Announce breaking changes</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      Keep older API versions alive for a while to give clients time to adapt. Use the <code className="text-pink-400">Deprecated</code> OpenAPI keyword and <code className="text-pink-400">x-sunset</code> extension to mark endpoints that will be removed. Removing endpoints without these markers is considered a breaking change.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">5. Guarantee API lifetime</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      Clearly communicate how long API versions will be supported (e.g., one year from release, or three major versions forward). Oasdiff enforces a minimal grace period before endpoints can be removed.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">6. Define maturity levels</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      Mark endpoints with <code className="text-pink-400">x-stability-level</code> extension using one of: draft, alpha, beta, or stable. Each level can have different grace periods. Customize these periods using the <code className="text-pink-400">--deprecation-days-beta</code> and <code className="text-pink-400">--deprecation-days-stable</code> flags in oasdiff.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">7. Allow exceptions</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      Define a process for approving breaking changes when necessary (e.g., for security reasons). Oasdiff supports exceptions using the <code className="text-pink-400">--warn-ignore</code> and <code className="text-pink-400">--err-ignore</code> flags.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">8. Publish your API lifecycle policy</h4>
+                    <p className="text-[var(--foreground)] leading-relaxed mb-4">
+                      Document and publish your API change process so clients know what to expect. Remember: changing APIs is okay, just don't surprise your clients.
+                    </p>
+                  </div>
                 </div>
               </>
             )

@@ -18,6 +18,7 @@ export const faqItems: FaqItem[] = [
   { id: "formats", title: "Output formats" },
   { id: "raw-diff", title: "Raw diff" },
   { id: "allof-comparison", title: "Comparing AllOf schemas" },
+  { id: "maturity-model", title: "API Change Management" },
 ];
 
 export const faqNavItems: FaqNavItem[] = faqItems.map(item => ({

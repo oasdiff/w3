@@ -39,7 +39,7 @@ export default function Home() {
           Oasdiff is open source and available on GitHub
         </p>
         <a 
-          href="https://github.com/Tufin/oasdiff" 
+          href="https://github.com/oasdiff/oasdiff" 
           target="_blank" 
           rel="noopener noreferrer"
           className="inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors"

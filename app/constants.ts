@@ -13,9 +13,11 @@ export const faqItems: FaqItem[] = [
   { id: "detect-changes", title: "Using oasdiff to detect changes" },
   { id: "prevent-breaking", title: "Using oasdiff to prevent changes" },
   { id: "cicd", title: "Using oasdiff in CI/CD" },
+  { id: "diff-service", title: "Diff as a Service" },
   { id: "changelog", title: "Generating a changelog" },
   { id: "formats", title: "Output formats" },
   { id: "raw-diff", title: "Raw diff" },
+  { id: "allof-comparison", title: "Comparing AllOf schemas" },
 ];
 
 export const faqNavItems: FaqNavItem[] = faqItems.map(item => ({

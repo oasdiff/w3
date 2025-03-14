@@ -177,6 +177,21 @@ export default function FAQ() {
             )
           },
           {
+            id: 'diff-service',
+            title: 'Diff as a Service',
+            content: (
+              <>
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  Oasdiff provides a web service that allows you to compare OpenAPI specifications without installing any software. This is perfect for quick comparisons or when you need to integrate API diffing into your existing tools.
+                </p>
+
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
+                  For more information, visit the <a href="https://www.oasdiff.com/diff-as-a-service" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">Diff as a Service</a> repo.
+                </p>
+              </>
+            )
+          },
+          {
             id: 'changelog',
             title: 'Generating a changelog',
             content: (
@@ -320,6 +335,64 @@ export default function FAQ() {
                       <pre>    deleted:</pre>
                       <pre>        - method: GET</pre>
                       <pre>          path: /api/test</pre>
+                    </code>
+                  </pre>
+                </div>
+              </>
+            )
+          },
+          {
+            id: 'allof-comparison',
+            title: 'Comparing AllOf schemas',
+            content: (
+              <>
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  OpenAPI 3.0 provides several keywords for combining schemas, including <code className="text-pink-400">allOf</code>, which validates a value against all subschemas. While these keywords are useful for describing complex data models, they can complicate breaking changes detection.
+                </p>
+
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  Consider this example where a new subschema is added under <code className="text-pink-400">allOf</code>:
+                </p>
+                <div className="overflow-x-auto rounded">
+                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
+                    <code className="language-yaml">{`allOf:
+  - type: object
+    properties:
+      prop1:
+        type: string
+  - type: object
+    properties:
+      prop2:
+        type: boolean
+  - type: object
+    properties:
+      prop1:
+        type: string`}</code>
+                  </pre>
+                </div>
+
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  By default, oasdiff might report this as a breaking change because it sees a new constraint. However, in this case, the new subschema is identical to an existing one and doesn't add any real constraints.
+                </p>
+
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  To handle this, oasdiff provides the <code className="text-pink-400">--flatten-allof</code> flag, which merges equivalent <code className="text-pink-400">allOf</code> schemas before comparison:
+                </p>
+                <div className="overflow-x-auto rounded">
+                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
+                    <code className="language-bash">
+                      <span className="text-emerald-400">❯ oasdiff</span> breaking --flatten-allof spec1.yaml spec2.yaml
+                    </code>
+                  </pre>
+                </div>
+
+                <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
+                  You can also use the <code className="text-pink-400">flatten</code> subcommand to see how oasdiff merges <code className="text-pink-400">allOf</code> schemas:
+                </p>
+                <div className="overflow-x-auto rounded">
+                  <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
+                    <code className="language-bash">
+                      <span className="text-emerald-400">❯ oasdiff</span> flatten spec.yaml
                     </code>
                   </pre>
                 </div>

@@ -134,11 +134,13 @@ export default function DiffCalculator() {
   const [file1, setFile1] = useState<File | null>(null);
   const [file2, setFile2] = useState<File | null>(null);
   const [mode, setMode] = useState<DiffMode>('breaking');
+  const [processingMode, setProcessingMode] = useState<DiffMode | null>(null);
   const [result, setResult] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [checks, setChecks] = useState<Check[]>([]);
   const checksRef = useRef<Check[]>([]);
   const [selectedCheck, setSelectedCheck] = useState<Check | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -165,6 +167,7 @@ export default function DiffCalculator() {
   const handleModeChange = async (newMode: DiffMode) => {
     setMode(newMode);
     setResult('');
+    setProcessingMode(newMode);
     
     if (file1 && file2) {
       setIsLoading(true);
@@ -192,6 +195,7 @@ export default function DiffCalculator() {
         setResult('Error comparing files');
       } finally {
         setIsLoading(false);
+        setProcessingMode(null);
       }
     }
   };
@@ -247,35 +251,35 @@ export default function DiffCalculator() {
         <button
           onClick={() => handleModeChange('breaking')}
           disabled={!file1 || !file2 || isLoading}
-          className={`px-4 py-2 rounded font-medium ${
+          className={`w-[180px] px-4 py-2 rounded font-medium ${
             mode === 'breaking'
               ? 'bg-emerald-600 text-[var(--foreground)]'
               : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
           } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
-          {isLoading ? 'Processing...' : 'Breaking Changes'}
+          {processingMode === 'breaking' ? 'Processing...' : 'Breaking Changes'}
         </button>
         <button
           onClick={() => handleModeChange('changelog')}
           disabled={!file1 || !file2 || isLoading}
-          className={`px-4 py-2 rounded font-medium ${
+          className={`w-[180px] px-4 py-2 rounded font-medium ${
             mode === 'changelog'
               ? 'bg-emerald-600 text-[var(--foreground)]'
               : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
           } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
-          {isLoading ? 'Processing...' : 'Changelog'}
+          {processingMode === 'changelog' ? 'Processing...' : 'Changelog'}
         </button>
         <button
           onClick={() => handleModeChange('diff')}
           disabled={!file1 || !file2 || isLoading}
-          className={`px-4 py-2 rounded font-medium ${
+          className={`w-[180px] px-4 py-2 rounded font-medium ${
             mode === 'diff'
               ? 'bg-emerald-600 text-[var(--foreground)]'
               : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
           } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
         >
-          {isLoading ? 'Processing...' : 'Raw Diff'}
+          {processingMode === 'diff' ? 'Processing...' : 'Raw Diff'}
         </button>
       </div>
 
@@ -299,15 +303,11 @@ export default function DiffCalculator() {
                   if (check) {
                     setSelectedCheck(check);
                     setModalPosition({ x: event.clientX + 10, y: event.clientY });
-                    if (modalRef.current) {
-                      modalRef.current.style.display = 'block';
-                    }
+                    setIsModalVisible(true);
                   }
                 },
                 () => {
-                  if (modalRef.current) {
-                    modalRef.current.style.display = 'none';
-                  }
+                  setIsModalVisible(false);
                 }
               )}
             </pre>
@@ -325,18 +325,10 @@ export default function DiffCalculator() {
             top: modalPosition.y,
             zIndex: 50,
             pointerEvents: 'auto',
-            display: 'none'
+            display: isModalVisible ? 'block' : 'none'
           }}
-          onMouseEnter={() => {
-            if (modalRef.current) {
-              modalRef.current.style.display = 'block';
-            }
-          }}
-          onMouseLeave={() => {
-            if (modalRef.current) {
-              modalRef.current.style.display = 'none';
-            }
-          }}
+          onMouseEnter={() => setIsModalVisible(true)}
+          onMouseLeave={() => setIsModalVisible(false)}
         >
           <div>
             <h2 className="text-2xl font-bold text-[var(--foreground)]">{selectedCheck.id}</h2>

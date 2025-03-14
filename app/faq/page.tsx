@@ -152,7 +152,7 @@ export default function FAQ() {
                   </pre>
                 </div>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
-                  See <a href="https://github.com/Tufin/oasdiff/blob/main/docs/BREAKING-CHANGES.md#preventing-breaking-changes" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">here</a> for more info.
+                  See <a href="https://github.com/Tufin/oasdiff/blob/main/docs/BREAKING-CHANGES.md#preventing-breaking-changes" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">oasdiff documentation</a> for more info.
                 </p>
               </>
             )
@@ -167,11 +167,11 @@ export default function FAQ() {
                 </p>
 
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
-                  The <a href="https://github.com/oasdiff/oasdiff-action" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">oasdiff GitHub Action</a> makes it easy to integrate breaking change checks into your CI/CD pipeline. It automatically runs when pull requests are created or updated, comparing the changes between the base branch and the pull request.
+                  The <a href="https://github.com/oasdiff/oasdiff-action" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">oasdiff GitHub Action</a> makes it easy to integrate breaking change checks into your CI/CD pipeline. It automatically runs when pull requests are created or updated, comparing the changes between the base branch and the pull request.
                 </p>
 
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
-                  You can also run oasdiff directly in your pipeline, as demonstrated in <a href="https://github.com/oasdiff/github-demo" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">this repo</a>.
+                  You can also run oasdiff directly in your pipeline, as demonstrated in <a href="https://github.com/oasdiff/github-demo" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">the oasdiff/github-demo repo</a>.
                 </p>
               </>
             )
@@ -186,7 +186,7 @@ export default function FAQ() {
                 </p>
 
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
-                  For more information, visit the <a href="https://www.oasdiff.com/diff-as-a-service" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">Diff as a Service</a> repo.
+                  For more information, see the <a href="https://github.com/oasdiff/oasdiff/blob/main/docs/OASDIFF-SERVICE.md" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">Diff as a Service documentation</a>.
                 </p>
               </>
             )
@@ -302,7 +302,7 @@ export default function FAQ() {
                   </div>
                 </div>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mt-6">
-                  See <a href="https://github.com/oasdiff/oasdiff/blob/main/docs/BREAKING-CHANGES.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">here</a> for more details about output formats and their specific features.
+                  See <a href="https://github.com/oasdiff/oasdiff/blob/main/docs/BREAKING-CHANGES.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">here</a> for more details about output formats and their specific features.
                 </p>
               </>
             )
@@ -437,7 +437,7 @@ export default function FAQ() {
                   </div>
 
                   <div>
-                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">2. Check for breaking changes in CI</h4>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">2. Check for breaking changes continuously</h4>
                     <p className="text-[var(--foreground)] leading-relaxed mb-4">
                       Use tools like oasdiff in your CI pipeline to automatically detect breaking changes. This enables a fully automated process that stops the build when breaking changes are detected.
                     </p>

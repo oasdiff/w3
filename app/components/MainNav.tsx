@@ -25,7 +25,7 @@ export function MainNav() {
         <div className="flex h-16 items-center space-x-8">
           <Link
             href="/"
-            className="text-emerald-400 hover:text-emerald-300 transition-colors font-medium flex items-center"
+            className="text-emerald-400 hover:text-emerald-300 transition-colors font-medium flex items-center -mt-0.5"
           >
             <Logo />
             <span className="text-xl font-bold">oasdiff</span>

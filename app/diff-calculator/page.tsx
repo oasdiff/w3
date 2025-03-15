@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, ReactNode, Fragment } from 'react';
+import { useState, useEffect, useRef, ReactNode, Fragment as ReactFragment } from 'react';
 
 type DiffMode = 'breaking' | 'changelog' | 'diff';
 
@@ -29,7 +29,7 @@ interface DiffResponse {
   changes: Change[];
 }
 
-export function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Name: string, onCheckHover: (checkId: string, event: React.MouseEvent) => void, onCheckLeave: () => void): ReactNode[] {
+function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Name: string, onCheckHover: (checkId: string, event: React.MouseEvent) => void, onCheckLeave: () => void): ReactNode[] {
   if (mode === 'diff') return [text];
 
   try {
@@ -65,7 +65,7 @@ export function colorizeOutput(text: string, mode: DiffMode, file1Name: string, 
         }
         
         lines.push(
-          <Fragment key={`first-${index}`}>
+          <ReactFragment key={`first-${index}`}>
             <span className={levelColor}>{levelText}</span>{' '}
             <span
               className="text-yellow-400 cursor-pointer hover:text-yellow-300"
@@ -76,41 +76,41 @@ export function colorizeOutput(text: string, mode: DiffMode, file1Name: string, 
               [{item.id}]
             </span>
             {source ? ` at ${source}` : ''}{'\n'}
-          </Fragment>
+          </ReactFragment>
         );
 
         // Second line: in API operation path
         if (item.operation && item.path) {
           lines.push(
-            <Fragment key={`second-${index}`}>
+            <ReactFragment key={`second-${index}`}>
               {'      in API '}
               <span className="text-emerald-400">{item.operation}</span>
               {' '}
               <span className="text-emerald-400">{item.path}</span>
               {'\n'}
-            </Fragment>
+            </ReactFragment>
           );
         }
 
         // Third line: the actual change text
         lines.push(
-          <Fragment key={`third-${index}`}>
+          <ReactFragment key={`third-${index}`}>
             {'          '}{item.text}{'\n'}
-          </Fragment>
+          </ReactFragment>
         );
 
         // Fourth line (if present): the comment
         if (item.comment) {
           lines.push(
-            <Fragment key={`fourth-${index}`}>
+            <ReactFragment key={`fourth-${index}`}>
               {'          '}{item.comment}{'\n'}
-            </Fragment>
+            </ReactFragment>
           );
         }
 
         // Add a blank line between items unless it's the last item
         if (index < jsonData.changes.length - 1) {
-          lines.push(<Fragment key={`space-${index}`}>{'\n'}</Fragment>);
+          lines.push(<ReactFragment key={`space-${index}`}>{'\n'}</ReactFragment>);
         }
       });
     }

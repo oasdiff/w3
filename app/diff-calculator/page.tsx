@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, ReactNode, Fragment as ReactFragment } from 'react';
+import { Table, TableHeader, TableRow, TableHead } from '@/components/ui/table';
 
 type DiffMode = 'breaking' | 'changelog' | 'diff';
 
@@ -316,7 +317,7 @@ export default function DiffCalculator() {
       {selectedCheck && (
         <div 
           ref={modalRef}
-          className="space-y-4 bg-[var(--background-card)] rounded-lg shadow-lg p-4 max-w-sm border border-[var(--background-hover)]" 
+          className="w-96 overflow-hidden border border-[var(--background-hover)] rounded-lg bg-[var(--background-card)]" 
           style={{ 
             position: 'fixed', 
             left: modalPosition.x, 
@@ -328,19 +329,43 @@ export default function DiffCalculator() {
           onMouseEnter={() => setIsModalVisible(true)}
           onMouseLeave={() => setIsModalVisible(false)}
         >
-          <div>
-            <h2 className="text-2xl font-bold text-[var(--foreground)]">{selectedCheck.id}</h2>
-            <div className="space-y-2">
-              <p className="text-[var(--foreground)]"><strong>Level:</strong> {selectedCheck.level}</p>
-              <p className="text-[var(--foreground)]"><strong>Direction:</strong> {selectedCheck.direction}</p>
-              <p className="text-[var(--foreground)]"><strong>Location:</strong> {selectedCheck.location}</p>
-              <p className="text-[var(--foreground)]"><strong>Action:</strong> {selectedCheck.action}</p>
+          <>
+            {/* Header section */}
+            <div className="bg-[var(--background-card)] border-b border-[var(--background-hover)]">
+              <Table className="w-full">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="p-3 text-[var(--foreground)] font-bold">{selectedCheck.id}</TableHead>
+                  </TableRow>
+                </TableHeader>
+              </Table>
             </div>
-            <div className="mt-6">
-              <h3 className="text-lg font-semibold text-[var(--foreground)] mb-2">Details</h3>
-              <p className="text-[var(--foreground)]">{selectedCheck.detailed_description}</p>
+            {/* Content section */}
+            <div className="p-6">
+              <div className="space-y-1">
+                <p className="text-[var(--foreground)] flex">
+                  <strong className="w-20">Level:</strong>
+                  <span>{selectedCheck.level}</span>
+                </p>
+                <p className="text-[var(--foreground)] flex">
+                  <strong className="w-20">Direction:</strong>
+                  <span>{selectedCheck.direction}</span>
+                </p>
+                <p className="text-[var(--foreground)] flex">
+                  <strong className="w-20">Location:</strong>
+                  <span>{selectedCheck.location}</span>
+                </p>
+                <p className="text-[var(--foreground)] flex">
+                  <strong className="w-20">Action:</strong>
+                  <span>{selectedCheck.action}</span>
+                </p>
+                <div className="pt-4">
+                  <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Details</h3>
+                  <p className="text-[var(--foreground)]">{selectedCheck.detailed_description}</p>
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         </div>
       )}
     </div>

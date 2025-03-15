@@ -40,8 +40,8 @@ function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Na
     if (jsonData.changes && Array.isArray(jsonData.changes)) {
       jsonData.changes.forEach((item: Change, index: number) => {
         // First line: error/warning/info with check ID
-        const levelText = item.level === 3 ? 'info' : item.level === 2 ? 'warning' : 'error';
-        const levelColor = item.level === 3 ? 'text-cyan-400' : item.level === 2 ? 'text-pink-400' : 'text-red-400';
+        const levelText = item.level === 1 ? 'info' : item.level === 2 ? 'warning' : 'error';
+        const levelColor = item.level === 1 ? 'text-cyan-400' : item.level === 2 ? 'text-pink-400' : 'text-red-400';
         
         // Replace temporary file paths with actual file names
         let source = item.source;

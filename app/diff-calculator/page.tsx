@@ -294,7 +294,13 @@ export default function DiffCalculator() {
                   const check = checks.find(c => c.id === checkId);
                   if (check) {
                     setSelectedCheck(check);
-                    setModalPosition({ x: event.clientX + 10, y: event.clientY });
+                    // Calculate position considering viewport boundaries
+                    const viewportHeight = window.innerHeight;
+                    const tooltipHeight = 300; // Approximate height of the tooltip
+                    const yPosition = event.clientY + tooltipHeight > viewportHeight
+                      ? Math.max(viewportHeight - tooltipHeight - 10, 10) // Keep 10px margin from top/bottom
+                      : event.clientY;
+                    setModalPosition({ x: event.clientX + 10, y: yPosition });
                     setIsModalVisible(true);
                   }
                 },

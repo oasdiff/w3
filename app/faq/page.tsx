@@ -160,7 +160,7 @@ export default function FAQ() {
           },
           {
             id: 'cicd',
-            title: 'Using oasdiff in CI/CD',
+            title: 'Integrating oasdiff into CI/CD pipelines',
             content: (
               <>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">

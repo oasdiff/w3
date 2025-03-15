@@ -1,6 +1,7 @@
 export interface FaqItem {
   id: string;
   title: string;
+  menuTitle?: string;  // Optional shorter title for menu
 }
 
 export interface FaqNavItem {
@@ -12,7 +13,7 @@ export const faqItems: FaqItem[] = [
   { id: "breaking-changes", title: "What are breaking changes?" },
   { id: "detect-changes", title: "Using oasdiff to detect changes" },
   { id: "prevent-breaking", title: "Using oasdiff to prevent changes" },
-  { id: "cicd", title: "Using oasdiff in CI/CD" },
+  { id: "cicd", title: "Integrating oasdiff into CI/CD pipelines", menuTitle: "CI/CD Integration" },
   { id: "diff-service", title: "Diff as a Service" },
   { id: "changelog", title: "Generating a changelog" },
   { id: "formats", title: "Output formats" },
@@ -23,5 +24,5 @@ export const faqItems: FaqItem[] = [
 
 export const faqNavItems: FaqNavItem[] = faqItems.map(item => ({
   href: `/faq#${item.id}`,
-  label: item.title
+  label: item.menuTitle || item.title
 })); 

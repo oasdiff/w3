@@ -137,7 +137,7 @@ export default function Page() {
                       onClick={() => setSelectedCheck(check)}
                       className={`${styles.tableRow} ${styles.tableRowHover} ${selectedCheck && selectedCheck.id === check.id ? styles.tableRowSelected : ''}`}
                     >
-                      <TableCell className={`${styles.tableCell} ${styles.tableCellIndex}`}>{index}</TableCell>
+                      <TableCell className={`${styles.tableCell} ${styles.tableCellIndex}`}>{index + 1}</TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellId}`}>{check.id}</TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>{check.level}</TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>{check.direction}</TableCell>

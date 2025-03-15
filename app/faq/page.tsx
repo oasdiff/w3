@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Collapsible } from "@/components/ui/collapsible";
-import { useSearchParams } from "next/navigation";
-import { faqItems } from '../constants';
+import Image from 'next/image';
 
 export default function FAQ() {
   const [openSection, setOpenSection] = useState<string | null>(null);
@@ -14,8 +13,6 @@ export default function FAQ() {
       const hash = window.location.hash.slice(1); // Remove the # symbol
       if (hash) {
         setOpenSection(hash);
-        // Find the matching section title
-        const section = faqItems.find(item => item.id === hash);
         const element = document.getElementById(hash);
         if (element) {
           setTimeout(() => {
@@ -69,7 +66,7 @@ export default function FAQ() {
           max-width: 100% !important;
         }
         code {
-          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, monospace;
         }
       `}</style>
 
@@ -81,7 +78,7 @@ export default function FAQ() {
             content: (
               <>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
-                  A breaking change is a change made to an API's contract that introduces incompatibilities with existing client applications and may cause them to break or malfunction.
+                  A breaking change is a change made to an API&apos;s contract that introduces incompatibilities with existing client applications and may cause them to break or malfunction.
                 </p>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
                   While there are numerous ways an API contract can introduce breaking changes, and definitions may vary across organizations, we can broadly categorize them into two fundamental types:
@@ -89,17 +86,21 @@ export default function FAQ() {
 
                 <div className="grid grid-cols-1 gap-8">
                   <div className="border border-[var(--border-color)] rounded overflow-hidden shadow-lg">
-                    <img
+                    <Image
                       src="/breaking-request.png"
                       alt="Diagram illustrating breaking changes"
+                      width={800}
+                      height={400}
                       className="w-full"
                     />
                   </div>
 
                   <div className="border border-[var(--border-color)] rounded overflow-hidden shadow-lg">
-                    <img
+                    <Image
                       src="/breaking-response.png"
                       alt="Diagram illustrating breaking changes"
+                      width={800}
+                      height={400}
                       className="w-full"
                     />
                   </div>
@@ -245,7 +246,7 @@ export default function FAQ() {
                   <div>
                     <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">YAML Format</h4>
                     <p className="text-[var(--foreground)] leading-relaxed mb-4">
-                      The YAML format provides a human-readable, hierarchical view of the differences between specifications. It's particularly useful for OpenAPI specifications since they are often written in YAML format.
+                      The YAML format provides a human-readable, hierarchical view of the differences between specifications. It&apos;s particularly useful for OpenAPI specifications since they are often written in YAML format.
                     </p>
                     <div className="overflow-x-auto rounded">
                       <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
@@ -259,7 +260,7 @@ export default function FAQ() {
                   <div>
                     <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">HTML Format</h4>
                     <p className="text-[var(--foreground)] leading-relaxed mb-4">
-                      The HTML format generates a beautifully formatted, interactive report that's perfect for sharing with team members or stakeholders. It includes syntax highlighting and collapsible sections.
+                      The HTML format generates a beautifully formatted, interactive report that&apos;s perfect for sharing with team members or stakeholders. It includes syntax highlighting and collapsible sections.
                     </p>
                     <div className="overflow-x-auto rounded">
                       <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
@@ -288,9 +289,9 @@ export default function FAQ() {
                   </div>
 
                   <div>
-                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">Text Formatfor more details about output formats and their specific features.</h4>
+                    <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">Text Format</h4>
                     <p className="text-[var(--foreground)] leading-relaxed mb-4">
-                      The text format provides a simple, human-readable output that's perfect for quick reviews and terminal-based workflows.
+                      The text format provides a simple, human-readable output that&apos;s perfect for quick reviews and terminal-based workflows.
                     </p>
                     <div className="overflow-x-auto rounded">
                       <pre className="bg-[var(--background-card)]/50 backdrop-blur-sm p-4 text-sm">
@@ -392,7 +393,7 @@ export default function FAQ() {
                 </div>
 
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
-                  By default, oasdiff might report this as a breaking change because it sees a new constraint. However, in this case, the new subschema is identical to an existing one and doesn't add any real constraints.
+                  By default, oasdiff might report this as a breaking change because it sees a new constraint. However, in this case, the new subschema is identical to an existing one and doesn&apos;t add any real constraints.
                 </p>
 
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
@@ -425,7 +426,7 @@ export default function FAQ() {
             content: (
               <>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mb-4">
-                  Becoming a mature API provider requires a systematic approach to managing API changes. Here's an outline of the key steps, with a focus on change management:
+                  Becoming a mature API provider requires a systematic approach to managing API changes. Here&apos;s an outline of the key steps, with a focus on change management:
                 </p>
 
                 <div className="space-y-6">
@@ -489,7 +490,7 @@ export default function FAQ() {
                   <div>
                     <h4 className="text-lg font-semibold text-[var(--foreground)] mb-2">8. Publish your API lifecycle policy</h4>
                     <p className="text-[var(--foreground)] leading-relaxed mb-4">
-                      Document and publish your API change process so clients know what to expect. Remember: changing APIs is okay, just don't surprise your clients.
+                      Document and publish your API change process so clients know what to expect. Remember: changing APIs is okay, just don&apos;t surprise your clients.
                     </p>
                   </div>
                 </div>

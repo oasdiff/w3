@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef, ReactNode, Fragment } from 'react';
-import { Modal } from '../components/ui/modal';
 
 type DiffMode = 'breaking' | 'changelog' | 'diff';
 
@@ -121,13 +120,6 @@ export function colorizeOutput(text: string, mode: DiffMode, file1Name: string, 
     console.error('Error parsing JSON:', e);
     return [text];
   }
-}
-
-interface Window {
-  handleCheckClick?: (checkId: string) => void;
-  handleCheckHover?: (checkId: string, event: MouseEvent) => void;
-  handleCheckLeave?: () => void;
-  hideTimeout?: NodeJS.Timeout;
 }
 
 export default function DiffCalculator() {

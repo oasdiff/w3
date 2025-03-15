@@ -23,10 +23,10 @@ export function Collapsible({ title, children, open, onOpenChange }: Collapsible
   };
 
   return (
-    <div className="border border-gray-700/50 rounded-xl overflow-hidden">
+    <div className="border border-gray-700/50 rounded-lg overflow-hidden">
       <button
         onClick={handleToggle}
-        className="w-full px-6 py-4 flex justify-between items-center bg-gray-800/50 hover:bg-gray-800/70 transition-colors"
+        className="w-full px-6 py-3 flex justify-between items-center bg-gray-800/50 hover:bg-gray-800/70 transition-colors"
       >
         <h3 className="text-xl font-semibold text-white">{title}</h3>
         <ChevronDownIcon 
@@ -36,7 +36,7 @@ export function Collapsible({ title, children, open, onOpenChange }: Collapsible
         />
       </button>
       {isOpen && (
-        <div className="px-6 py-4 bg-gray-800/10">
+        <div className="px-6 py-3 bg-gray-800/10">
           {children}
         </div>
       )}

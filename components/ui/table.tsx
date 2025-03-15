@@ -7,6 +7,7 @@ interface TableProps {
 
 interface TableHeaderProps {
   children: ReactNode;
+  className?: string;
 }
 
 interface TableRowProps {
@@ -30,11 +31,11 @@ interface TableCellProps {
 }
 
 export function Table({ children, className = "" }: TableProps) {
-  return <table className={`w-full border-collapse border ${className}`}>{children}</table>;
+  return <table className={`w-full border-collapse rounded-lg ${className}`}>{children}</table>;
 }
 
-export function TableHeader({ children }: TableHeaderProps) {
-  return <thead className="bg-gray-200">{children}</thead>;
+export function TableHeader({ children, className = "" }: TableHeaderProps) {
+  return <thead className={`rounded-t-lg overflow-hidden ${className}`}>{children}</thead>;
 }
 
 export function TableRow({ children, className, onClick }: TableRowProps) {
@@ -54,5 +55,5 @@ export function TableBody({ children }: TableBodyProps) {
 }
 
 export function TableCell({ children, className = "" }: TableCellProps) {
-  return <td className={`border ${className}`}>{children}</td>;
+  return <td className={`${className}`}>{children}</td>;
 } 

@@ -60,20 +60,20 @@ export default function Page() {
       <Card className="bg-[var(--background)] overflow-hidden px-6 pb-6">
         <div className="flex flex-row gap-6 h-full">
           {/* Left side - Table */}
-          <div className="w-[calc(100%-24rem)]">
+          <div className="w-[calc(100%-24rem)] border border-[var(--background-hover)] rounded-lg overflow-hidden">
             {/* Fixed Header */}
             <div className={styles.tableHeader}>
               <Table className={styles.tableContainer}>
-                <TableHeader>
+                <TableHeader className="bg-[var(--background-card)] border-b border-[var(--background-hover)]">
                   <TableRow className={styles.tableRow}>
-                    <TableHead className={`${styles.tableCell} ${styles.tableCellIndex} text-[var(--foreground)]`}>#</TableHead>
-                    <TableHead className={`${styles.tableCell} ${styles.tableCellId} text-[var(--foreground)]`}>ID</TableHead>
-                    <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)]`}>Level</TableHead>
-                    <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)]`}>Direction</TableHead>
-                    <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)]`}>Location</TableHead>
-                    <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)]`}>Action</TableHead>
+                    <TableHead className={`${styles.tableCell} ${styles.tableCellIndex} text-[var(--foreground)] font-bold`}>#</TableHead>
+                    <TableHead className={`${styles.tableCell} ${styles.tableCellId} text-[var(--foreground)] font-bold`}>ID</TableHead>
+                    <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)] font-bold`}>Level</TableHead>
+                    <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)] font-bold`}>Direction</TableHead>
+                    <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)] font-bold`}>Location</TableHead>
+                    <TableHead className={`${styles.tableCell} ${styles.tableCellStandard} text-[var(--foreground)] font-bold`}>Action</TableHead>
                   </TableRow>
-                  <TableRow className={styles.tableRow}>
+                  <TableRow className={`${styles.tableRow} bg-[var(--background-card)]`}>
                     <TableCell className={`${styles.tableCell} ${styles.tableCellIndex}`}>&nbsp;</TableCell>
                     <TableCell className={`${styles.tableCell} ${styles.tableCellId}`}>
                       <Input
@@ -151,7 +151,7 @@ export default function Page() {
           </div>
 
           {/* Right side - Panel */}
-          <div className="w-96 overflow-y-auto">
+          <div className="w-96 overflow-y-auto border border-[var(--background-hover)] rounded-lg p-6">
             {selectedCheck ? (
               <>
                 <h2 className="text-xl font-bold mb-4 text-[var(--foreground)]">{selectedCheck.id}</h2>

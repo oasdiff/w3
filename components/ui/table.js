@@ -1,5 +1,5 @@
 export function Table({ children, className = "" }) {
-    return <table className="w-full border-collapse border ${className}">{children}</table>;
+    return <table className={`w-full border-collapse border ${className}`}>{children}</table>;
   }
   
   export function TableHeader({ children }) {

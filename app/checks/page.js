@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Select } from "@/components/ui/select";
 import styles from './styles.module.css';
 
@@ -23,10 +23,11 @@ export default function Page() {
   useEffect(() => {
     fetch("/data/checks.json")
     .then((res) => res.json())
-    .then((data) => setChecks(data))
+    .then((data) => {
+      setChecks(data);
+      console.log("Loaded checks:", data);
+    })
     .catch((error) => console.error("Error loading JSON:", error));
-
-    console.log("Loaded checks:", checks);
   }, []);
 
   const filteredChecks = checks.filter(check =>

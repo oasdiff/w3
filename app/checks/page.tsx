@@ -166,12 +166,12 @@ export default function Page() {
                 </div>
                 {/* Content section */}
                 <div className="p-6 overflow-y-auto" style={{ height: 'calc(100vh - 15rem)' }}>
-                  <div className="space-y-4">
+                  <div className="space-y-2">
                     <p className="text-[var(--foreground)]"><strong>Level:</strong> {selectedCheck.level}</p>
                     <p className="text-[var(--foreground)]"><strong>Direction:</strong> {selectedCheck.direction}</p>
                     <p className="text-[var(--foreground)]"><strong>Location:</strong> {selectedCheck.location}</p>
                     <p className="text-[var(--foreground)]"><strong>Action:</strong> {selectedCheck.action}</p>
-                    <div className="pt-2">
+                    <div className="pt-4">
                       <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Details</h3>
                       <p className="text-[var(--foreground)]">{selectedCheck.detailed_description}</p>
                     </div>

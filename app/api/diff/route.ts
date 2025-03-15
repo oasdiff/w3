@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
           'Content-Type': 'application/json',
         },
       });
-    } catch (_) {
+    } catch {
       // If it's not JSON, return as plain text
       return new Response(result);
     }

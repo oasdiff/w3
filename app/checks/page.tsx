@@ -151,16 +151,32 @@ export default function Page() {
           </div>
 
           {/* Right side - Panel */}
-          <div className="w-96 overflow-y-auto border border-[var(--background-hover)] rounded-lg p-6">
+          <div className="w-96 overflow-hidden border border-[var(--background-hover)] rounded-lg">
             {selectedCheck ? (
               <>
-                <h2 className="text-xl font-bold mb-4 text-[var(--foreground)]">{selectedCheck.id}</h2>
-                <p className="text-[var(--foreground)]"><strong>ID:</strong> {selectedCheck.id}</p>
-                <p className="text-[var(--foreground)]"><strong>Level:</strong> {selectedCheck.level}</p>
-                <p className="text-[var(--foreground)]"><strong>Direction:</strong> {selectedCheck.direction}</p>
-                <p className="text-[var(--foreground)]"><strong>Location:</strong> {selectedCheck.location}</p>
-                <p className="text-[var(--foreground)]"><strong>Action:</strong> {selectedCheck.action}</p>
-                <p className="mt-4 text-[var(--foreground)]"><strong>Details:</strong> {selectedCheck.detailed_description}</p>
+                {/* Header section */}
+                <div className={styles.tableHeader}>
+                  <Table className={styles.tableContainer}>
+                    <TableHeader className="bg-[var(--background-card)] border-b border-[var(--background-hover)]">
+                      <TableRow className={styles.tableRow}>
+                        <TableHead className={`${styles.tableCell} text-[var(--foreground)] font-bold`}>{selectedCheck.id}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                  </Table>
+                </div>
+                {/* Content section */}
+                <div className="p-6 overflow-y-auto" style={{ height: 'calc(100vh - 15rem)' }}>
+                  <div className="space-y-4">
+                    <p className="text-[var(--foreground)]"><strong>Level:</strong> {selectedCheck.level}</p>
+                    <p className="text-[var(--foreground)]"><strong>Direction:</strong> {selectedCheck.direction}</p>
+                    <p className="text-[var(--foreground)]"><strong>Location:</strong> {selectedCheck.location}</p>
+                    <p className="text-[var(--foreground)]"><strong>Action:</strong> {selectedCheck.action}</p>
+                    <div className="pt-2">
+                      <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Details</h3>
+                      <p className="text-[var(--foreground)]">{selectedCheck.detailed_description}</p>
+                    </div>
+                  </div>
+                </div>
               </>
             ) : (
               <div className="flex items-center justify-center h-full text-[var(--foreground)]/50">

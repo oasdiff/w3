@@ -421,7 +421,6 @@ components:
         - name
         - status
         - category
-        - createdAt
       properties:
         id:
           type: string
@@ -441,9 +440,6 @@ components:
           items:
             type: string
           maxItems: 10
-        createdAt:
-          type: string
-          format: date-time
         metadata:
           type: object
           additionalProperties: true

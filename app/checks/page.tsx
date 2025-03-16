@@ -14,6 +14,8 @@ interface Check {
   location: string;
   action: string;
   detailed_description: string;
+  mitigation?: string;
+  description: string;
 }
 
 export default function Page() {
@@ -184,9 +186,19 @@ export default function Page() {
                       <span>{selectedCheck.action}</span>
                     </p>
                     <div className="pt-4">
+                      <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Description</h3>
+                      <p className="text-[var(--foreground)]">{selectedCheck.description}</p>
+                    </div>
+                    <div className="pt-4">
                       <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Details</h3>
                       <p className="text-[var(--foreground)]">{selectedCheck.detailed_description}</p>
                     </div>
+                    {selectedCheck.mitigation && (
+                      <div className="pt-4">
+                        <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Mitigation</h3>
+                        <p className="text-[var(--foreground)]">{selectedCheck.mitigation}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </>

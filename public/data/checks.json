@@ -2,25 +2,27 @@
   {
     "id": "api-deprecated-sunset-missing",
     "level": "error",
-    "description": "api-deprecated-sunset-missing-description",
+    "description": "Endpoint deprecated without sunset date.",
     "direction": "none",
     "location": "endpoint",
     "action": "change",
-    "detailed_description": "The specified sunset date is required but missing in the API definition. When deprecating an API element, a sunset date must be provided to indicate when the element will be removed. This change can break clients that rely on the sunset date to plan for the removal of deprecated elements, as they will not have a clear timeline for when the element will be unavailable."
+    "detailed_description": "The endpoint was deprecated without specifying a sunset date while deprecation policy requires a minimal number of days between deprecation and sunset.",
+    "mitigation": "Add a sunset date with the x-sunset extension, or alternatively run oasdiff without requiring deprecation-days."
   },
   {
     "id": "api-deprecated-sunset-parse",
     "level": "error",
-    "description": "api-deprecated-sunset-parse-description",
+    "description": "Endpoint deprecated with invalid sunset date.",
     "direction": "none",
     "location": "endpoint",
     "action": "change",
-    "detailed_description": "The specified sunset date is not a valid date. The sunset date must be a valid date in the format YYYY-MM-DD. This change can break clients that rely on the sunset date to plan for the removal of deprecated elements, as they will not have a clear timeline for when the element will be unavailable."
+    "detailed_description": "The sunset date is invalid.",
+    "mitigation": "When specifying sunset dates, use the RFC3339 date format (e.g., '2024-01-01T00:00:00Z') to ensure proper parsing and compatibility."
   },
   {
     "id": "api-global-security-added",
     "level": "info",
-    "description": "api-global-security-added-description",
+    "description": "A gloval security requirement was added.",
     "direction": "none",
     "location": "security",
     "action": "add",

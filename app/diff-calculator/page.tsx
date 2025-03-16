@@ -11,7 +11,9 @@ interface Check {
   direction: string;
   location: string;
   action: string;
+  description: string;
   detailed_description: string;
+  mitigation?: string;
 }
 
 interface Change {
@@ -479,6 +481,10 @@ export default function DiffCalculator() {
             {/* Content section */}
             <div className="p-6">
               <div className="space-y-1">
+                <div className="pb-4">
+                  <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Description</h3>
+                  <p className="text-[var(--foreground)]">{selectedCheck.description}</p>
+                </div>
                 <p className="text-[var(--foreground)] flex">
                   <strong className="w-20">Level:</strong>
                   <span>{selectedCheck.level}</span>
@@ -499,6 +505,12 @@ export default function DiffCalculator() {
                   <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Details</h3>
                   <p className="text-[var(--foreground)]">{selectedCheck.detailed_description}</p>
                 </div>
+                {selectedCheck.mitigation && (
+                  <div className="pt-4">
+                    <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Mitigation</h3>
+                    <p className="text-[var(--foreground)]">{selectedCheck.mitigation}</p>
+                  </div>
+                )}
               </div>
             </div>
           </>

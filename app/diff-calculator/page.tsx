@@ -31,6 +31,48 @@ interface DiffResponse {
   changes: Change[];
 }
 
+interface SelectedFileProps {
+  file: File | null;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+}
+
+function SelectedFile({ file, onChange, label }: SelectedFileProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
+        {label}
+      </label>
+      <div className="relative">
+        <input
+          type="file"
+          accept=".yaml,.yml,.json"
+          onChange={onChange}
+          key={file?.name || ''}
+          className="block w-full text-sm text-transparent
+            [&::file-selector-button]:mr-4 [&::file-selector-button]:py-2 [&::file-selector-button]:px-4
+            [&::file-selector-button]:rounded [&::file-selector-button]:border-0
+            [&::file-selector-button]:text-sm [&::file-selector-button]:font-medium
+            [&::file-selector-button]:bg-emerald-600 [&::file-selector-button]:text-white
+            [&::file-selector-button]:hover:bg-emerald-700
+            [&::file-selector-button]:cursor-pointer
+            [&::-webkit-file-upload-button]:mr-4 [&::-webkit-file-upload-button]:py-2 [&::-webkit-file-upload-button]:px-4
+            [&::-webkit-file-upload-button]:rounded [&::-webkit-file-upload-button]:border-0
+            [&::-webkit-file-upload-button]:text-sm [&::-webkit-file-upload-button]:font-medium
+            [&::-webkit-file-upload-button]:bg-emerald-600 [&::-webkit-file-upload-button]:text-white
+            [&::-webkit-file-upload-button]:hover:bg-emerald-700
+            [&::-webkit-file-upload-button]:cursor-pointer"
+        />
+        {file && (
+          <span className="absolute left-[140px] top-1/2 -translate-y-1/2 text-sm text-[var(--foreground)]">
+            {file.name}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Name: string, onCheckHover: (checkId: string, event: React.MouseEvent) => void, onCheckLeave: () => void): ReactNode[] {
   if (mode === 'diff') return [text];
 
@@ -324,67 +366,16 @@ export default function DiffCalculator() {
       </div>
       
       <div className="grid grid-cols-2 gap-8 mb-8">
-        <div>
-          <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
-            First OpenAPI Specification
-          </label>
-          <div className="relative">
-            <input
-              type="file"
-              accept=".yaml,.yml,.json"
-              onChange={(e) => handleFileChange(e, 1)}
-              key={file1?.name || ''}
-              className="block w-full text-sm text-transparent [&::file-selector-button]:mr-4 [&::file-selector-button]:py-2 [&::file-selector-button]:px-4
-                [&::file-selector-button]:rounded [&::file-selector-button]:border-0
-                [&::file-selector-button]:text-sm [&::file-selector-button]:font-medium
-                [&::file-selector-button]:bg-emerald-600 [&::file-selector-button]:text-white
-                [&::file-selector-button]:hover:bg-emerald-700
-                [&::file-selector-button]:cursor-pointer
-                [&::-webkit-file-upload-button]:mr-4 [&::-webkit-file-upload-button]:py-2 [&::-webkit-file-upload-button]:px-4
-                [&::-webkit-file-upload-button]:rounded [&::-webkit-file-upload-button]:border-0
-                [&::-webkit-file-upload-button]:text-sm [&::-webkit-file-upload-button]:font-medium
-                [&::-webkit-file-upload-button]:bg-emerald-600 [&::-webkit-file-upload-button]:text-white
-                [&::-webkit-file-upload-button]:hover:bg-emerald-700
-                [&::-webkit-file-upload-button]:cursor-pointer"
-            />
-            {file1 && (
-              <span className="absolute left-[140px] top-1/2 -translate-y-1/2 text-sm text-[var(--foreground)]">
-                {file1.name}
-              </span>
-            )}
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
-            Second OpenAPI Specification
-          </label>
-          <div className="relative">
-            <input
-              type="file"
-              accept=".yaml,.yml,.json"
-              onChange={(e) => handleFileChange(e, 2)}
-              key={file2?.name || ''}
-              className="block w-full text-sm text-transparent [&::file-selector-button]:mr-4 [&::file-selector-button]:py-2 [&::file-selector-button]:px-4
-                [&::file-selector-button]:rounded [&::file-selector-button]:border-0
-                [&::file-selector-button]:text-sm [&::file-selector-button]:font-medium
-                [&::file-selector-button]:bg-emerald-600 [&::file-selector-button]:text-white
-                [&::file-selector-button]:hover:bg-emerald-700
-                [&::file-selector-button]:cursor-pointer
-                [&::-webkit-file-upload-button]:mr-4 [&::-webkit-file-upload-button]:py-2 [&::-webkit-file-upload-button]:px-4
-                [&::-webkit-file-upload-button]:rounded [&::-webkit-file-upload-button]:border-0
-                [&::-webkit-file-upload-button]:text-sm [&::-webkit-file-upload-button]:font-medium
-                [&::-webkit-file-upload-button]:bg-emerald-600 [&::-webkit-file-upload-button]:text-white
-                [&::-webkit-file-upload-button]:hover:bg-emerald-700
-                [&::-webkit-file-upload-button]:cursor-pointer"
-            />
-            {file2 && (
-              <span className="absolute left-[140px] top-1/2 -translate-y-1/2 text-sm text-[var(--foreground)]">
-                {file2.name}
-              </span>
-            )}
-          </div>
-        </div>
+        <SelectedFile
+          file={file1}
+          onChange={(e) => handleFileChange(e, 1)}
+          label="First OpenAPI Specification"
+        />
+        <SelectedFile
+          file={file2}
+          onChange={(e) => handleFileChange(e, 2)}
+          label="Second OpenAPI Specification"
+        />
       </div>
 
       <div className="flex gap-4 mb-8">

@@ -128,7 +128,7 @@ export default function FAQ() {
                   </pre>
                 </div>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
-                  See an example with the <a href="http://localhost:3000/diff-calculator?spec1=/data/spec1.yaml&spec2=/data/spec2.yaml&mode=breaking" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">diff-calculator</a>
+                  Try it yourself using our interactive <a href="http://localhost:3000/diff-calculator?spec1=/data/spec1.yaml&spec2=/data/spec2.yaml&mode=breaking" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">diff-calculator</a>.
                 </p>
               </>
             )
@@ -221,7 +221,7 @@ export default function FAQ() {
                   </pre>
                 </div>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
-                  See an example with the <a href="http://localhost:3000/diff-calculator?spec1=/data/spec1.yaml&spec2=/data/spec2.yaml&mode=changelog" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">diff-calculator</a>
+                  Try it yourself using our interactive <a href="http://localhost:3000/diff-calculator?spec1=/data/spec1.yaml&spec2=/data/spec2.yaml&mode=changelog" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">diff-calculator</a>.
                 </p>
               </>
             )
@@ -366,7 +366,7 @@ export default function FAQ() {
                   </pre>
                 </div>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mt-4">
-                  See an example with the <a href="http://localhost:3000/diff-calculator?spec1=/data/spec1.yaml&spec2=/data/spec2.yaml&mode=diff" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">diff-calculator</a>
+                  Try it yourself using our interactive <a href="http://localhost:3000/diff-calculator?spec1=/data/spec1.yaml&spec2=/data/spec2.yaml&mode=diff" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors">diff-calculator</a>.
                 </p>
 
               </>

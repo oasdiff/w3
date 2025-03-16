@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, ReactNode, Fragment as ReactFragment, useCallback } from 'react';
 import { Table, TableHeader, TableRow, TableHead } from '@/components/ui/table';
+import type { JSX } from 'react';
 
 type DiffMode = 'breaking' | 'changelog' | 'diff';
 
@@ -327,36 +328,62 @@ export default function DiffCalculator() {
           <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
             First OpenAPI Specification
           </label>
-          <input
-            type="file"
-            accept=".yaml,.yml,.json"
-            onChange={(e) => handleFileChange(e, 1)}
-            className="block w-full text-sm text-[var(--foreground)]
-              file:mr-4 file:py-2 file:px-4
-              file:rounded file:border-0
-              file:text-sm file:font-medium
-              file:bg-emerald-600 file:text-white
-              hover:file:bg-emerald-700
-              file:cursor-pointer"
-          />
+          <div className="relative">
+            <input
+              type="file"
+              accept=".yaml,.yml,.json"
+              onChange={(e) => handleFileChange(e, 1)}
+              key={file1?.name || ''}
+              className="block w-full text-sm text-transparent [&::file-selector-button]:mr-4 [&::file-selector-button]:py-2 [&::file-selector-button]:px-4
+                [&::file-selector-button]:rounded [&::file-selector-button]:border-0
+                [&::file-selector-button]:text-sm [&::file-selector-button]:font-medium
+                [&::file-selector-button]:bg-emerald-600 [&::file-selector-button]:text-white
+                [&::file-selector-button]:hover:bg-emerald-700
+                [&::file-selector-button]:cursor-pointer
+                [&::-webkit-file-upload-button]:mr-4 [&::-webkit-file-upload-button]:py-2 [&::-webkit-file-upload-button]:px-4
+                [&::-webkit-file-upload-button]:rounded [&::-webkit-file-upload-button]:border-0
+                [&::-webkit-file-upload-button]:text-sm [&::-webkit-file-upload-button]:font-medium
+                [&::-webkit-file-upload-button]:bg-emerald-600 [&::-webkit-file-upload-button]:text-white
+                [&::-webkit-file-upload-button]:hover:bg-emerald-700
+                [&::-webkit-file-upload-button]:cursor-pointer"
+            />
+            {file1 && (
+              <span className="absolute left-[140px] top-1/2 -translate-y-1/2 text-sm text-[var(--foreground)]">
+                {file1.name}
+              </span>
+            )}
+          </div>
         </div>
 
         <div>
           <label className="block text-sm font-medium text-[var(--foreground)] mb-2">
             Second OpenAPI Specification
           </label>
-          <input
-            type="file"
-            accept=".yaml,.yml,.json"
-            onChange={(e) => handleFileChange(e, 2)}
-            className="block w-full text-sm text-[var(--foreground)]
-              file:mr-4 file:py-2 file:px-4
-              file:rounded file:border-0
-              file:text-sm file:font-medium
-              file:bg-emerald-600 file:text-white
-              hover:file:bg-emerald-700
-              file:cursor-pointer"
-          />
+          <div className="relative">
+            <input
+              type="file"
+              accept=".yaml,.yml,.json"
+              onChange={(e) => handleFileChange(e, 2)}
+              key={file2?.name || ''}
+              className="block w-full text-sm text-transparent [&::file-selector-button]:mr-4 [&::file-selector-button]:py-2 [&::file-selector-button]:px-4
+                [&::file-selector-button]:rounded [&::file-selector-button]:border-0
+                [&::file-selector-button]:text-sm [&::file-selector-button]:font-medium
+                [&::file-selector-button]:bg-emerald-600 [&::file-selector-button]:text-white
+                [&::file-selector-button]:hover:bg-emerald-700
+                [&::file-selector-button]:cursor-pointer
+                [&::-webkit-file-upload-button]:mr-4 [&::-webkit-file-upload-button]:py-2 [&::-webkit-file-upload-button]:px-4
+                [&::-webkit-file-upload-button]:rounded [&::-webkit-file-upload-button]:border-0
+                [&::-webkit-file-upload-button]:text-sm [&::-webkit-file-upload-button]:font-medium
+                [&::-webkit-file-upload-button]:bg-emerald-600 [&::-webkit-file-upload-button]:text-white
+                [&::-webkit-file-upload-button]:hover:bg-emerald-700
+                [&::-webkit-file-upload-button]:cursor-pointer"
+            />
+            {file2 && (
+              <span className="absolute left-[140px] top-1/2 -translate-y-1/2 text-sm text-[var(--foreground)]">
+                {file2.name}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 

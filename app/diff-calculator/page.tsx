@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, ReactNode, Fragment as ReactFragment } from 'react';
+import { useState, useEffect, useRef, ReactNode, Fragment as ReactFragment, useCallback } from 'react';
 import { Table, TableHeader, TableRow, TableHead } from '@/components/ui/table';
 
 type DiffMode = 'breaking' | 'changelog' | 'diff';
@@ -124,6 +124,8 @@ function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Na
 }
 
 export default function DiffCalculator() {
+  console.log('DiffCalculator component mounting');
+
   const [file1, setFile1] = useState<File | null>(null);
   const [file2, setFile2] = useState<File | null>(null);
   const [mode, setMode] = useState<DiffMode>('breaking');
@@ -136,6 +138,158 @@ export default function DiffCalculator() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const modalRef = useRef<HTMLDivElement>(null);
+  const hasAutoCompared = useRef(false);
+
+  const handleModeChange = useCallback(async (newMode: DiffMode, overrideFile1?: File, overrideFile2?: File) => {
+    console.log('handleModeChange called with mode:', newMode, 'files:', { 
+      file1: overrideFile1 || file1, 
+      file2: overrideFile2 || file2 
+    });
+    setMode(newMode);
+    setResult('');
+    setProcessingMode(newMode);
+    
+    const activeFile1 = overrideFile1 || file1;
+    const activeFile2 = overrideFile2 || file2;
+    
+    if (activeFile1 && activeFile2) {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append('file1', activeFile1);
+      formData.append('file2', activeFile2);
+      formData.append('mode', newMode);
+
+      try {
+        console.log('Sending files to API:', {
+          file1Name: activeFile1.name,
+          file1Type: activeFile1.type,
+          file1Size: activeFile1.size,
+          file2Name: activeFile2.name,
+          file2Type: activeFile2.type,
+          file2Size: activeFile2.size,
+          mode: newMode
+        });
+
+        const response = await fetch('/api/diff', {
+          method: 'POST',
+          body: formData,
+        });
+        
+        console.log('API Response status:', response.status);
+        
+        if (!response.ok) {
+          const error = await response.text();
+          console.error('API Error:', error);
+          setResult(`Error: ${error}`);
+          return;
+        }
+
+        const data = await response.text();
+        console.log('API Response data:', data);
+        
+        // Only update state if we have valid data
+        if (data) {
+          setResult(data);
+          setProcessingMode(null);
+        } else {
+          console.error('Empty response from API');
+          setResult('Error: Empty response from API');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        setResult('Error comparing files');
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      console.log('No files available for comparison');
+      setProcessingMode(null);
+      setIsLoading(false);
+    }
+  }, [file1, file2]);
+
+  // Store the latest handleModeChange in a ref
+  const handleModeChangeRef = useRef(handleModeChange);
+  useEffect(() => {
+    handleModeChangeRef.current = handleModeChange;
+  }, [handleModeChange]);
+
+  // Handle URL parameters
+  useEffect(() => {
+    console.log('URL Parameters effect running');
+    const searchParams = new URLSearchParams(window.location.search);
+    const spec1Path = searchParams.get('spec1');
+    const spec2Path = searchParams.get('spec2');
+    const autoCompare = searchParams.get('compare') === 'true';
+
+    console.log('URL Parameters:', { spec1Path, spec2Path, autoCompare });
+
+    const loadFiles = async () => {
+      if (spec1Path && spec2Path) {
+        try {
+          console.log('Fetching spec files...');
+          const [file1Response, file2Response] = await Promise.all([
+            fetch(spec1Path + '?' + new Date().getTime()),
+            fetch(spec2Path + '?' + new Date().getTime())
+          ]);
+
+          console.log('File responses:', {
+            file1Status: file1Response.status,
+            file2Status: file2Response.status
+          });
+
+          if (!file1Response.ok || !file2Response.ok) {
+            throw new Error('Failed to fetch spec files');
+          }
+
+          const file1Blob = await file1Response.blob();
+          const file2Blob = await file2Response.blob();
+
+          console.log('File blobs:', {
+            file1Size: file1Blob.size,
+            file2Size: file2Blob.size
+          });
+
+          const file1 = new File([file1Blob], spec1Path.split('/').pop() || 'spec1.yaml', { type: 'application/yaml' });
+          const file2 = new File([file2Blob], spec2Path.split('/').pop() || 'spec2.yaml', { type: 'application/yaml' });
+
+          console.log('Setting files');
+          
+          // Use Promise.all to wait for both state updates
+          await Promise.all([
+            new Promise<void>((resolve) => {
+              setFile1(file1);
+              resolve();
+            }),
+            new Promise<void>((resolve) => {
+              setFile2(file2);
+              resolve();
+            })
+          ]);
+
+          // Wait for React state to be updated
+          await new Promise<void>((resolve) => setTimeout(resolve, 100));
+
+          if (autoCompare) {
+            console.log('Files set, checking state before comparison:', {
+              file1: file1?.name,
+              file2: file2?.name
+            });
+            handleModeChange('breaking', file1, file2);
+          }
+        } catch (error) {
+          console.error('Error loading spec files:', error);
+          setResult('Error loading specification files');
+          setIsLoading(false);
+          setProcessingMode(null);
+        }
+      } else {
+        console.log('No spec files in URL parameters');
+      }
+    };
+
+    loadFiles();
+  }, []); // Remove window.location.search dependency to prevent re-runs
 
   // Update ref when checks change
   useEffect(() => {
@@ -154,42 +308,6 @@ export default function DiffCalculator() {
     if (e.target.files && e.target.files[0]) {
       if (fileNum === 1) setFile1(e.target.files[0]);
       else setFile2(e.target.files[0]);
-    }
-  };
-
-  const handleModeChange = async (newMode: DiffMode) => {
-    setMode(newMode);
-    setResult('');
-    setProcessingMode(newMode);
-    
-    if (file1 && file2) {
-      setIsLoading(true);
-      const formData = new FormData();
-      formData.append('file1', file1);
-      formData.append('file2', file2);
-      formData.append('mode', newMode);
-
-      try {
-        const response = await fetch('/api/diff', {
-          method: 'POST',
-          body: formData,
-        });
-        
-        if (!response.ok) {
-          const error = await response.text();
-          setResult(`Error: ${error}`);
-          return;
-        }
-
-        const data = await response.text();
-        setResult(data);
-      } catch (error) {
-        console.error('Error:', error);
-        setResult('Error comparing files');
-      } finally {
-        setIsLoading(false);
-        setProcessingMode(null);
-      }
     }
   };
 

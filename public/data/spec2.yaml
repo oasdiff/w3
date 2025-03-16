@@ -1,19 +1,166 @@
 info:
-  title: Sample API
+  title: Pet Store API
   version: '2.0.0'
+  description: An enhanced API for managing a pet store with additional features
   contact:
-    email: support@tufin.com
-    url: www.tufin.com
+    email: info@oasdiff.com
+    url: www.oasdiff.com
   license:
     name: apache
 openapi: 3.0.0
 x-extension-test2: nogo
 externalDocs:
-  url: https://tufin.io
+  url: https://www.oasdiff.com
 tags:
 - name: reuven
   description: harrison
 paths:
+  /pets:
+    get:
+      summary: List all pets
+      operationId: listPets
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of pets to return (reduced for performance)
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 50
+        - name: status
+          in: query
+          description: Filter pets by status
+          required: false
+          schema:
+            type: string
+            enum: [available, pending, sold]
+        - name: category
+          in: query
+          description: Filter pets by category
+          required: false
+          schema:
+            type: string
+            enum: [dog, cat, bird, fish, other]
+      responses:
+        '200':
+          description: A paginated list of pets
+          headers:
+            X-Next-Page:
+              schema:
+                type: string
+              description: Token for the next page
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - items
+                  - total
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pet'
+                  total:
+                    type: integer
+                    format: int64
+    post:
+      summary: Create a pet
+      operationId: createPet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPet'
+      responses:
+        '201':
+          description: Pet created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: string
+  /pets/{petId}:
+    get:
+      summary: Get pet by ID
+      operationId: getPetById
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Pet found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '404':
+          description: Pet not found
+    delete:
+      summary: Delete a pet
+      operationId: deletePet
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: force
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '204':
+          description: Pet deleted successfully
+        '404':
+          description: Pet not found
+    patch:
+      summary: Update pet details
+      operationId: updatePet
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PetUpdate'
+      responses:
+        '200':
+          description: Pet updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '404':
+          description: Pet not found
   /api/{domain}/{project}/badges/security-score:
     get:
       operationId: GetSecurityScore
@@ -30,7 +177,7 @@ paths:
         schema:
           not:
             description: alphanumeric with underscore, dash, period, slash and colon
-            example: tufinim/generic-bank:cia-latest
+            example: oasdiff/oasdiff
             format: general string
             pattern: ^(?:[\w-./:]+)$
             type: string
@@ -71,7 +218,7 @@ paths:
           type: string
       responses:
         default:
-          description: Tufin
+          description: oasdiff
       servers: []
   /api/{domain}/{project}/install-command:
     get:
@@ -90,8 +237,8 @@ paths:
         required: true
         schema:
           enum:
-          - tufin
-          - generic-bank
+          - other
+          - generic
           type: string
       - in: path
         name: project
@@ -107,7 +254,6 @@ paths:
       responses:
         default:
           x-test:
-          description: Tufin
           x-extension-test:
           headers:
             X-RateLimit-Limit:
@@ -130,7 +276,7 @@ paths:
       name: name
       schema:
         enum:
-        - tufin
+        - other
   /register:
     post:
       security:
@@ -152,7 +298,7 @@ paths:
                   description: Your server returns this code if it accepts the callback
       responses:
         default:
-          description: Tufin
+          description: lambda
   /subscribe:
     post:
       summary: Subscribe to a webhook
@@ -216,7 +362,7 @@ paths:
                   description: Your server returns this code if it accepts the callback
       responses:
         default:
-          description: Tufin
+          description: lambda
 components:
   callbacks:
     test:  
@@ -260,10 +406,87 @@ components:
             accountWrite: Allows accounts data to be written
             admin: read
         clientCredentials:
-          tokenUrl: tufin.io/token        
+          tokenUrl: oasdiff.com/token        
   examples:
     a:
       description: reuven
   links:
     b:
       description: reuven
+  schemas:
+    Pet:
+      type: object
+      required:
+        - id
+        - name
+        - status
+        - category
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        status:
+          type: string
+          enum: [available, pending, sold, reserved]
+        category:
+          type: string
+          enum: [dog, cat, bird, fish, other]
+        tags:
+          type: array
+          items:
+            type: string
+          maxItems: 10
+        createdAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          additionalProperties: true
+    NewPet:
+      type: object
+      required:
+        - name
+        - category
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        status:
+          type: string
+          enum: [available, pending, sold, reserved]
+          default: available
+        category:
+          type: string
+          enum: [dog, cat, bird, fish, other]
+        tags:
+          type: array
+          items:
+            type: string
+          maxItems: 10
+        metadata:
+          type: object
+          additionalProperties: true
+    PetUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        status:
+          type: string
+          enum: [available, pending, sold, reserved]
+        tags:
+          type: array
+          items:
+            type: string
+          maxItems: 10
+        metadata:
+          type: object
+          additionalProperties: true

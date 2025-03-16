@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     }
 
     const result = await response.text();
-    console.log('Service response:', result);
+    console.log('Service response:', response.status);
     
     // Try to parse and format JSON if the response is JSON
     try {

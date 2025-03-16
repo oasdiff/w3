@@ -220,9 +220,14 @@ export default function DiffCalculator() {
     const searchParams = new URLSearchParams(window.location.search);
     const spec1Path = searchParams.get('spec1');
     const spec2Path = searchParams.get('spec2');
-    const autoCompare = searchParams.get('compare') === 'true';
+    const urlMode = searchParams.get('mode');
 
-    console.log('URL Parameters:', { spec1Path, spec2Path, autoCompare });
+    // Validate the mode parameter
+    const isValidMode = (mode: string | null): mode is DiffMode => {
+      return mode === 'breaking' || mode === 'changelog' || mode === 'diff';
+    };
+
+    console.log('URL Parameters:', { spec1Path, spec2Path, mode: urlMode });
 
     const loadFiles = async () => {
       if (spec1Path && spec2Path) {
@@ -270,12 +275,9 @@ export default function DiffCalculator() {
           // Wait for React state to be updated
           await new Promise<void>((resolve) => setTimeout(resolve, 100));
 
-          if (autoCompare) {
-            console.log('Files set, checking state before comparison:', {
-              file1: file1?.name,
-              file2: file2?.name
-            });
-            handleModeChange('breaking', file1, file2);
+          if (isValidMode(urlMode)) {
+            console.log('Files set, triggering comparison with mode:', urlMode);
+            handleModeChange(urlMode, file1, file2);
           }
         } catch (error) {
           console.error('Error loading spec files:', error);

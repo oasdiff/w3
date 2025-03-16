@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, ReactNode, Fragment as ReactFragment, useCallback } from 'react';
 import { Table, TableHeader, TableRow, TableHead } from '@/components/ui/table';
-import type { JSX } from 'react';
 
 type DiffMode = 'breaking' | 'changelog' | 'diff';
 
@@ -181,7 +180,6 @@ export default function DiffCalculator() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const modalRef = useRef<HTMLDivElement>(null);
-  const hasAutoCompared = useRef(false);
 
   const handleModeChange = useCallback(async (newMode: DiffMode, overrideFile1?: File, overrideFile2?: File) => {
     console.log('handleModeChange called with mode:', newMode, 'files:', { 
@@ -320,7 +318,7 @@ export default function DiffCalculator() {
 
           if (isValidMode(urlMode)) {
             console.log('Files set, triggering comparison with mode:', urlMode);
-            handleModeChange(urlMode, file1, file2);
+            handleModeChangeRef.current(urlMode, file1, file2);
           }
         } catch (error) {
           console.error('Error loading spec files:', error);
@@ -334,7 +332,7 @@ export default function DiffCalculator() {
     };
 
     loadFiles();
-  }, []); // Remove window.location.search dependency to prevent re-runs
+  }, [handleModeChangeRef]); // Add handleModeChangeRef as dependency
 
   // Update ref when checks change
   useEffect(() => {

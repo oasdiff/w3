@@ -22,7 +22,7 @@
   {
     "id": "api-global-security-added",
     "level": "info",
-    "description": "A gloval security requirement was added.",
+    "description": "A global security requirement was added.",
     "direction": "none",
     "location": "security",
     "action": "add",
@@ -31,7 +31,7 @@
   {
     "id": "api-global-security-removed",
     "level": "info",
-    "description": "api-global-security-removed-description",
+    "description": "A global security requirement was deleted.",
     "direction": "none",
     "location": "security",
     "action": "remove",

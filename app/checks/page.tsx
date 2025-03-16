@@ -15,7 +15,7 @@ interface Check {
   action: string;
   detailed_description: string;
   mitigation?: string;
-  description: string;
+  description?: string;
 }
 
 export default function Page() {
@@ -185,10 +185,12 @@ export default function Page() {
                       <strong className="w-20">Action:</strong>
                       <span>{selectedCheck.action}</span>
                     </p>
-                    <div className="pt-4">
-                      <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Description</h3>
-                      <p className="text-[var(--foreground)]">{selectedCheck.description}</p>
-                    </div>
+                    {selectedCheck.description && (
+                      <div className="pt-4">
+                        <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Description</h3>
+                        <p className="text-[var(--foreground)]">{selectedCheck.description}</p>
+                      </div>
+                    )}
                     <div className="pt-4">
                       <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Details</h3>
                       <p className="text-[var(--foreground)]">{selectedCheck.detailed_description}</p>

@@ -16,6 +16,7 @@ interface Check {
   detailed_description: string;
   mitigation?: string;
   description?: string;
+  number: number;
 }
 
 export default function Page() {
@@ -139,7 +140,7 @@ export default function Page() {
                       onClick={() => setSelectedCheck(check)}
                       className={`${styles.tableRow} ${styles.tableRowHover} ${selectedCheck && selectedCheck.id === check.id ? styles.tableRowSelected : ''}`}
                     >
-                      <TableCell className={`${styles.tableCell} ${styles.tableCellIndex}`}>{index + 1}</TableCell>
+                      <TableCell className={`${styles.tableCell} ${styles.tableCellIndex}`}>{check.number}</TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellId}`}>{check.id}</TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>{check.level}</TableCell>
                       <TableCell className={`${styles.tableCell} ${styles.tableCellStandard}`}>{check.direction}</TableCell>
@@ -169,6 +170,10 @@ export default function Page() {
                 {/* Content section */}
                 <div className="p-6 overflow-y-auto" style={{ height: 'calc(100vh - 15rem)' }}>
                   <div className="space-y-1">
+                    <p className="text-[var(--foreground)] flex">
+                      <strong className="w-20">Serial #:</strong>
+                      <span>{selectedCheck.number}</span>
+                    </p>
                     <p className="text-[var(--foreground)] flex">
                       <strong className="w-20">Level:</strong>
                       <span>{selectedCheck.level}</span>

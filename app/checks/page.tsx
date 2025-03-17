@@ -134,7 +134,7 @@ export default function Page() {
             <div className={styles.tableBody}>
               <Table className={styles.tableContainer}>
                 <TableBody>
-                  {filteredChecks.map((check, index) => (
+                  {filteredChecks.map((check) => (
                     <TableRow
                       key={check.id}
                       onClick={() => setSelectedCheck(check)}

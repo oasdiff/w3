@@ -6,8 +6,8 @@
     "direction": "none",
     "location": "endpoint",
     "action": "change",
-    "detailed_description": "The endpoint was deprecated without specifying a sunset date while deprecation policy requires a minimal number of days between deprecation and sunset.",
-    "mitigation": "Add a sunset date with the x-sunset extension, or alternatively run oasdiff without requiring deprecation-days."
+    "detailed_description": "The API endpoint has been marked as deprecated but is missing a sunset date, which violates the deprecation policy that requires a minimum time period between deprecation and sunset dates.",
+    "mitigation": "Either add a sunset date using the x-sunset extension, or run oasdiff without the deprecation-days requirement."
   },
   {
     "id": "api-deprecated-sunset-parse",
@@ -21,12 +21,12 @@
   },
   {
     "id": "api-global-security-added",
-    "level": "info",
+    "level": "error",
     "description": "A global security requirement was added.",
     "direction": "none",
     "location": "security",
     "action": "add",
-    "detailed_description": "A global security requirement was added to the API definition. This security requirement will be applied to all operations in the API."
+    "detailed_description": "A global security requirement was added to the API definition. By default, applying a global security requirement means all endpoints inherit the security requirement unless explicitly overridden. Existing clients that previously accessed unsecured endpoints may start receiving 401 Unauthorized or 403 Forbidden responses."
   },
   {
     "id": "api-global-security-removed",
@@ -35,35 +35,39 @@
     "direction": "none",
     "location": "security",
     "action": "remove",
-    "detailed_description": "A global security requirement was removed from the API definition. This security requirement will no longer be applied to all operations in the API."
+    "detailed_description": "A global security requirement was removed from the API definition. Endpoints previously secured globally now become publicly accessible, unless they have local security overrides."
   },
   {
     "id": "api-global-security-scope-added",
-    "level": "info",
+    "level": "error",
+    "description": "A global security scope was added.",
     "direction": "none",
     "location": "security",
     "action": "add",
-    "detailed_description": "A scope was added to a global security requirement in the API definition. This scope will be required for all operations in the API."
+    "detailed_description": "A new scope has been added to the global security requirements for OAuth 2.0 or OpenID Connect authentication. As a result, any authenticated request now requires tokens with this additional scope permission. Requests using tokens that lack this scope will be rejected by the server, usually with a 401 Unauthorized or 403 Forbidden response."
   },
   {
     "id": "api-global-security-scope-removed",
     "level": "info",
+    "description": "A global security scope was removed.",
     "direction": "none",
     "location": "security",
     "action": "remove",
-    "detailed_description": "A scope was removed from a global security requirement in the API definition. This scope will no longer be required for all operations in the API."
+    "detailed_description": "A security scope has been removed from the global OAuth 2.0 or OpenID Connect authentication requirements. While clients no longer need to include this scope in their requests, continuing to do so will not cause any issues."
   },
   {
     "id": "api-invalid-stability-level",
     "level": "error",
+    "description": "Invalid stability level.",
     "direction": "none",
     "location": "endpoint",
     "action": "change",
-    "detailed_description": "The specified stability level is not valid. The stability level must be one of 'stable', 'beta', 'alpha', or 'deprecated'."
+    "detailed_description": "The specified stability level is invalid. The stability level must be one of 'stable', 'beta', 'alpha', or 'deprecated'."
   },
   {
     "id": "api-operation-id-added",
     "level": "info",
+    "description": "An operation ID was added.",
     "direction": "none",
     "location": "endpoint",
     "action": "add",
@@ -71,71 +75,85 @@
   },
   {
     "id": "api-operation-id-removed",
-    "level": "info",
+    "level": "warning",
+    "description": "An operation ID was removed.",
     "direction": "none",
     "location": "endpoint",
     "action": "remove",
-    "detailed_description": "An operation ID was removed from an operation in the API definition. The operation ID is a unique identifier for the operation and is used to reference the operation in other parts of the API definition."
+    "detailed_description": "The operation ID has been removed from an API operation. This removal may cause issues for clients, particularly those using auto-generated SDKs, that depend on operation IDs to reference specific API operations."
   },
   {
     "id": "api-path-removed-before-sunset",
     "level": "error",
+    "description": "A path was removed before the specified sunset date.",
     "direction": "none",
     "location": "endpoint",
     "action": "remove",
-    "detailed_description": "The specified path was removed from the API definition before the specified sunset date. When removing an API element, the element must be deprecated before it is removed. This change can break clients that rely on the sunset date to plan for the removal of deprecated paths, as they will not have a clear timeline for when the path will be unavailable."
+    "detailed_description": "The specified path was removed from the API definition before the specified sunset date.",
+    "mitigation": "Keep the path available in the API specification until reaching the designated sunset date."
   },
   {
     "id": "api-path-removed-with-deprecation",
     "level": "info",
+    "description": "A path was removed after being deprecated.",
     "direction": "none",
     "location": "endpoint",
     "action": "remove",
-    "detailed_description": "The specified path was removed from the API definition after being deprecated. When removing an API element, the element must be deprecated before it is removed."
+    "detailed_description": "The specified path was removed from the API definition after being deprecated."
   },
   {
     "id": "api-path-removed-without-deprecation",
     "level": "error",
+    "description": "A path was removed without being deprecated.",
     "direction": "none",
     "location": "endpoint",
     "action": "remove",
-    "detailed_description": "The specified path was removed from the API definition without being deprecated. When removing an API element, the element must be deprecated before it is removed. This change can break clients that rely on the deprecated path to transition to new paths or functionalities, as they will not have a clear timeline or warning for when the path will be unavailable."
+    "detailed_description": "The specified path was removed from the API definition without being deprecated.",
+    "mitigation": "Ensure the path is deprecated before removal."
   },
   {
     "id": "api-path-sunset-parse",
     "level": "error",
+    "description": "Invalid sunset date.",
     "direction": "none",
     "location": "endpoint",
     "action": "change",
-    "detailed_description": "The specified path was removed from the API definition without being deprecated. Removing an API element without prior deprecation can break clients that depend on the deprecated path to transition to new paths or functionalities. Without a clear timeline or warning, clients will not have the opportunity to update their implementations, leading to potential failures in their applications when the path becomes unavailable."
+    "detailed_description": "The sunset date is invalid.",
+    "mitigation": "Use the RFC3339 date format (e.g., '2024-01-01T00:00:00Z') to ensure proper parsing and compatibility."
   },
   {
     "id": "api-removed-before-sunset",
     "level": "error",
+    "description": "An endpoint was removed before the specified sunset date.",
     "direction": "none",
     "location": "endpoint",
     "action": "remove",
-    "detailed_description": "The API was removed from the API definition before the specified sunset date. When removing an API, the API must be deprecated before it is removed. This change can break clients that rely on the sunset date to plan for the removal of deprecated APIs, as they will not have a clear timeline for when the API will be unavailable, leading to potential failures in their applications."
+    "detailed_description": "The specified endpoint was removed from the API definition before the specified sunset date.",
+    "mitigation": "Keep the endpoint available in the API specification until reaching the designated sunset date."    
   },
   {
     "id": "api-removed-with-deprecation",
     "level": "info",
+    "description": "An endpoint was removed after being deprecated.",
     "direction": "none",
     "location": "endpoint",
     "action": "remove",
-    "detailed_description": "The API was removed from the API definition after being deprecated. When removing an API, the API must be deprecated before it is removed. This change can break clients that rely on the deprecated API to transition to new APIs or functionalities, as they will not have a clear timeline or warning for when the API will be unavailable."
+    "detailed_description": "The specified endpoint was removed from the API definition after being deprecated."
   },
   {
     "id": "api-removed-without-deprecation",
     "level": "error",
+    "description": "An endpoint was removed without being deprecated.",
     "direction": "none",
     "location": "endpoint",
     "action": "remove",
-    "detailed_description": "The API was removed from the API definition without being deprecated. When removing an API, the API must be deprecated before it is removed. This change can break clients that rely on the deprecated API to transition to new APIs or functionalities, as they will not have a clear timeline or warning for when the API will be unavailable, leading to potential failures in their applications."
+    "detailed_description": "The specified endpoint was removed from the API definition without being deprecated.",
+    "mitigation": "Ensure the endpoint is deprecated before removal."
   },
   {
     "id": "api-schema-removed",
     "level": "info",
+    "description": "A schema was removed from the components section.",
     "direction": "none",
     "location": "components",
     "action": "remove",
@@ -143,11 +161,12 @@
   },
   {
     "id": "api-security-added",
-    "level": "info",
+    "level": "error",
+    "description": "A security requirement was added to the endpoint definition.",
     "direction": "none",
     "location": "security",
     "action": "add",
-    "detailed_description": "A security requirement was added to the API definition. This security requirement will be applied to specific operations in the API."
+    "detailed_description": "A new security requirement has been introduced to this endpoint. As a result, clients who were previously able to access this endpoint without authentication may now receive 401 Unauthorized or 403 Forbidden responses."
   },
   {
     "id": "api-security-component-added",

@@ -14,6 +14,7 @@ interface Check {
   description: string;
   detailed_description: string;
   mitigation?: string;
+  number?: number;
 }
 
 interface Change {
@@ -485,6 +486,12 @@ export default function DiffCalculator() {
                   <h3 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Description</h3>
                   <p className="text-[var(--foreground)]">{selectedCheck.description}</p>
                 </div>
+                {selectedCheck.number && (
+                  <p className="text-[var(--foreground)] flex">
+                    <strong className="w-20">Serial #:</strong>
+                    <span>{selectedCheck.number}</span>
+                  </p>
+                )}
                 <p className="text-[var(--foreground)] flex">
                   <strong className="w-20">Level:</strong>
                   <span>{selectedCheck.level}</span>

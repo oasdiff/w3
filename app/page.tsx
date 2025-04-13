@@ -10,26 +10,55 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
         <Link href="/diff-calculator" className="group">
-          <div className="p-6 rounded-lg border border-[var(--background-hover)] bg-[var(--background-card)]/50 backdrop-blur-sm hover:bg-[var(--background-hover)]/50 transition-colors">
-            <h2 className="text-xl font-semibold mb-2 text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">
-              Diff Calculator
-            </h2>
-            <p className="text-[var(--foreground)]/70">
-              Compare two OpenAPI specifications and identify breaking changes, generate changelog, or view raw diff
-            </p>
+          <div className="p-6 rounded-lg border border-[var(--background-hover)] bg-[var(--background-card)]/50 backdrop-blur-sm hover:bg-[var(--background-hover)]/50 transition-colors h-full flex items-center gap-4">
+            {/* Diff Calculator Icon (Arrows) */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[var(--foreground)]/70 group-hover:text-emerald-400 transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <div>
+              <h2 className="text-xl font-semibold mb-1 text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">
+                Diff Calculator
+              </h2>
+              <p className="text-[var(--foreground)]/70">
+                Compare two OpenAPI specifications and identify breaking changes, generate changelog, or view raw diff.
+              </p>
+            </div>
           </div>
         </Link>
 
         <Link href="/faq" className="group">
-          <div className="p-6 rounded-lg border border-[var(--background-hover)] bg-[var(--background-card)]/50 backdrop-blur-sm hover:bg-[var(--background-hover)]/50 transition-colors">
-            <h2 className="text-xl font-semibold mb-2 text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">
-              FAQ
-            </h2>
-            <p className="text-[var(--foreground)]/70">
-              Learn about breaking changes, how to prevent them, and best practices for API versioning
-            </p>
+          <div className="p-6 rounded-lg border border-[var(--background-hover)] bg-[var(--background-card)]/50 backdrop-blur-sm hover:bg-[var(--background-hover)]/50 transition-colors h-full flex items-center gap-4">
+            {/* FAQ Icon (Question Mark) */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[var(--foreground)]/70 group-hover:text-emerald-400 transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <h2 className="text-xl font-semibold mb-1 text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">
+                FAQ
+              </h2>
+              <p className="text-[var(--foreground)]/70">
+                Learn about breaking changes, how to prevent them, and best practices for API versioning.
+              </p>
+            </div>
+          </div>
+        </Link>
+
+        <Link href="/checks" className="group">
+          <div className="p-6 rounded-lg border border-[var(--background-hover)] bg-[var(--background-card)]/50 backdrop-blur-sm hover:bg-[var(--background-hover)]/50 transition-colors h-full flex items-center gap-4">
+            {/* Browse Checks Icon (Checklist) */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[var(--foreground)]/70 group-hover:text-emerald-400 transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+            <div>
+              <h2 className="text-xl font-semibold mb-1 text-[var(--foreground)] group-hover:text-emerald-400 transition-colors">
+                Browse Checks
+              </h2>
+              <p className="text-[var(--foreground)]/70">
+                Explore and search all available checks used by oasdiff to detect changes between specifications.
+              </p>
+            </div>
           </div>
         </Link>
       </div>

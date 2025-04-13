@@ -97,6 +97,16 @@ export function MainNav() {
           >
             Checks
           </Link>
+          <Link
+            href="/contact"
+            className={`${
+              pathname === "/contact"
+                ? "text-emerald-400"
+                : "text-gray-300 hover:text-emerald-300"
+            } transition-colors font-medium`}
+          >
+            Contact
+          </Link>
         </div>
       </div>
     </nav>

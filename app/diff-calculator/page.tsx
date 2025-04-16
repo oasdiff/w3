@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, ReactNode, Fragment as ReactFragment, useCallback } from 'react';
 import { Table, TableHeader, TableRow, TableHead } from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
 
 type DiffMode = 'breaking' | 'changelog' | 'diff';
 
@@ -50,7 +51,7 @@ function SelectedFile({ file, onChange, label }: SelectedFileProps) {
           type="file"
           accept=".yaml,.yml,.json"
           onChange={onChange}
-          key={file?.name || ''}
+          key={file ? `${file.name}-${file.lastModified}` : 'file-input'}
           className="block w-full text-sm text-transparent
             [&::file-selector-button]:mr-4 [&::file-selector-button]:py-2 [&::file-selector-button]:px-4
             [&::file-selector-button]:rounded [&::file-selector-button]:border-0
@@ -66,7 +67,7 @@ function SelectedFile({ file, onChange, label }: SelectedFileProps) {
             [&::-webkit-file-upload-button]:cursor-pointer"
         />
         {file && (
-          <span className="absolute left-[140px] top-1/2 -translate-y-1/2 text-sm text-[var(--foreground)]">
+          <span className="absolute left-[140px] top-1/2 -translate-y-1/2 text-sm text-[var(--foreground)] truncate max-w-[calc(100%-150px)]">
             {file.name}
           </span>
         )}
@@ -75,8 +76,8 @@ function SelectedFile({ file, onChange, label }: SelectedFileProps) {
   );
 }
 
-function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Name: string, onCheckHover: (checkId: string, event: React.MouseEvent) => void, onCheckLeave: () => void): ReactNode[] {
-  if (mode === 'diff') return [text];
+function colorizeOutput(text: string, mode: DiffMode | null, file1Name: string, file2Name: string, onCheckHover: (checkId: string, event: React.MouseEvent) => void, onCheckLeave: () => void): ReactNode[] {
+  if (mode === 'diff' || !mode) return [text];
 
   try {
     const jsonData = JSON.parse(text) as DiffResponse;
@@ -163,7 +164,7 @@ function colorizeOutput(text: string, mode: DiffMode, file1Name: string, file2Na
 
     return lines;
   } catch (e) {
-    console.error('Error parsing JSON:', e);
+    console.error('Error parsing/colorizing JSON:', e);
     return [text];
   }
 }
@@ -173,10 +174,11 @@ export default function DiffCalculator() {
 
   const [file1, setFile1] = useState<File | null>(null);
   const [file2, setFile2] = useState<File | null>(null);
-  const [mode, setMode] = useState<DiffMode>('breaking');
-  const [processingMode, setProcessingMode] = useState<DiffMode | null>(null);
+  const [selectedMode, setSelectedMode] = useState<DiffMode | null>(null);
+  const [selectedFormat, setSelectedFormat] = useState<string | null>(null);
   const [result, setResult] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle');
   const [checks, setChecks] = useState<Check[]>([]);
   const checksRef = useRef<Check[]>([]);
   const [selectedCheck, setSelectedCheck] = useState<Check | null>(null);
@@ -184,176 +186,156 @@ export default function DiffCalculator() {
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const handleModeChange = useCallback(async (newMode: DiffMode, overrideFile1?: File, overrideFile2?: File) => {
-    console.log('handleModeChange called with mode:', newMode, 'files:', { 
-      file1: overrideFile1 || file1, 
-      file2: overrideFile2 || file2 
-    });
-    setMode(newMode);
+  const availableFormats = ['text', 'yaml', 'json', 'html', 'markdown'];
+
+  // Map formats to Accept header values
+  const formatToAcceptHeader: { [key: string]: string } = {
+    yaml: 'application/yaml',
+    json: 'application/json',
+    html: 'text/html',
+    text: 'text/plain',
+    markdown: 'text/markdown'
+  };
+
+  const filesSelected = !!file1 && !!file2;
+  const modeSelected = !!selectedMode;
+  const formatSelected = !!selectedFormat;
+  const canGenerate = filesSelected && modeSelected && formatSelected && !isLoading;
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fileNum: 1 | 2) => {
+    const file = e.target.files?.[0] || null;
+    if (fileNum === 1) setFile1(file);
+    else setFile2(file);
+    setSelectedMode(null);
+    setSelectedFormat(null);
     setResult('');
-    setProcessingMode(newMode);
-    
-    const activeFile1 = overrideFile1 || file1;
-    const activeFile2 = overrideFile2 || file2;
-    
-    if (activeFile1 && activeFile2) {
-      setIsLoading(true);
-      const formData = new FormData();
-      formData.append('file1', activeFile1);
-      formData.append('file2', activeFile2);
-      formData.append('mode', newMode);
+  };
 
-      try {
-        console.log('Sending files to API:', {
-          file1Name: activeFile1.name,
-          file1Type: activeFile1.type,
-          file1Size: activeFile1.size,
-          file2Name: activeFile2.name,
-          file2Type: activeFile2.type,
-          file2Size: activeFile2.size,
-          mode: newMode
-        });
+  const handleModeSelect = (mode: DiffMode) => {
+    setSelectedMode(mode);
+    setSelectedFormat(null);
+    setResult('');
+  };
 
-        const response = await fetch('/api/diff', {
-          method: 'POST',
-          body: formData,
-        });
-        
-        console.log('API Response status:', response.status);
-        
-        if (!response.ok) {
-          const error = await response.text();
-          console.error('API Error:', error);
-          setResult(`Error: ${error}`);
-          return;
-        }
+  const handleFormatSelect = (format: string) => {
+    setSelectedFormat(format);
+    setResult('');
+  };
 
-        const data = await response.text();
-        console.log('API Response data:', data);
-        
-        // Only update state if we have valid data
-        if (data) {
-          setResult(data);
-          setProcessingMode(null);
-        } else {
-          console.error('Empty response from API');
-          setResult('Error: Empty response from API');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        setResult('Error comparing files');
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      console.log('No files available for comparison');
-      setProcessingMode(null);
-      setIsLoading(false);
-    }
-  }, [file1, file2]);
+  const handleGenerate = async () => {
+    if (!canGenerate || !file1 || !file2 || !selectedMode || !selectedFormat) return;
 
-  // Store the latest handleModeChange in a ref
-  const handleModeChangeRef = useRef(handleModeChange);
-  useEffect(() => {
-    handleModeChangeRef.current = handleModeChange;
-  }, [handleModeChange]);
-
-  // Handle URL parameters
-  useEffect(() => {
-    console.log('URL Parameters effect running');
-    const searchParams = new URLSearchParams(window.location.search);
-    const spec1Path = searchParams.get('spec1');
-    const spec2Path = searchParams.get('spec2');
-    const urlMode = searchParams.get('mode');
-
-    // Validate the mode parameter
-    const isValidMode = (mode: string | null): mode is DiffMode => {
-      return mode === 'breaking' || mode === 'changelog' || mode === 'diff';
+    // Map user selected format to the format value sent to the backend
+    const userFormatToBackendFormat: { [key: string]: string } = {
+      text: 'json',      // User wants text, request json from backend (for breaking/changelog colorizing)
+      json: 'json',
+      yaml: 'yaml',
+      html: 'html',
+      markdown: 'markdown' 
     };
+    
+    // Determine the format to request from the backend
+    let formatToSend = userFormatToBackendFormat[selectedFormat] || 'json'; // Default to json
+    // *** Override: If mode is diff and user wants text, request actual text ***
+    if (selectedMode === 'diff' && selectedFormat === 'text') {
+      formatToSend = 'text'; 
+    }
 
-    console.log('URL Parameters:', { spec1Path, spec2Path, mode: urlMode });
+    console.log(`Generating diff. User selected: ${selectedFormat}, Mode: ${selectedMode}, Sending format: ${formatToSend} to backend`);
+    setIsLoading(true);
+    setResult('');
 
-    const loadFiles = async () => {
-      if (spec1Path && spec2Path) {
+    const formData = new FormData();
+    formData.append('file1', file1);
+    formData.append('file2', file2);
+    formData.append('mode', selectedMode);
+    formData.append('format', formatToSend); // Use the potentially overridden format value
+
+    try {
+      // Accept header should still reflect what the user ultimately wants to *display*
+      const acceptHeader = formatToAcceptHeader[selectedFormat] || 'text/plain'; 
+      console.log(`Setting Accept header for backend call: ${acceptHeader}`);
+
+      const response = await fetch('/api/diff', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': acceptHeader
+        }
+      });
+      const data = await response.text();
+      if (!response.ok) {
+        setResult(`Error: ${data || response.statusText}`);
+      } else if (selectedFormat === 'html') {
+        // Handle HTML: Open in new tab
         try {
-          console.log('Fetching spec files...');
-          const [file1Response, file2Response] = await Promise.all([
-            fetch(spec1Path + '?' + new Date().getTime()),
-            fetch(spec2Path + '?' + new Date().getTime())
-          ]);
-
-          console.log('File responses:', {
-            file1Status: file1Response.status,
-            file2Status: file2Response.status
-          });
-
-          if (!file1Response.ok || !file2Response.ok) {
-            throw new Error('Failed to fetch spec files');
-          }
-
-          const file1Blob = await file1Response.blob();
-          const file2Blob = await file2Response.blob();
-
-          console.log('File blobs:', {
-            file1Size: file1Blob.size,
-            file2Size: file2Blob.size
-          });
-
-          const file1 = new File([file1Blob], spec1Path.split('/').pop() || 'spec1.yaml', { type: 'application/yaml' });
-          const file2 = new File([file2Blob], spec2Path.split('/').pop() || 'spec2.yaml', { type: 'application/yaml' });
-
-          console.log('Setting files');
-          
-          // Use Promise.all to wait for both state updates
-          await Promise.all([
-            new Promise<void>((resolve) => {
-              setFile1(file1);
-              resolve();
-            }),
-            new Promise<void>((resolve) => {
-              setFile2(file2);
-              resolve();
-            })
-          ]);
-
-          // Wait for React state to be updated
-          await new Promise<void>((resolve) => setTimeout(resolve, 100));
-
-          if (isValidMode(urlMode)) {
-            console.log('Files set, triggering comparison with mode:', urlMode);
-            handleModeChangeRef.current(urlMode, file1, file2);
-          }
-        } catch (error) {
-          console.error('Error loading spec files:', error);
-          setResult('Error loading specification files');
-          setIsLoading(false);
-          setProcessingMode(null);
+          const blob = new Blob([data], { type: 'text/html' });
+          const url = URL.createObjectURL(blob);
+          window.open(url, '_blank');
+          URL.revokeObjectURL(url); // Clean up the object URL
+          setResult('HTML report opened in a new tab.'); // Set success message
+        } catch (e) {
+          console.error("Error creating Blob URL for HTML:", e);
+          setResult("Error: Failed to open HTML report.");
         }
       } else {
-        console.log('No spec files in URL parameters');
+        // Handle other formats: Set result state for display
+        setResult(data || 'No differences found.');
       }
-    };
+    } catch (error) {
+      setResult(`Fetch Error: ${error instanceof Error ? error.message : String(error)}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    loadFiles();
-  }, [handleModeChangeRef]); // Add handleModeChangeRef as dependency
-
-  // Update ref when checks change
   useEffect(() => {
     checksRef.current = checks;
   }, [checks]);
 
   useEffect(() => {
-    // Load checks data
     fetch("/data/checks.json?" + new Date().getTime())
       .then(res => res.json())
       .then(data => setChecks(data))
       .catch(error => console.error('Error loading checks:', error));
-  }, []); // Empty dependency array since we only want this to run once
+  }, []);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fileNum: 1 | 2) => {
-    if (e.target.files && e.target.files[0]) {
-      if (fileNum === 1) setFile1(e.target.files[0]);
-      else setFile2(e.target.files[0]);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const spec1Path = searchParams.get('spec1');
+    const spec2Path = searchParams.get('spec2');
+    if (spec1Path && spec2Path) {
+      const loadInitialFiles = async () => {
+        try {
+          const [res1, res2] = await Promise.all([
+            fetch(spec1Path + '?' + new Date().getTime()),
+            fetch(spec2Path + '?' + new Date().getTime())
+          ]);
+          if (!res1.ok || !res2.ok) throw new Error('Failed to fetch initial specs');
+          const [blob1, blob2] = await Promise.all([res1.blob(), res2.blob()]);
+          setFile1(new File([blob1], spec1Path.split('/').pop() || 'spec1.yaml'));
+          setFile2(new File([blob2], spec2Path.split('/').pop() || 'spec2.yaml'));
+          console.log('Loaded initial files from URL');
+        } catch (err) {
+          console.error('Error loading initial files from URL:', err);
+        }
+      };
+      loadInitialFiles();
+    }
+  }, []);
+
+  // --- Copy Handler ---
+  const handleCopy = async () => {
+    if (!result || selectedFormat === 'html' || result === 'HTML report opened in a new tab.') return;
+
+    try {
+      await navigator.clipboard.writeText(result);
+      setCopyStatus('copied');
+      setTimeout(() => setCopyStatus('idle'), 1500); // Reset after 1.5 seconds
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      setCopyStatus('error');
+      setTimeout(() => setCopyStatus('idle'), 2000); // Reset after 2 seconds
     }
   };
 
@@ -361,94 +343,169 @@ export default function DiffCalculator() {
     <div className="max-w-4xl mx-auto py-12 px-4">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4 text-[var(--foreground)]">Diff Calculator</h1>
-        <p className="text-lg text-[var(--foreground)]/80">
-          Compare OpenAPI specifications and identify breaking changes
-        </p>
-      </div>
-      
-      <div className="grid grid-cols-2 gap-8 mb-8">
-        <SelectedFile
-          file={file1}
-          onChange={(e) => handleFileChange(e, 1)}
-          label="First OpenAPI Specification"
-        />
-        <SelectedFile
-          file={file2}
-          onChange={(e) => handleFileChange(e, 2)}
-          label="Second OpenAPI Specification"
-        />
       </div>
 
-      <div className="flex gap-4 mb-8">
-        <button
-          onClick={() => handleModeChange('breaking')}
-          disabled={!file1 || !file2 || isLoading}
-          className={`w-[180px] px-4 py-2 rounded font-medium ${
-            mode === 'breaking'
-              ? 'bg-emerald-600 text-[var(--foreground)]'
-              : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
-          } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
-        >
-          {processingMode === 'breaking' ? 'Processing...' : 'Breaking Changes'}
-        </button>
-        <button
-          onClick={() => handleModeChange('changelog')}
-          disabled={!file1 || !file2 || isLoading}
-          className={`w-[180px] px-4 py-2 rounded font-medium ${
-            mode === 'changelog'
-              ? 'bg-emerald-600 text-[var(--foreground)]'
-              : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
-          } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
-        >
-          {processingMode === 'changelog' ? 'Processing...' : 'Changelog'}
-        </button>
-        <button
-          onClick={() => handleModeChange('diff')}
-          disabled={!file1 || !file2 || isLoading}
-          className={`w-[180px] px-4 py-2 rounded font-medium ${
-            mode === 'diff'
-              ? 'bg-emerald-600 text-[var(--foreground)]'
-              : 'bg-[var(--background-card)] text-[var(--foreground)] hover:bg-[var(--background-hover)]'
-          } disabled:bg-[var(--background-dark)] disabled:text-[var(--foreground)]/40 disabled:cursor-not-allowed`}
-        >
-          {processingMode === 'diff' ? 'Processing...' : 'Raw Diff'}
-        </button>
-      </div>
-
-      {isLoading && (
-        <div className="text-center py-4 text-[var(--foreground)]/70">
-          Comparing specifications...
+      <div className="mb-10 p-6 border border-[var(--background-hover)] rounded-lg bg-[var(--background-card)]/30">
+        <h2 className="text-xl font-semibold text-center text-[var(--foreground)] mb-6">1. Select Specifications</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <SelectedFile
+            file={file1}
+            onChange={(e) => handleFileChange(e, 1)}
+            label="Base Specification (Old)"
+          />
+          <SelectedFile
+            file={file2}
+            onChange={(e) => handleFileChange(e, 2)}
+            label="Revision Specification (New)"
+          />
         </div>
-      )}
+      </div>
 
-      {result && !isLoading && (
-        <div className="bg-[var(--background-card)]/50 backdrop-blur-sm rounded p-6 border border-[var(--background-hover)]">
-          {result.trim() === '' ? (
-            <p className="text-[var(--foreground)] text-center py-4">
-              No differences found between the specifications.
-            </p>
+      <div className={`mb-10 p-6 border rounded-lg ${filesSelected ? 'border-[var(--background-hover)] bg-[var(--background-card)]/30' : 'border-dashed border-[var(--foreground)]/30 bg-transparent'}`}>
+        <h2 className={`text-xl font-semibold text-center mb-6 ${filesSelected ? 'text-[var(--foreground)]' : 'text-[var(--foreground)]/50'}`}>2. Select Comparison Type</h2>
+        <div className="flex justify-center gap-4">
+          <Button
+            onClick={() => handleModeSelect('breaking')}
+            disabled={!filesSelected}
+            className={`w-[180px] px-4 py-2 rounded font-medium ${
+              selectedMode === 'breaking'
+                ? 'bg-emerald-600 text-white'
+                : 'bg-transparent text-[var(--foreground)] border border-emerald-600 hover:bg-emerald-600/10 disabled:border-[var(--foreground)]/30 disabled:text-[var(--foreground)]/50 disabled:hover:bg-transparent'
+            }`}
+          >
+            Breaking Changes
+          </Button>
+          <Button
+            onClick={() => handleModeSelect('changelog')}
+            disabled={!filesSelected}
+            className={`w-[180px] px-4 py-2 rounded font-medium ${
+              selectedMode === 'changelog'
+                ? 'bg-emerald-600 text-white'
+                : 'bg-transparent text-[var(--foreground)] border border-emerald-600 hover:bg-emerald-600/10 disabled:border-[var(--foreground)]/30 disabled:text-[var(--foreground)]/50 disabled:hover:bg-transparent'
+            }`}
+          >
+            Changelog
+          </Button>
+          <Button
+            onClick={() => handleModeSelect('diff')}
+            disabled={!filesSelected}
+            className={`w-[180px] px-4 py-2 rounded font-medium ${
+              selectedMode === 'diff'
+                ? 'bg-emerald-600 text-white'
+                : 'bg-transparent text-[var(--foreground)] border border-emerald-600 hover:bg-emerald-600/10 disabled:border-[var(--foreground)]/30 disabled:text-[var(--foreground)]/50 disabled:hover:bg-transparent'
+            }`}
+          >
+            Raw Diff
+          </Button>
+        </div>
+      </div>
+
+      <div className={`mb-10 p-6 border rounded-lg ${modeSelected ? 'border-[var(--background-hover)] bg-[var(--background-card)]/30' : 'border-dashed border-[var(--foreground)]/30 bg-transparent'}`}>
+        <h2 className={`text-xl font-semibold text-center mb-6 ${modeSelected ? 'text-[var(--foreground)]' : 'text-[var(--foreground)]/50'}`}>3. Select Output Format</h2>
+        <div className="flex justify-center gap-3 flex-wrap">
+          {availableFormats.map(format => (
+            <Button
+              key={format}
+              onClick={() => handleFormatSelect(format)}
+              disabled={!modeSelected}
+              className={`min-w-[100px] px-4 py-2 rounded font-medium ${
+                selectedFormat === format
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-transparent text-[var(--foreground)] border border-emerald-600 hover:bg-emerald-600/10 disabled:border-[var(--foreground)]/30 disabled:text-[var(--foreground)]/50 disabled:hover:bg-transparent'
+              }`}
+            >
+              {format.toUpperCase()}
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      <div className="mb-8 flex justify-center">
+        <Button
+          onClick={handleGenerate}
+          disabled={!canGenerate}
+          className="w-[180px] px-4 py-2 rounded font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          {isLoading ? 'Generating...' : 'Generate'}
+        </Button>
+      </div>
+
+      {(isLoading || result) && (
+        <div className="relative bg-[var(--background-card)]/50 backdrop-blur-sm rounded p-6 pr-12 border border-[var(--background-hover)] min-h-[100px]">
+          <div className="absolute top-2 right-2">
+            {!isLoading && result && selectedFormat !== 'html' && result !== 'HTML report opened in a new tab.' && (
+              <button 
+                onClick={handleCopy}
+                title="Copy to Clipboard"
+                className="p-1.5 rounded text-[var(--foreground)]/60 hover:bg-[var(--background-hover)] hover:text-[var(--foreground)] transition-colors"
+              >
+                {copyStatus === 'idle' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                )}
+                {copyStatus === 'copied' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+                {copyStatus === 'error' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+              </button>
+            )}
+          </div>
+
+          {isLoading ? (
+            <div className="text-center py-4 text-[var(--foreground)]/70">
+              Comparing specifications...
+            </div>
           ) : (
-            <pre className="text-sm text-[var(--foreground)] whitespace-pre-wrap font-mono">
-              {colorizeOutput(result, mode, file1?.name || 'First Specification', file2?.name || 'Second Specification',
-                (checkId, event) => {
-                  const check = checks.find(c => c.id === checkId);
-                  if (check) {
-                    setSelectedCheck(check);
-                    // Calculate position considering viewport boundaries
-                    const viewportHeight = window.innerHeight;
-                    const tooltipHeight = 300; // Approximate height of the tooltip
-                    const yPosition = event.clientY + tooltipHeight > viewportHeight
-                      ? Math.max(viewportHeight - tooltipHeight - 10, 10) // Keep 10px margin from top/bottom
-                      : event.clientY;
-                    setModalPosition({ x: event.clientX + 10, y: yPosition });
-                    setIsModalVisible(true);
+            result.trim() === '' ? (
+              <p className="text-[var(--foreground)] text-center py-4">
+                No output generated.
+              </p>
+            ) : result === 'HTML report opened in a new tab.' ? (
+              <p className="text-[var(--foreground)] text-center py-4 text-emerald-500">{result}</p>
+            ) : selectedFormat === 'text' ? (
+              <pre className="text-sm text-[var(--foreground)] whitespace-pre-wrap font-mono">
+                {colorizeOutput(result, selectedMode, file1?.name || 'Base', file2?.name || 'Revision',
+                  (checkId, event) => {
+                    const check = checksRef.current.find(c => c.id === checkId);
+                    if (check) {
+                      setSelectedCheck(check);
+                      const viewportHeight = window.innerHeight;
+                      const tooltipHeight = 300;
+                      const yPosition = event.clientY + tooltipHeight > viewportHeight
+                        ? Math.max(viewportHeight - tooltipHeight - 10, 10)
+                        : event.clientY;
+                      setModalPosition({ x: event.clientX + 10, y: yPosition });
+                      setIsModalVisible(true);
+                    }
+                  },
+                  () => {
+                    setIsModalVisible(false);
                   }
-                },
-                () => {
-                  setIsModalVisible(false);
-                }
-              )}
-            </pre>
+                )}
+              </pre>
+            ) : selectedFormat === 'json' ? (
+              <pre className="text-sm text-[var(--foreground)] whitespace-pre-wrap font-mono">
+                {(() => {
+                  try {
+                    return JSON.stringify(JSON.parse(result), null, 2);
+                  } catch (e) {
+                    console.error("Result is not valid JSON for formatting:", e);
+                    return result; // Display raw result if parsing fails
+                  }
+                })()}
+              </pre>
+            ) : (
+              <pre className="text-sm text-[var(--foreground)] whitespace-pre-wrap font-mono">
+                {result}
+              </pre>
+            )
           )}
         </div>
       )}
@@ -456,20 +513,16 @@ export default function DiffCalculator() {
       {selectedCheck && (
         <div 
           ref={modalRef}
-          className="w-96 overflow-hidden border border-[var(--background-hover)] rounded-lg bg-[var(--background-card)]" 
+          className="w-96 overflow-hidden border border-[var(--background-hover)] rounded-lg bg-[var(--background-card)] fixed z-50 pointer-events-auto" 
           style={{ 
-            position: 'fixed', 
-            left: modalPosition.x, 
+            left: modalPosition.x,
             top: modalPosition.y,
-            zIndex: 50,
-            pointerEvents: 'auto',
             display: isModalVisible ? 'block' : 'none'
           }}
           onMouseEnter={() => setIsModalVisible(true)}
           onMouseLeave={() => setIsModalVisible(false)}
         >
           <>
-            {/* Header section */}
             <div className="bg-[var(--background-card)] border-b border-[var(--background-hover)]">
               <Table className="w-full">
                 <TableHeader>
@@ -479,7 +532,6 @@ export default function DiffCalculator() {
                 </TableHeader>
               </Table>
             </div>
-            {/* Content section */}
             <div className="p-6">
               <div className="space-y-1">
                 <div className="pb-4">

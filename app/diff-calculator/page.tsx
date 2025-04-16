@@ -188,6 +188,25 @@ export default function DiffCalculator() {
 
   const availableFormats = ['text', 'yaml', 'json', 'html', 'markdown'];
 
+  // Explanations for Breaking/Changelog Modes (from BREAKING-CHANGES.md#output-formats)
+  const formatExplanations: { [key: string]: string } = {
+    text: 'Human-readable text format, emulates the output of the oasdiff command line tool.',
+    yaml: 'Structured, human-readable YAML format.',
+    json: 'Structured JSON format for machine processing.',
+    html: 'Generates an interactive HTML report (opens in new tab).',
+    markdown: 'Markdown format suitable for documentation.'
+    // Note: githubactions and junit are not included as options here.
+  };
+
+  // Explanations for Diff Mode (from DIFF.md#output-formats)
+  const diffFormatExplanations: { [key: string]: string } = {
+    yaml: 'Includes all diff details.',
+    json: 'Includes all diff details (excludes endpoints section).',
+    text: 'Simplified, user-friendly format showing important changes.',
+    markdown: 'Simplified, user-friendly format showing important changes (same as text).',
+    html: 'Simplified, user-friendly HTML report showing important changes (opens in new tab).'
+  };
+
   // Map formats to Accept header values
   const formatToAcceptHeader: { [key: string]: string } = {
     yaml: 'application/yaml',
@@ -417,6 +436,9 @@ export default function DiffCalculator() {
               {format.toUpperCase()}
             </Button>
           ))}
+        </div>
+        <div className="mt-4 text-center text-sm text-[var(--foreground)]/70 min-h-[1.25rem]">
+          {selectedFormat && (selectedMode === 'diff' ? diffFormatExplanations[selectedFormat] : formatExplanations[selectedFormat])}
         </div>
       </div>
 

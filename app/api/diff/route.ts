@@ -9,70 +9,88 @@ const modeToEndpoint = {
   'diff': 'diff'
 };
 
+// Map formats to Accept header values for the service call
+const formatToAcceptHeader: { [key: string]: string } = {
+  yaml: 'application/yaml',
+  json: 'application/json',
+  html: 'text/html',
+  text: 'text/plain',
+  markdown: 'text/markdown' 
+};
+
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
     const file1 = formData.get('file1') as File;
     const file2 = formData.get('file2') as File;
     const mode = formData.get('mode') as string;
+    const format = formData.get('format') as string || 'json'; // Get format, default to json
 
-    if (!file1 || !file2) {
-      console.error('Missing files in request');
-      return new Response('Missing files', { status: 400 });
+    if (!file1 || !file2 || !mode) {
+      console.error('Missing files or mode in request');
+      return new Response('Missing files or mode', { status: 400 });
     }
 
-    console.log('Processing files:', {
+    console.log('Processing request:', {
       file1Name: file1.name,
-      file1Type: file1.type,
-      file1Size: file1.size,
       file2Name: file2.name,
-      file2Type: file2.type,
-      file2Size: file2.size,
-      mode
+      mode,
+      format
     });
 
     // Create a new FormData object for the oasdiff-service request
     const serviceFormData = new FormData();
     
-    // Convert files to blobs with proper content type
-    const file1Blob = new Blob([await file1.arrayBuffer()], { type: 'application/yaml' });
-    const file2Blob = new Blob([await file2.arrayBuffer()], { type: 'application/yaml' });
+    // Use blobs to ensure correct content type handling if needed by the service
+    const file1Blob = new Blob([await file1.arrayBuffer()], { type: file1.type || 'application/yaml' });
+    const file2Blob = new Blob([await file2.arrayBuffer()], { type: file2.type || 'application/yaml' });
     
     serviceFormData.append('base', file1Blob, file1.name);
     serviceFormData.append('revision', file2Blob, file2.name);
 
     const endpoint = modeToEndpoint[mode as keyof typeof modeToEndpoint];
+    if (!endpoint) {
+       console.error('Invalid mode:', mode);
+       return new Response('Invalid mode', { status: 400 });
+    }
+    
+    // Construct URL without format query parameter
     const url = `${OASDIFF_SERVICE_URL}/${endpoint}`;
     console.log('Calling oasdiff-service at:', url);
+    
+    // Determine the Accept header value
+    const acceptHeader = formatToAcceptHeader[format] || 'text/plain';
+    console.log(`Setting Accept header for service call: ${acceptHeader}`);
 
-    // Call oasdiff-service with mode in URL
+    // Call oasdiff-service with mode in URL and Accept header
     const response = await fetch(url, {
       method: 'POST',
-      body: serviceFormData
+      body: serviceFormData,
+      headers: {
+          'Accept': acceptHeader
+      }
     });
 
+    const result = await response.text();
+    console.log('Service response status:', response.status);
+    
     if (!response.ok) {
-      const error = await response.text();
-      console.error('Error from oasdiff-service:', error);
-      return new Response(error, { status: response.status });
+      console.error('Error from oasdiff-service:', result);
+      return new Response(result || 'Error from service', { status: response.status });
     }
 
-    const result = await response.text();
-    console.log('Service response:', response.status);
-    
-    // Try to parse and format JSON if the response is JSON
-    try {
-      const jsonResult = JSON.parse(result);
-      const formattedResult = JSON.stringify(jsonResult, null, 2);
-      return new Response(formattedResult, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    } catch {
-      // If it's not JSON, return as plain text
-      return new Response(result);
+    // Return the raw result from the service, letting the frontend handle display based on format
+    // We also forward the Content-Type header received from the service if available
+    const responseHeaders = new Headers();
+    const contentType = response.headers.get('content-type');
+    if (contentType) { 
+        responseHeaders.set('Content-Type', contentType);
     }
+
+    return new Response(result, { 
+        status: 200, 
+        headers: responseHeaders 
+    });
   } catch (error) {
     console.error('Error:', error);
     return new Response('Internal server error', { status: 500 });

@@ -358,6 +358,46 @@ export default function DiffCalculator() {
     }
   };
 
+  // Enhanced Hover Handler (now defined within the main component)
+  const handleCheckHover = (checkId: string, event: React.MouseEvent) => {
+    const check = checksRef.current.find(c => c.id === checkId);
+    if (check) {
+      setSelectedCheck(check);
+
+      const margin = 15; // Increased margin
+      const popupWidth = 384; // from w-96
+      const popupHeight = 400; // Adjusted estimate based on content
+
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      let x = event.clientX + margin; // Default: right of cursor
+      if (x + popupWidth > viewportWidth) {
+        // Try left of cursor
+        x = event.clientX - popupWidth - margin;
+      }
+      // Ensure it doesn't go off-screen left
+      x = Math.max(margin, x); 
+      // Ensure it doesn't go off-screen right (in case left didn't fit either)
+      x = Math.min(x, viewportWidth - popupWidth - margin); 
+
+      let y = event.clientY + margin; // Default: below cursor
+      if (y + popupHeight > viewportHeight) {
+        // Try placing it so bottom aligns with viewport bottom
+        y = viewportHeight - popupHeight - margin;
+      }
+      // Ensure it doesn't go off-screen top
+      y = Math.max(margin, y); 
+
+      setModalPosition({ x, y });
+      setIsModalVisible(true);
+    }
+  };
+
+  const handleCheckLeave = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <div className="max-w-4xl mx-auto py-12 px-4">
       <div className="text-center mb-12">
@@ -494,22 +534,8 @@ export default function DiffCalculator() {
             ) : selectedFormat === 'text' ? (
               <pre className="text-sm text-[var(--foreground)] whitespace-pre-wrap font-mono">
                 {colorizeOutput(result, selectedMode, file1?.name || 'Base', file2?.name || 'Revision',
-                  (checkId, event) => {
-                    const check = checksRef.current.find(c => c.id === checkId);
-                    if (check) {
-                      setSelectedCheck(check);
-                      const viewportHeight = window.innerHeight;
-                      const tooltipHeight = 300;
-                      const yPosition = event.clientY + tooltipHeight > viewportHeight
-                        ? Math.max(viewportHeight - tooltipHeight - 10, 10)
-                        : event.clientY;
-                      setModalPosition({ x: event.clientX + 10, y: yPosition });
-                      setIsModalVisible(true);
-                    }
-                  },
-                  () => {
-                    setIsModalVisible(false);
-                  }
+                  handleCheckHover,
+                  handleCheckLeave
                 )}
               </pre>
             ) : selectedFormat === 'json' ? (

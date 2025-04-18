@@ -65,7 +65,7 @@ export default function Home() {
 
       <div className="mt-12 text-center">
         <p className="text-[var(--foreground)]/70 mb-4">
-          Oasdiff is open source and available on GitHub
+          oasdiff is open source and available on GitHub
         </p>
         <a 
           href="https://github.com/oasdiff/oasdiff" 

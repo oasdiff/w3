@@ -309,7 +309,8 @@ export default function FAQ() {
                   </div>
                 </div>
                 <p className="text-lg text-[var(--foreground)] leading-relaxed mt-6">
-                  See <a href="https://github.com/oasdiff/oasdiff/blob/main/docs/BREAKING-CHANGES.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">here</a> for more details about output formats and their specific features.
+                  Learn more about the <a href="https://github.com/oasdiff/oasdiff/blob/main/docs/BREAKING-CHANGES.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">supported formats for breaking-changes and changelog output</a>.<br/>
+                  Learn more about the <a href="https://github.com/oasdiff/oasdiff/blob/main/docs/DIFF.md#output-formats" className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors" target="_blank" rel="noopener noreferrer">supported formats for diff output</a>.
                 </p>
               </>
             )

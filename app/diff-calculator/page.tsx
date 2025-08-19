@@ -176,6 +176,7 @@ export default function DiffCalculator() {
   const [file2, setFile2] = useState<File | null>(null);
   const [selectedMode, setSelectedMode] = useState<DiffMode | null>(null);
   const [selectedFormat, setSelectedFormat] = useState<string | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
   const [result, setResult] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle');
@@ -187,6 +188,13 @@ export default function DiffCalculator() {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const availableFormats = ['text', 'yaml', 'json', 'html', 'markdown'];
+
+  const availableLanguages = [
+    { code: 'en', name: 'English' },
+    { code: 'ru', name: 'Russian' },
+    { code: 'pt-br', name: 'Portuguese (Brazil)' },
+    { code: 'es', name: 'Spanish' }
+  ];
 
   // Explanations for Breaking/Changelog Modes (from BREAKING-CHANGES.md#output-formats)
   const formatExplanations: { [key: string]: string } = {
@@ -219,7 +227,8 @@ export default function DiffCalculator() {
   const filesSelected = !!file1 && !!file2;
   const modeSelected = !!selectedMode;
   const formatSelected = !!selectedFormat;
-  const canGenerate = filesSelected && modeSelected && formatSelected && !isLoading;
+  const languageSelected = !!selectedLanguage;
+  const canGenerate = filesSelected && modeSelected && formatSelected && languageSelected && !isLoading;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fileNum: 1 | 2) => {
     const file = e.target.files?.[0] || null;
@@ -241,8 +250,13 @@ export default function DiffCalculator() {
     setResult('');
   };
 
+  const handleLanguageSelect = (language: string) => {
+    setSelectedLanguage(language);
+    setResult('');
+  };
+
   const handleGenerate = async () => {
-    if (!canGenerate || !file1 || !file2 || !selectedMode || !selectedFormat) return;
+    if (!canGenerate || !file1 || !file2 || !selectedMode || !selectedFormat || !selectedLanguage) return;
 
     // Map user selected format to the format value sent to the backend
     const userFormatToBackendFormat: { [key: string]: string } = {
@@ -279,7 +293,8 @@ export default function DiffCalculator() {
         method: 'POST',
         body: formData,
         headers: {
-          'Accept': acceptHeader
+          'Accept': acceptHeader,
+          'Accept-Language': selectedLanguage
         }
       });
       const data = await response.text();
@@ -479,6 +494,29 @@ export default function DiffCalculator() {
         </div>
         <div className="mt-4 text-center text-sm text-[var(--foreground)]/70 min-h-[1.25rem]">
           {selectedFormat && (selectedMode === 'diff' ? diffFormatExplanations[selectedFormat] : formatExplanations[selectedFormat])}
+        </div>
+      </div>
+
+      <div className={`mb-10 p-6 border rounded-lg ${formatSelected ? 'border-[var(--background-hover)] bg-[var(--background-card)]/30' : 'border-dashed border-[var(--foreground)]/30 bg-transparent'}`}>
+        <h2 className={`text-xl font-semibold text-center mb-6 ${formatSelected ? 'text-[var(--foreground)]' : 'text-[var(--foreground)]/50'}`}>4. Select Language</h2>
+        <div className="flex justify-center gap-3 flex-wrap">
+          {availableLanguages.map(lang => (
+            <Button
+              key={lang.code}
+              onClick={() => handleLanguageSelect(lang.code)}
+              disabled={!formatSelected}
+              className={`min-w-[120px] px-4 py-2 rounded font-medium ${
+                selectedLanguage === lang.code
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-transparent text-[var(--foreground)] border border-emerald-600 hover:bg-emerald-600/10 disabled:border-[var(--foreground)]/30 disabled:text-[var(--foreground)]/50 disabled:hover:bg-transparent'
+              }`}
+            >
+              {lang.name}
+            </Button>
+          ))}
+        </div>
+        <div className="mt-4 text-center text-sm text-[var(--foreground)]/70 min-h-[1.25rem]">
+          {selectedLanguage && `Results will be displayed in ${availableLanguages.find(l => l.code === selectedLanguage)?.name || 'the selected language'}`}
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 
-const OASDIFF_SERVICE_URL = 'https://api.oasdiff.com/tenants/0634345d-02fb-43df-b56a-68fc22253621';
+const TENANT_ID = process.env.OASDIFF_TENANT_ID;
+const OASDIFF_SERVICE_URL = `https://api.oasdiff.com/tenants/${TENANT_ID}`;
 
 // Map frontend modes to service endpoints
 const modeToEndpoint = {
@@ -25,6 +26,7 @@ export async function POST(req: NextRequest) {
     const file2 = formData.get('file2') as File;
     const mode = formData.get('mode') as string;
     const format = formData.get('format') as string || 'json'; // Get format, default to json
+    const language = req.headers.get('Accept-Language') || 'en'; // Get language from header, default to English
 
     if (!file1 || !file2 || !mode) {
       console.error('Missing files or mode in request');
@@ -35,7 +37,8 @@ export async function POST(req: NextRequest) {
       file1Name: file1.name,
       file2Name: file2.name,
       mode,
-      format
+      format,
+      language: language
     });
 
     // Create a new FormData object for the oasdiff-service request
@@ -61,13 +64,15 @@ export async function POST(req: NextRequest) {
     // Determine the Accept header value
     const acceptHeader = formatToAcceptHeader[format] || 'text/plain';
     console.log(`Setting Accept header for service call: ${acceptHeader}`);
+    console.log(`Setting Accept-Language header for service call: ${language}`);
 
-    // Call oasdiff-service with mode in URL and Accept header
+    // Call oasdiff-service with mode in URL, Accept header, and Accept-Language header
     const response = await fetch(url, {
       method: 'POST',
       body: serviceFormData,
       headers: {
-          'Accept': acceptHeader
+          'Accept': acceptHeader,
+          'Accept-Language': language
       }
     });
 
